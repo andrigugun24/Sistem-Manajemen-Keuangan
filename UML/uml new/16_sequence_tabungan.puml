@@ -1,0 +1,69 @@
+@startuml SEQ_Tabungan
+' ============================================================
+' SEQUENCE DIAGRAM - Tabungan Siswa (Simplified)
+' (Setor, Tarik, Lihat Riwayat)
+' Sistem Informasi Keuangan Sekolah Ananda
+' ============================================================
+skinparam sequence {
+  ArrowColor #00838F
+  ActorBorderColor #006064
+  ActorBackgroundColor #E0F7FA
+  LifeLineBorderColor #90A4AE
+  ParticipantBorderColor #37474F
+  ParticipantBackgroundColor #FAFAFA
+}
+skinparam roundcorner 8
+
+title Sequence Diagram — Tabungan Siswa (Disederhanakan)\nSistem Informasi Keuangan Sekolah Ananda
+
+actor "Bendahara" as Bendahara
+actor "Orang Tua/Wali" as Ortu
+participant "Sistem" as Sys
+database "Database" as DB
+
+== Alur: Tampilkan Tabungan & Riwayat ==
+Bendahara -> Sys : Buka Menu Tabungan Siswa
+activate Sys
+Sys -> DB : Ambil Data Siswa & Saldo
+activate DB
+DB --> Sys : Data Siswa & Saldo
+deactivate DB
+Sys --> Bendahara : Tampilkan Daftar Tabungan Siswa
+deactivate Sys
+
+Bendahara -> Sys : Lihat Detail Riwayat Mutasi Siswa
+activate Sys
+Sys -> DB : Ambil Riwayat Mutasi
+activate DB
+DB --> Sys : Data Mutasi
+deactivate DB
+Sys --> Bendahara : Tampilkan Riwayat Transaksi
+deactivate Sys
+
+== Alur: Setor / Tarik Tabungan ==
+Bendahara -> Sys : Input Form Mutasi (Setor/Tarik) & Simpan
+activate Sys
+Sys -> Sys : Validasi Input & Cek Saldo (Jika Tarik)
+
+alt Saldo Tidak Cukup (Penarikan)
+  Sys --> Bendahara : Tampilkan Error Saldo
+else Validasi Berhasil
+  Sys -> DB : Simpan Mutasi & Update Saldo Tabungan
+  activate DB
+  DB --> Sys : Sukses
+  deactivate DB
+  Sys --> Bendahara : Tampilkan Notifikasi Sukses & Saldo Baru
+end
+deactivate Sys
+
+== Alur: Orang Tua Lihat Tabungan ==
+Ortu -> Sys : Buka Menu Tabungan Anak
+activate Sys
+Sys -> DB : Ambil Data Tabungan (Relasi Ortu-Anak)
+activate DB
+DB --> Sys : Saldo & Riwayat Anak
+deactivate DB
+Sys --> Ortu : Tampilkan Saldo & Riwayat Mutasi
+deactivate Sys
+
+@enduml

@@ -1,0 +1,57 @@
+@startuml ACT_DataMaster
+' ============================================================
+' ACTIVITY DIAGRAM - Kelola Data Master (Simplified)
+' Sistem Informasi Keuangan Sekolah Ananda
+' ============================================================
+skinparam Activity {
+  BackgroundColor #E8EAF6
+  BorderColor #3949AB
+  StartColor #3949AB
+  EndColor #1A237E
+  DiamondBackgroundColor #FFF9C4
+  DiamondBorderColor #F57F17
+}
+skinparam swimlane {
+  BorderColor #37474F
+  BorderThickness 2
+  TitleFontStyle Bold
+}
+skinparam ArrowColor #37474F
+
+title Activity Diagram — Kelola Data Master (CRUD) (Disederhanakan)\nSistem Informasi Keuangan Sekolah Ananda
+
+|#EDE7F6| Admin |
+|#E8F5E9| Sistem |
+|#FFF3E0| Database |
+
+|Admin|
+start
+:Buka menu Data Master;
+|Sistem|
+:Tampilkan Daftar Data;
+
+|Admin|
+:Pilih Tindakan CRUD atau Pengaturan;
+
+if (Butuh Form Input? \n(Tambah/Edit/Assign)) then (Ya)
+  |Admin|
+  repeat
+    :Isi Form Data;
+    |Sistem|
+    :Validasi Input & Cek Duplikasi;
+  repeat while (Input Valid?) is (Tidak Valid)
+  ->Valid;
+  |Database|
+  :Simpan / Update Data;
+else (Tidak, Hanya Konfirmasi\n(Hapus/Set Tahun Aktif))
+  |Admin|
+  :Konfirmasi Tindakan;
+  |Database|
+  :Hapus / Update Status Data;
+endif
+
+|Sistem|
+:Catat Log Aktivitas;
+:Refresh Tabel & Tampilkan Notifikasi;
+stop
+@enduml

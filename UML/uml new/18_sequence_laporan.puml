@@ -1,0 +1,51 @@
+@startuml SEQ_Laporan
+' ============================================================
+' SEQUENCE DIAGRAM - Laporan Keuangan & Ekspor (Simplified)
+' Sistem Informasi Keuangan Sekolah Ananda
+' ============================================================
+skinparam sequence {
+  ArrowColor #283593
+  ActorBorderColor #1A237E
+  ActorBackgroundColor #E8EAF6
+  LifeLineBorderColor #90A4AE
+  ParticipantBorderColor #37474F
+  ParticipantBackgroundColor #FAFAFA
+}
+skinparam roundcorner 8
+
+title Sequence Diagram — Laporan Keuangan & Ekspor Data (Disederhanakan)\nSistem Informasi Keuangan Sekolah Ananda
+
+actor "Pengguna (Bendahara/Yayasan)" as User
+participant "Sistem" as Sys
+database "Database" as DB
+
+== Alur: Tampilkan Laporan (Arus Kas/Pembayaran/dll) ==
+User -> Sys : Buka Laporan & Set Filter (Tanggal/Kategori)
+activate Sys
+Sys -> DB : Ambil Data Sesuai Filter
+activate DB
+DB --> Sys : Data Transaksi Laporan
+deactivate DB
+
+Sys -> Sys : Kalkulasi Ringkasan Laporan
+Sys --> User : Tampilkan Tabel & Grafik Ringkasan
+deactivate Sys
+
+== Alur: Ekspor Laporan (PDF / Excel) ==
+User -> Sys : Klik Ekspor Laporan (Pilih Format)
+activate Sys
+Sys -> DB : Ambil Data Sesuai Filter Saat Ini
+activate DB
+DB --> Sys : Collection Data
+deactivate DB
+
+alt Format PDF
+  Sys -> Sys : Generate File PDF Laporan
+else Format Excel
+  Sys -> Sys : Generate File Excel Laporan
+end
+
+Sys --> User : Download File Hasil Ekspor
+deactivate Sys
+
+@enduml

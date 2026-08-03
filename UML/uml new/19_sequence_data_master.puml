@@ -1,0 +1,74 @@
+@startuml SEQ_DataMaster
+' ============================================================
+' SEQUENCE DIAGRAM - Manajemen Data Master (Simplified)
+' (Siswa, Kelas, Guru, Tahun Ajaran, Pengguna)
+' Sistem Informasi Keuangan Sekolah Ananda
+' ============================================================
+skinparam sequence {
+  ArrowColor #3949AB
+  ActorBorderColor #283593
+  ActorBackgroundColor #E8EAF6
+  LifeLineBorderColor #90A4AE
+  ParticipantBorderColor #37474F
+  ParticipantBackgroundColor #FAFAFA
+}
+skinparam roundcorner 8
+
+title Sequence Diagram — Manajemen Data Master (Disederhanakan)\nSistem Informasi Keuangan Sekolah Ananda
+
+actor "Admin" as Admin
+participant "Sistem" as Sys
+database "Database" as DB
+
+== Alur: Tambah / Edit Data Master ==
+Admin -> Sys : Isi Form & Simpan Data
+activate Sys
+Sys -> Sys : Validasi Input & Uniqueness
+Sys -> DB : Simpan / Update Data
+activate DB
+DB --> Sys : Sukses
+deactivate DB
+Sys -> DB : Catat Log Aktivitas (Create/Update)
+Sys --> Admin : Tampilkan Notifikasi Sukses
+deactivate Sys
+
+== Alur: Hapus Data Master ==
+Admin -> Sys : Hapus Data Master
+activate Sys
+Sys -> DB : Cek Relasi Terkait (Misal: Tagihan Aktif)
+activate DB
+DB --> Sys : Hasil Pengecekan
+deactivate DB
+
+alt Ada Relasi Aktif
+  Sys --> Admin : Tampilkan Error Tidak Bisa Dihapus
+else Aman
+  Sys -> DB : Soft Delete Data
+  activate DB
+  DB --> Sys : Sukses
+  deactivate DB
+  Sys -> DB : Catat Log Aktivitas (Delete)
+  Sys --> Admin : Tampilkan Notifikasi Sukses
+end
+deactivate Sys
+
+== Alur Khusus: Assign Siswa ke Wali (Pengguna) ==
+Admin -> Sys : Pilih Wali & Assign Siswa
+activate Sys
+Sys -> DB : Cek Ketersediaan Siswa (Belum Ada Wali)
+activate DB
+DB --> Sys : Hasil
+deactivate DB
+
+alt Sudah Punya Wali
+  Sys --> Admin : Tampilkan Error
+else Valid
+  Sys -> DB : Simpan Relasi Wali-Siswa
+  activate DB
+  DB --> Sys : Sukses
+  deactivate DB
+  Sys --> Admin : Tampilkan Notifikasi Sukses
+end
+deactivate Sys
+
+@enduml

@@ -1,0 +1,111 @@
+@startuml ACT_Sistem_Usulan_SPP_Tabungan
+' ============================================================
+' ACTIVITY DIAGRAM 3.1.2.A — Sistem Usulan (Terkomputerisasi)
+' Pembayaran SPP & Deposit Tabungan
+' Merujuk pada: 20_activity_sistem_berjalan_spp_tabungan.puml
+' Sistem Informasi Keuangan Sekolah Ananda
+' ============================================================
+skinparam Activity {
+  BackgroundColor #E8F5E9
+  BorderColor #2E7D32
+  StartColor #1B5E20
+  EndColor #1B5E20
+  DiamondBackgroundColor #FFF9C4
+  DiamondBorderColor #F57F17
+}
+skinparam swimlane {
+  BorderColor #37474F
+  BorderThickness 2
+  TitleFontStyle Bold
+}
+skinparam ArrowColor #37474F
+skinparam note {
+  BackgroundColor #ECEFF1
+  BorderColor #546E7A
+}
+
+title Activity Diagram: Sistem Usulan\nPembayaran SPP & Deposit Tabungan (Terkomputerisasi)
+
+|#E3F2FD| Orang Tua |
+|#FFF3E0| Bendahara |
+|#E8F5E9| Sistem |
+
+|Orang Tua|
+start
+
+fork
+  :Datang ke Sekolah &\nMenyerahkan Dana Tunai;
+fork again
+  :Login Portal Orang Tua;
+  :Unggah Bukti Transfer\n(untuk Bayar SPP);
+end fork
+
+:Menyatakan Keperluan\n(SPP / Tabungan);
+
+if (Keperluan?) then (Bayar SPP)
+  :Pembayaran SPP;
+else (Deposit Tabungan)
+  :Deposit Tabungan;
+endif
+
+|Bendahara|
+:Login ke Sistem Keuangan;
+:Buka modul Pembayaran\natau Tabungan Siswa;
+
+repeat
+  :Menerima / Verifikasi Dana\n& Data Siswa;
+
+  if (Sesuai?) then (Tidak)
+    |Orang Tua|
+    :Penyesuaian Dana\natau Bukti Transfer;
+    |Bendahara|
+  else (Ya)
+  endif
+
+repeat while (Sesuai?) is (Tidak) not (Ya)
+
+if (Keperluan?) then (Bayar SPP)
+  |Sistem|
+  :Validasi tagihan & nominal;
+  :Simpan pembayaran ke database;
+  :Perbarui status tagihan &\nmutasi kas masuk;
+
+  note right
+    **Database**
+    pembayarans, detail_pembayarans,
+    tagihans, transaksi_kas
+  end note
+
+else (Deposit Tabungan)
+  |Sistem|
+  :Validasi nominal setoran;
+  :Simpan mutasi tabungan;
+  :Perbarui saldo tabungan;
+
+  note right
+    **Database**
+    tabungans, mutasi_tabungans
+  end note
+endif
+
+:Generate Kwitansi / Bukti\nTransaksi (PDF);
+
+fork
+  :Arsip Digital\n(di Database);
+  note right
+    **Arsip Digital**
+    Riwayat transaksi tersimpan
+    di sistem (bukan buku besar kertas)
+  end note
+fork again
+  |Bendahara|
+  :Cetak / Tampilkan Kwitansi;
+  |Orang Tua|
+  :Menerima Kwitansi Digital\n& Uang Sisa (jika ada);
+end fork
+
+:Menerima Kuitansi dan Dana Sisa;
+:Meninggalkan Area / Keluar Portal;
+stop
+
+@enduml

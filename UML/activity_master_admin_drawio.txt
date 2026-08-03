@@ -1,0 +1,49 @@
+@startuml
+skinparam Activity {
+  BackgroundColor #D5E8D4
+  BorderColor #82B366
+}
+skinparam swimlane {
+  BorderColor #333333
+  BorderThickness 2
+}
+
+|Admin|
+|Sistem|
+
+|Admin|
+start
+:Masuk Menu "Data Master" (Contoh: Manajemen Pengguna/Siswa);
+:Pilih Aksi "Tambah Data Baru";
+:Input Form (Identitas Diri, Email, Role/Kelas);
+:Klik Tombol "Simpan Database";
+
+|Sistem|
+:Validasi Integritas Input (Format, Karakter dsb);
+if (Validasi Regex Lanjut?) then (Lolos)
+  :Cek Eksternal Apabila Data Sudah Terakumulasi (Duplikasi NIK/Email);
+  if (Apakah Terjadi Duplikasi?) then (Ya)
+    :Tolak Permintaan (Rollback Data);
+    :Lempar Pesan "Data Sudah Digunakan/Terdaftar";
+    |Admin|
+    :Perbaiki Inputan yang Salah;
+    stop
+  else (Tidak)
+    |Sistem|
+    :Lakukan Eksekusi Kueri Ke Database (Insert Query);
+    :Refresh Tabel Tabel Real-Time;
+    :Tampilkan Pesan Konfirmasi "Sukses Diperbarui";
+    |Admin|
+    :Diarahkan Kembali ke Tabel Utama Data Master;
+  endif
+else (Tidak Lolos / Kurang)
+  |Sistem|
+  :Lemparkan Peringatan Kolom Wajib Isi;
+  |Admin|
+  :Review Form Kembali;
+  stop
+endif
+
+|Admin|
+stop
+@enduml

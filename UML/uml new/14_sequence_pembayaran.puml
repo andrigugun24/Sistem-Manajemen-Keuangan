@@ -1,0 +1,64 @@
+@startuml SEQ_Pembayaran
+' ============================================================
+' SEQUENCE DIAGRAM - Proses Pembayaran Lengkap (Simplified)
+' Sistem Informasi Keuangan Sekolah Ananda
+' ============================================================
+skinparam sequence {
+  ArrowColor #2E7D32
+  ActorBorderColor #1B5E20
+  ActorBackgroundColor #E8F5E9
+  LifeLineBorderColor #90A4AE
+  ParticipantBorderColor #37474F
+  ParticipantBackgroundColor #F5F5F5
+}
+skinparam roundcorner 8
+
+title Sequence Diagram — Proses Pembayaran (Disederhanakan)\nSistem Informasi Keuangan Sekolah Ananda
+
+actor "Orang Tua/Wali" as Ortu
+actor "Bendahara" as Bendahara
+participant "Sistem" as Sys
+database "Database" as DB
+
+== FASE 1: Pembayaran via Transfer (Orang Tua) ==
+Ortu -> Sys : Pilih Tagihan & Upload Bukti Transfer
+activate Sys
+Sys -> Sys : Validasi Bukti & Ekstensi File
+Sys -> DB : Simpan Pembayaran (Status: Menunggu)
+activate DB
+DB --> Sys : Sukses
+deactivate DB
+Sys -> DB : Antre Notifikasi ke Bendahara
+Sys --> Ortu : Tampilkan Status Menunggu Verifikasi
+deactivate Sys
+
+== FASE 2: Validasi Pembayaran (Bendahara) ==
+Bendahara -> Sys : Lihat Daftar Konfirmasi & Cek Bukti
+activate Sys
+alt Tolak Pembayaran
+  Bendahara -> Sys : Klik [Tolak] & Isi Alasan
+  Sys -> DB : Update Pembayaran (Status: Ditolak) & Tagihan
+  Sys -> DB : Antre Notifikasi ke Ortu
+  Sys --> Bendahara : Sukses Tolak
+else Setujui Pembayaran
+  Bendahara -> Sys : Klik [Setujui]
+  Sys -> DB : Update Pembayaran (Status: Lunas) & Tagihan
+  Sys -> DB : Catat Transaksi Kas Masuk
+  Sys -> Sys : Generate Kwitansi PDF
+  Sys -> DB : Antre Notifikasi ke Ortu
+  Sys --> Bendahara : Sukses Setujui
+end
+deactivate Sys
+
+== FASE 3: Pembayaran Tunai (Bendahara) ==
+Bendahara -> Sys : Input Pembayaran Tunai
+activate Sys
+Sys -> Sys : Validasi Nominal
+Sys -> DB : Simpan Pembayaran (Lunas), Tagihan & Kas
+activate DB
+DB --> Sys : Sukses
+deactivate DB
+Sys -> Sys : Generate Kwitansi PDF
+Sys --> Bendahara : Tampilkan Sukses & Cetak Kwitansi
+deactivate Sys
+@enduml

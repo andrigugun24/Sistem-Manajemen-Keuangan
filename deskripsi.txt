@@ -1,0 +1,856 @@
+### 1. Halaman Tagihan Siswa
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) dari halaman "Tagihan Siswa" pada sistem informasi manajemen sekolah Yayasan La Tahzan. Halaman ini merupakan bagian dari modul Keuangan yang dirancang khusus untuk memfasilitasi Admin Sekolah dalam mengelola dan memantau tagihan keuangan siswa.
+
+Desain antarmuka mengusung konsep dasbor (dashboard) modern yang bersih (clean design), dengan dominasi latar belakang putih dan pemanfaatan ruang kosong (white space) yang baik sehingga informasi mudah dibaca. Elemen-elemen penting ditonjolkan menggunakan warna-warna kontras seperti hijau, biru, dan merah.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Sidebar (Menu Navigasi Samping)
+Terletak pada sisi kiri layar, sidebar berfungsi sebagai panel navigasi utama aplikasi. Menu yang saat ini aktif adalah submenu "Tagihan Siswa" yang berada di bawah kelompok menu "Keuangan". Sidebar juga menampilkan opsi menu lainnya seperti Dashboard, Data Master, Tabungan, Kas Sekolah, Laporan, dan Pengaturan. Pada bagian bawah sidebar, terdapat tombol sakelar (toggle) untuk mode gelap (Dark Mode) serta informasi akun pengguna yang sedang login (Admin Sekolah).
+
+2. Bagian Header dan Judul
+Pada bagian atas area konten utama, terdapat breadcrumb ("Dashboard > Keuangan > Tagihan Siswa") yang berfungsi sebagai penunjuk lokasi halaman saat ini. Di bawahnya, terdapat judul halaman "Tagihan Siswa" yang dilengkapi dengan penanda (badge) tahun ajaran aktif, yaitu "Tahun Ajaran 2025/2026". Di sudut kanan atas juga terdapat tombol aksi primer berwarna hitam dengan teks "+ Buat Tagihan" untuk memicu proses pembuatan tagihan baru.
+
+3. Kartu Ringkasan (Summary Cards)
+Terdapat tiga buah kartu metrik yang menyajikan ringkasan data tagihan secara cepat dan informatif:
+- Total Expected (Q1): Menampilkan estimasi total penerimaan dana dari tagihan (Rp 900.000), dilengkapi dengan indikator tren persentase peningkatan dari bulan sebelumnya.
+- Sudah Terkumpul: Menampilkan total nominal yang telah berhasil dibayarkan oleh siswa (Rp 450.000).
+- Belum Dibayar (Tunggakan): Menampilkan total nominal tagihan yang masih belum dilunasi (Rp 450.000), beserta informasi jumlah siswa yang menunggak.
+
+4. Area Filter dan Pencarian
+Di bawah kartu ringkasan, terdapat serangkaian menu tarik-turun (dropdown) yang berfungsi sebagai alat filter (penyaring) data pada tabel. Filter yang tersedia meliputi Tahun Ajaran, Kelas Target, Jenis Tagihan, dan Status Progres. Selain itu, terdapat kolom pencarian untuk mempermudah admin dalam mencari tagihan spesifik berdasarkan kodenya.
+
+5. Tabel Daftar Tagihan Berjalan
+Bagian utama halaman ini adalah tabel data yang menampilkan rincian tagihan yang sedang aktif. Di bagian atas tabel disediakan tombol utilitas untuk "Import" dan "Export" data. Tabel ini menyajikan kolom-kolom informasi yang meliputi: Kode Tagihan, Jenis Tagihan (misal: Infaq Syahriah), Kelas, Nominal tagihan, Progres Siswa (dilengkapi visualisasi diagram batang horizontal untuk membandingkan proporsi siswa yang lunas dan belum lunas), Jatuh Tempo, Status (menggunakan badge warna kuning untuk "Belum Lunas"), dan kolom Aksi yang berisi ikon tombol untuk mengelola data (seperti lihat detail atau ubah). Di bagian paling bawah tabel, terdapat fitur navigasi halaman (pagination) untuk mengelola tampilan data yang jumlahnya banyak.
+
+---
+
+### 2. Halaman Login (Masuk)
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) dari halaman Otentikasi atau "Masuk" pada Sistem Manajemen Keuangan Terpadu Yayasan La Tahzan Citeras. Halaman ini berfungsi sebagai gerbang keamanan utama bagi pengguna untuk mengakses data operasional yayasan.
+
+Desain antarmuka mengusung konsep tata letak layar terbagi (split-screen) yang modern dan kontras. Pemisahan visual ini secara efektif membedakan area identitas (branding) instansi dengan area fungsional untuk pengisian formulir.
+
+Secara struktural, halaman ini terbagi menjadi dua bagian utama sebagai berikut:
+
+1. Bagian Kiri (Area Branding dan Identitas)
+Area ini menampilkan latar belakang berwarna biru gelap yang solid. Pada bagian atasnya terdapat logo resmi Yayasan La Tahzan Citeras diikuti teks nama instansi. Di bawahnya terdapat teks sambutan dan penjelasan singkat mengenai sistem. Selain itu, terdapat tipografi tebal yang menonjolkan tahun fiskal "2026" dan moto "100% Digital Transparency". Bagian bawah area ini dihiasi dengan ilustrasi grafis antarmuka samar yang memberikan kesan teknologi modern.
+
+2. Bagian Kanan (Area Formulir Otentikasi)
+Area ini merupakan fokus interaksi fungsional berlatar belakang putih bersih tempat pengguna memasukkan kredensial mereka. Terdapat judul "Masuk" dan teks instruksi singkat. Formulir login itu sendiri mencakup dua isian utama: kolom "Username" yang dilengkapi dengan ikon pengguna, dan kolom "Password" yang memiliki ikon gembok. Kolom kata sandi juga menyediakan fitur fungsional tambahan berupa tautan "Lupa password?" dan ikon mata untuk melihat atau menyembunyikan teks kata sandi. Di bawah formulir, terdapat kotak centang (checkbox) "Ingat saya" (Remember me), yang langsung diikuti oleh tombol aksi primer "Masuk" yang berwarna biru cerah. Di bagian paling bawah halaman, terdapat keterangan hak cipta (copyright).
+
+---
+
+### 3. Halaman Master Data Kelas
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) dari halaman "Master Data Kelas" pada sistem informasi manajemen sekolah Yayasan La Tahzan. Halaman ini merupakan bagian dari modul Data Master yang dirancang untuk memfasilitasi Admin Sekolah dalam mengelola dan melihat rincian data kelas beserta instansinya.
+
+Desain antarmuka secara konsisten mempertahankan konsep dasbor modern. Keunikannya terletak pada cara penyajian data yang tidak menggunakan format tabel konvensional, melainkan mengadopsi antarmuka berbasis kartu (card-based interface) sehingga informasi setiap kelas terasa lebih terfokus dan visual.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Sidebar (Menu Navigasi Samping)
+Sama seperti standar sistem, sidebar terletak di sebelah kiri layar. Menu yang sedang aktif ditandai secara visual, yaitu submenu "Data Kelas" di bawah kategori "Data Master".
+
+2. Bagian Header dan Judul
+Berada di area atas konten utama, terdapat breadcrumb ("Dashboard > Data Master > Data Kelas") sebagai penunjuk hierarki halaman. Di bawahnya adalah judul halaman "Master Data Kelas" beserta deskripsi singkat fungsinya. Di sudut kanan atas area ini terdapat tombol aksi primer berwarna biru dengan teks "+ Tambah Kelas" untuk memudahkan penambahan data baru.
+
+3. Area Pencarian dan Filter
+Di bawah judul, disediakan alat bantu navigasi data berupa kolom pencarian ("Cari nama kelas atau instansi..."). Di sebelah kanannya terdapat menu tarik-turun (dropdown) filter untuk memilih "Semua Tingkat" dan tombol dengan ikon corong (filter) tambahan untuk mempermudah penyaringan data yang spesifik.
+
+4. Area Tampilan Data Kelas (Card View)
+Ini adalah area konten utama yang menampilkan data instansi/kelas dalam wujud kartu berjejer. Gambar menunjukkan dua kartu yang merepresentasikan "Instansi SMA" dan "Instansi SMP". Setiap kartu memuat angka jumlah kelas (bernilai 1), label kode instansi, dan informasi total siswa yang saat ini berstatus "Belum Ada". Sebagai penanda visual tambahan, bagian atas tiap kartu memiliki aksen garis berwarna yang berbeda (hijau untuk SMA dan biru untuk SMP). Di bagian paling bawah dari setiap kartu, disematkan dua tombol aksi cepat yaitu "Edit" (mengubah data) dan "Hapus" (menghapus data).
+
+---
+
+### 4. Halaman Master Data Siswa
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) dari halaman "Master Data Siswa & Orang Tua" pada sistem informasi manajemen sekolah Yayasan La Tahzan. Halaman yang berada di bawah modul Data Master ini dirancang untuk memungkinkan Admin Sekolah mengelola rekam data siswa, status akademik, beserta detail kontak orang tua secara terpusat.
+
+Desain antarmuka berfokus pada penyajian data tabular yang bersih dan informatif. Pemanfaatan ruang yang efisien serta penggunaan ikonografi (seperti avatar dan ikon telepon) membuat baris data lebih hidup dan tidak membosankan saat dibaca.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Sidebar (Menu Navigasi Samping)
+Terletak pada sisi kiri layar, menampilkan menu "Data Siswa" sebagai submenu yang sedang aktif di dalam kategori hierarki "Data Master".
+
+2. Bagian Header dan Tombol Aksi Massal
+Di area konten atas, terdapat breadcrumb penunjuk navigasi dan judul utama "Master Data Siswa & Orang Tua". Pada sudut kanan atas, terdapat dua tombol fungsional yang sangat menonjol: tombol hijau bertuliskan "Import Excel" untuk memasukkan banyak data siswa sekaligus secara massal, dan tombol biru "+ Tambah Siswa" untuk menambahkan data siswa secara tunggal melalui pengisian manual.
+
+3. Area Pencarian
+Di bawah header, terdapat sebuah kolom isian panjang yang berfungsi ganda sebagai fitur pencarian. Pengguna dapat mengetikkan nama siswa atau Nomor Induk Siswa Nasional (NISN) untuk memfilter tabel di bawahnya secara langsung.
+
+4. Tabel Data Siswa Utama
+Keseluruhan data disajikan ke dalam format tabel berskala penuh. Baris tabel (row) memuat rincian informasi spesifik per siswa. Kolom-kolom yang tersedia antara lain: "Siswa" (menampilkan inisial dalam avatar bulat berwarna beserta nama lengkap), "NISN", "Kelas", dan "Orang Tua" (yang memuat dua baris teks: nama orang tua dan nomor telepon selulernya lengkap dengan ikon gagang telepon merah). Pada ujung kanan setiap baris, terdapat kolom "Aksi" yang berisi tombol ikon interaktif berupa pensil (untuk mengedit data) dan tempat sampah (untuk menghapus data).
+
+---
+
+### 5. Halaman Tambah Siswa Baru
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) formulir input pada halaman "Tambah Siswa Baru" di dalam sistem informasi manajemen sekolah Yayasan La Tahzan. Halaman ini berfungsi sebagai sarana interaktif bagi admin untuk memasukkan rekaman data profil seorang siswa baru ke dalam pangkalan data.
+
+Desain antarmuka memprioritaskan tata letak formulir (form layout) yang berpusat pada pengguna (user-centric). Isian-isian (fields) dikelompokkan secara teratur dan dibagi menjadi dua kolom agar halaman tidak menjadi terlalu panjang ke bawah (scrolling berlebih), sekaligus mempercepat proses pengisian.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Sidebar (Menu Navigasi Samping)
+Bagian kiri antarmuka tetap menampilkan sidebar navigasi standar, dengan penyorotan aktif tetap berada pada menu "Data Siswa" karena halaman ini merupakan sub-proses fungsional dari menu tersebut.
+
+2. Bagian Header dan Tombol Navigasi Kembali
+Terletak di bagian atas area konten utama, bagian ini menampilkan breadcrumb hierarkis panjang ("Dashboard > Data Master > Data Siswa > Tambah Siswa"). Di bawahnya terdapat judul halaman "Tambah Siswa Baru" yang diapit di sisi kirinya oleh tombol kembali (back button) berbentuk lingkaran dengan panah arah kiri. Tombol ini sangat penting untuk memberikan kebebasan navigasi kembali ke tabel data siswa tanpa harus menyimpan form.
+
+3. Formulir "Data Pribadi"
+Area formulir utama berada di dalam kontainer putih. Bagian ini dinamakan "Data Pribadi" dan berisikan rincian kolom masukan berpasangan sejajar, yang meliputi:
+- Isian Wajib: Ditandai secara eksplisit dengan simbol bintang (asterisk) merah agar tidak terlewat, yang mencakup: NISN, Nama Lengkap, Jenis Kelamin (menggunakan elemen dropdown), Kelas (dropdown), dan Instansi (dropdown).
+- Isian Opsional: Kolom masukan opsional tambahan seperti Tempat Lahir, Tanggal Lahir (dilengkapi dengan widget pemilih kalender atau date picker berikon), serta kotak isian area teks luas (textarea) untuk mencatat Alamat lengkap siswa. Setiap kolom masukan juga dilengkapi dengan teks petunjuk (placeholder) yang membimbing pengguna dalam proses entri data.
+
+---
+
+### 6. Halaman Dashboard Admin Utama
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) beranda atau "Dashboard Admin Utama" pada sistem informasi manajemen sekolah Yayasan La Tahzan. Halaman ini merupakan layar pertama yang menyambut staf dengan hak akses tinggi (Administrator) setelah melakukan login.
+
+Desain antarmuka mengedepankan pendekatan *at-a-glance* (sekilas pandang), yang mana metrik penting divisualisasikan dengan angka besar tebal (bold typography) dan ikon berwarna-warni yang mencolok di dalam kartu, memberikan kesan dinamis dan mudah dicerna secara instan.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Sidebar (Menu Navigasi Samping)
+Pada bagian panel navigasi kiri, menu atas yakni "Dashboard" terlihat berstatus aktif. Ini menandakan pengguna sedang berada di halaman utama level teratas dari aplikasi.
+
+2. Panel Sambutan (Welcome Banner) dan Header
+Pada area header paling atas sisi kanan, terdapat kotak pelabelan "Tahun Ajaran 2025/2026". Di bawahnya terbentang panel sambutan besar ("Selamat Datang, Administrator!") yang diperindah dengan avatar inisial (A) ungu besar dan lencana (badge) hijau. Pada sayap kanan banner ini disematkan sebuah indikator diagnostik "Status Sistem" (dengan sebuah titik hijau menyala) yang memberikan kepastian instan bahwa "Semua Layanan Berjalan Normal".
+
+3. Kartu Indikator Statistik (Metrics Cards)
+Di bawah panel sambutan berjajar empat blok widget ringkasan statistik esensial sistem. Angka statistik pada setiap widget mendominasi secara visual, diiringi oleh ikon-ikon ikonik beraneka warna yang merepresentasikan:
+- Total Siswa: Berikon ungu, menampilkan angka siswa aktif terdaftar (2).
+- Total Guru & Staf: Berikon hijau kebiruan, menampilkan angka tenaga pendidik aktif (3).
+- Total Kelas: Berikon kuning-oranye, menampilkan angka ruang kelas terdaftar (2).
+- Pengguna Aktif: Berikon ungu, menampilkan angka jumlah akun administrator terdaftar (5).
+
+4. Panel Eksekusi Cepat dan Aktivitas Sistem
+Area di bagian bawah dasbor terpisah menjadi dua zona kolom fungsional:
+- Kolom Kiri ("Aksi Cepat"): Zona navigasi pintasan (shortcut) yang berfungsi memandu pengguna mempercepat eksekusi tugas rutin, seperti tombol panjang interaktif untuk "Tambah Siswa".
+- Kolom Kanan ("Log Aktivitas Sistem"): Zona linimasa historis (timeline) yang merekam dan melacak aktivitas-aktivitas terbaru yang terjadi dalam sistem. Sebagai contoh, log tersebut merekam jejak ketika seorang "Administrator" menambahkan data "Guru" lengkap beserta informasi hari, tanggal, dan jam kejadian secara presisi.
+
+---
+
+### 7. Halaman Tambah Kelas Baru
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) formulir input pada halaman "Tambah Kelas" di dalam sistem informasi manajemen sekolah Yayasan La Tahzan. Halaman ini berfungsi sebagai fasilitas bagi admin untuk meregistrasikan ruangan kelas baru beserta instansi naungannya ke dalam sistem.
+
+Desain antarmuka memprioritaskan tata letak formulir (form layout) yang sederhana dan langsung pada intinya (straightforward). Elemen formulir ditempatkan di dalam kontainer putih berlatar belakang abu-abu terang, memfokuskan perhatian pengguna pada area isian data tanpa distraksi visual yang tidak perlu.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Sidebar (Menu Navigasi Samping)
+Pada bagian kiri layar, panel navigasi sidebar tetap dipertahankan. Menu yang sedang disorot (aktif) adalah "Data Kelas" di bawah modul "Data Master", menandakan konteks operasional dari formulir ini.
+
+2. Bagian Header dan Tombol Navigasi Kembali
+Di area atas konten utama, terdapat breadcrumb ("Dashboard > Data Master > Data Kelas > Tambah Baru") yang memperjelas posisi pengguna. Di bawahnya adalah judul halaman "Tambah Kelas", yang diawali dengan ikon panah kembali (back) untuk membatalkan proses dan kembali ke halaman daftar kelas tanpa menyimpan.
+
+3. Formulir Data Kelas
+Area ini merupakan inti dari halaman, berisi kolom-kolom isian terstruktur yang meliputi:
+- Nama Kelas: Isian wajib (ditandai bintang merah) berupa kotak teks (text field) untuk memasukkan nama spesifik ruangan kelas, dilengkapi contoh teks petunjuk (placeholder) "Contoh: 10 IPA 1".
+- Instansi Pembinaan: Isian wajib berupa menu tarik-turun (dropdown) untuk menentukan instansi pendidikan yang menaungi kelas tersebut (contoh yang dipilih adalah "SMP").
+
+4. Area Tombol Aksi
+Berada di sudut kanan bawah kontainer formulir, terdapat dua tombol kontrol: tombol "Batal" berwarna abu-abu muda untuk membatalkan pengisian, dan tombol aksi primer "Simpan Data" berwarna biru cerah untuk mengeksekusi penyimpanan data ke pangkalan data.
+
+---
+
+### 8. Halaman Data Guru & Staf
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) dari halaman "Data Guru & Staf" pada sistem informasi manajemen sekolah Yayasan La Tahzan. Halaman ini berperan sebagai pangkalan data (database) pusat untuk mengelola informasi seluruh pegawai, baik tenaga pendidik maupun staf kependidikan.
+
+Desain antarmuka mengadopsi tampilan tabel data (data grid) yang bersih dan terstruktur. Penggunaan warna status (seperti titik hijau untuk status aktif) dan tata letak kolom yang proporsional memudahkan admin memindai (scanning) informasi secara cepat.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Sidebar (Menu Navigasi Samping)
+Terletak pada sisi kiri, sidebar secara visual menonjolkan menu "Guru & Staf" sebagai halaman aktif yang sedang diakses pengguna di dalam hierarki modul "Data Master".
+
+2. Bagian Header dan Tombol Tambah Data
+Area paling atas konten utama menampilkan breadcrumb navigasi. Tepat di bawahnya, judul "Data Guru & Staf" dan deskripsi singkatnya diletakkan sejajar dengan tombol aksi primer "+ Tambah Guru/Staf" yang berwarna biru cerah di sisi kanan atas.
+
+3. Area Pencarian
+Untuk mempermudah penemuan data pegawai tertentu di antara ratusan data lainnya, disediakan sebuah bilah pencarian lebar dengan teks bantuan (placeholder) "Cari nama atau NIP guru...".
+
+4. Tabel Daftar Pegawai
+Keseluruhan rekaman data disajikan dalam tabel yang terorganisir dengan rapi. Tabel ini terdiri dari kolom-kolom krusial:
+- NIP: Menampilkan Nomor Induk Pegawai.
+- NAMA: Menampilkan nama lengkap pegawai, diawali dengan ikon avatar berisi inisial nama.
+- INSTANSI: Menunjukkan tempat penugasan pegawai (misalnya: SMA, SMP, atau Keduanya/Yayasan).
+- STATUS: Menampilkan lencana (badge) status keaktifan pegawai, ditandai dengan teks "Aktif" dan indikator titik hijau.
+- AKSI: Menyediakan tombol ikon aksi cepat berupa pensil (untuk mengedit data) dan tempat sampah (untuk menghapus data).
+
+---
+
+### 9. Halaman Tambah Guru/Staf Baru
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) formulir input pada halaman "Tambah Guru/Staf" pada sistem informasi manajemen sekolah Yayasan La Tahzan. Halaman ini adalah layar antarmuka tempat administrator dapat memasukkan identitas lengkap tenaga pendidik atau staf baru.
+
+Desain antarmuka menggunakan pendekatan tata letak satu kolom yang lega dengan elemen-elemen isian yang berjarak (spacious). Kontainer formulir diberi sudut membulat (rounded corners) dan bayangan halus (drop shadow) untuk memberikan efek mengambang yang elegan.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Sidebar (Menu Navigasi Samping)
+Pada panel navigasi kiri, menu "Guru & Staf" di bawah modul "Data Master" ditandai sebagai menu aktif, memberikan orientasi visual yang konsisten bagi pengguna.
+
+2. Bagian Header dan Navigasi Kembali
+Menampilkan runtutan navigasi breadcrumb di area atas. Di bawahnya terdapat judul halaman "Tambah Guru/Staf" beserta deskripsi instruksional singkat. Judul ini dilengkapi tombol navigasi kembali (ikon panah kiri) untuk pembatalan aman tanpa menyimpan data.
+
+3. Formulir Identitas Pegawai
+Berada di dalam kontainer utama, area ini memuat elemen isian formulir:
+- Isian Wajib: Kolom "Nama Lengkap" (kotak teks) dan "Instansi" (menu dropdown).
+- Isian Opsional: Kolom "NIP / NIK" untuk memasukkan nomor identitas kependudukan/pegawai.
+- Unggah Foto: Area khusus berlabel "Foto Guru (Opsional)" yang menyediakan fungsi pengunggahan berkas gambar. Terdapat ikon profil kosong dan tombol "Pilih Foto", disertai batasan spesifikasi berkas (Maks 2MB, format JPG atau PNG).
+
+4. Area Tombol Aksi
+Di bagian kanan bawah formulir, terdapat tata letak dua tombol standar: tombol sekunder "Batal" dan tombol eksekusi primer "Simpan Data Guru" yang diberi blok warna biru cerah.
+
+---
+
+### 10. Halaman Manajemen Pengguna & Peran
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) dari halaman "Manajemen Pengguna & Peran" pada sistem informasi manajemen sekolah Yayasan La Tahzan. Halaman ini merupakan modul administratif krusial untuk mengelola akun pengguna, hak akses (role-based access), dan memantau status login semua pihak yang menggunakan sistem.
+
+Desain antarmuka merangkum kompleksitas pengelolaan peran menjadi visualisasi yang intuitif. Penggabungan antara kartu statistik peran di bagian atas dan tabel data di bagian bawah menciptakan alur kerja dari sekilas pandang (overview) menuju tingkat rincian (details).
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Sidebar (Menu Navigasi Samping)
+Terletak pada sisi paling kiri layar, sidebar dengan jelas menyoroti menu "Manajemen Pengguna" sebagai halaman yang sedang aktif diakses di bawah modul "Data Master".
+
+2. Bagian Header dan Aksi Utama
+Pada area teratas, terdapat breadcrumb penunjuk hierarki halaman, diikuti oleh judul besar "Manajemen Pengguna & Peran" dan sub-penjelasannya. Di sudut kanan atas sebaris dengan judul, terdapat tombol aksi berwarna biru bertuliskan "+ Tambah Pengguna".
+
+3. Kartu Statistik Peran (Role Summary Cards)
+Berada tepat di bawah header, terdapat barisan lima buah kartu informasi yang merangkum distribusi jumlah pengguna berdasarkan perannya (role). Masing-masing kartu menampilkan ikon yang relevan, nama peran, dan jumlah akun terdaftar: Admin (1), Kepala Sekolah (1), Bendahara (1), Guru (0), dan Orang Tua (1).
+
+4. Area Filter, Ekspor, dan Pencarian
+Sebagai alat bantu pengelolaan data tabel, tersedia kolom pencarian utama di sisi kiri ("Cari nama, email..."). Di sisi kanannya, berdampingan, terdapat tombol "Filter" (berikon corong) untuk penyaringan lanjutan dan tombol "Ekspor" (berikon unduh) untuk mengunduh rekaman data pengguna ke dalam format berkas eksternal.
+
+5. Tabel Daftar Pengguna
+Bagian utama di bawahnya adalah tabel komprehensif yang memuat daftar pengguna sistem. Kolom tabel merinci informasi: Nomor urut (NO), "PENGGUNA" (berisi avatar inisial, nama pengguna, dan alamat email/username), "PERAN" (menampilkan lencana berwarna sesuai perannya, misal "Orang Tua", "Kepala Yayasan", "Kepala Sekolah"), "STATUS" (dengan indikator hijau "Aktif"), "TERAKHIR LOGIN" (catatan waktu historis akses), serta kolom "AKSI" untuk kontrol pengeditan dan penghapusan akun.
+
+---
+
+### 11. Halaman Tambah Pengguna Baru
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) formulir input pada halaman "Tambah Pengguna" di dalam sistem informasi manajemen sekolah Yayasan La Tahzan. Halaman ini digunakan oleh Administrator untuk memberikan akses sistem kepada individu baru dengan menentukan peran dan hak akses spesifiknya.
+
+Desain antarmuka mempertahankan gaya formulir bersih dan terfokus seperti pada formulir lainnya di dalam sistem. Tata letak grid digunakan untuk memisahkan baris isian dengan rapi, sehingga pengguna dapat mengisi data langkah demi langkah tanpa kebingungan.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Sidebar (Menu Navigasi Samping)
+Pada panel navigasi kiri, menu "Manajemen Pengguna" di bawah "Data Master" tetap berada pada status aktif, mengindikasikan letak proses ini dalam sistem.
+
+2. Bagian Header dan Navigasi Kembali
+Di area paling atas layar utama, terdapat penunjuk breadcrumb ("Dashboard > Manajemen Pengguna > Tambah Pengguna"). Di bawahnya tertera judul halaman "Tambah Pengguna" beserta penjelasannya. Di sebelah kiri judul juga disertakan tombol kembali (ikon panah) untuk keluar dari formulir ke halaman daftar pengguna.
+
+3. Formulir Pembuatan Akun
+Berada di dalam kontainer utama berlatar putih, formulir ini berisi isian-isian esensial (semuanya berstatus wajib ditandai bintang merah) untuk meregistrasikan akun, yaitu:
+- Nama Lengkap: Kotak teks dengan ikon pengguna.
+- Alamat Email: Kotak teks dengan ikon amplop, berfungsi sebagai username atau kontak utama.
+- Peran (Role): Menu tarik-turun (dropdown) untuk menetapkan level hak akses pengguna, contoh yang dipilih adalah "Guru".
+- Password Akses: Kotak teks dengan ikon gembok untuk mengatur kata sandi awal dengan petunjuk minimal 8 karakter.
+
+4. Area Tombol Aksi
+Pada sudut kanan bawah, sejajar dengan struktur formulir lainnya, disematkan dua tombol standar: "Batal" (berwarna abu-abu) dan "Simpan Pengguna" (berwarna biru cerah) untuk menyelesaikan pembuatan akun.
+
+---
+
+### 12. Halaman Data Tahun Ajaran
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) dari halaman "Data Tahun Ajaran" pada sistem informasi manajemen sekolah Yayasan La Tahzan. Halaman ini adalah bagian penting dari pengaturan inti sistem yang digunakan untuk mendefinisikan dan mengaktifkan periode akademik dan siklus semester.
+
+Desain antarmuka memanfaatkan format tabel yang terkesan ringan (lightweight) dengan menggunakan garis pembatas horisontal halus. Penggunaan label status dengan warna yang berbeda (hijau terang untuk "Aktif" dan abu-abu redup untuk "Nonaktif") membuat admin mudah mengenali tahun ajaran mana yang sedang berjalan tanpa perlu membaca detail teksnya.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Sidebar (Menu Navigasi Samping)
+Pada panel sebelah kiri, menu "Tahun Ajaran" disorot sebagai menu aktif, menandakan posisi navigasi pengguna saat ini di dalam modul "Data Master".
+
+2. Bagian Header dan Aksi Utama
+Terletak di area konten atas, bagian ini memuat navigasi hierarkis (breadcrumb) beserta judul utama "Data Tahun Ajaran" dan teks deksripsi pendukung. Pada area kanan atas, sejajar dengan elemen teks tersebut, disematkan tombol aksi "+ Tambah Tahun Ajaran" yang memiliki isian warna biru penuh (solid blue).
+
+3. Area Pencarian
+Di atas tabel data, terdapat kontainer pencarian panjang berbingkai halus dengan teks bantuan "Cari tahun ajaran atau semester...". Fitur ini mempermudah pencarian pada kasus sekolah yang memiliki banyak riwayat tahun ajaran di pangkalan datanya.
+
+4. Tabel Daftar Tahun Ajaran
+Bagian terbawah adalah tabel data yang berisikan rekaman periode akademik. Setiap baris mewakili satu tahun ajaran. Kolom yang tersedia mencakup: Nomor urut (NO), "TAHUN AJARAN" (disertai ikon kalender dan tahun contoh: 2025/2026), "SEMESTER" (seperti Genap atau Ganjil), lencana "STATUS" keaktifan, dan kolom fungsional "AKSI" yang ruangnya dipersiapkan untuk ikon pengelolaan.
+
+---
+
+### 13. Halaman Kategori Keuangan
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) dari halaman "Kategori Keuangan" pada sistem informasi manajemen sekolah Yayasan La Tahzan. Halaman ini berfungsi memfasilitasi pengguna untuk melakukan kategorisasi sumber uang masuk dan jenis pos pengeluaran dalam sistem akuntansi sekolah.
+
+Desain antarmuka memisahkan data menjadi dua blok visual besar (kartu kategori utama) ketimbang menyatukannya di dalam satu tabel yang sama. Penggunaan sistem warna lampu lalu lintas, yaitu hijau untuk kas masuk dan merah untuk kas keluar, menciptakan persepsi kognitif yang seketika dapat dipahami.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Sidebar (Menu Navigasi Samping)
+Sidebar dengan latar putih ini menyorot menu "Kategori Keuangan" yang berada di bawah rumpun "Data Master", memberikan petunjuk letak fungsionalitas tata kelola kategori di dalam sistem.
+
+2. Bagian Header dan Aksi Utama
+Pada sisi atas halaman, terdapat breadcrumb penunjuk hierarki, judul "Kategori Keuangan", serta sub-judul deskriptif. Tombol navigasi aksi bertuliskan "+ Tambah Kategori" diletakkan di sudut kanan atas dengan corak warna biru untuk menambah kategori baru.
+
+3. Kartu Kelompok Kas Masuk
+Ini adalah kontainer besar bergaris tepi (outline) di sebelah kiri yang didedikasikan khusus untuk sumber pemasukan. Kartu ini memiliki label judul "Kategori Kas Masuk" lengkap dengan ikon panah hijau mengarah ke bawah (simbol masuk), beserta angka indikator total jenis masukan (contoh: 2). Di dalamnya, rincian kategori disajikan dalam wujud baris-baris kartu kecil bertumpuk (contoh: Pembayaran SPP dan DANA BOS) yang masing-masingnya memiliki penanda status "Aktif" serta ikon untuk mengedit dan menghapus.
+
+4. Kartu Kelompok Kas Keluar
+Ini adalah kontainer identik di sebelah kanan yang berfungsi menampung jenis pos beban pembiayaan. Kartu ini diberi label "Kategori Kas Keluar" dengan ikon panah merah mengarah ke atas (simbol uang keluar). Terdapat juga indikator jumlah (contoh: 1). Rincian kategori di dalamnya disusun sama seperti sisi kiri (contoh: Gaji Guru), yang turut dilengkapi status operasional dan ikon fungsi aksi modifikasi.
+
+---
+
+### 14. Halaman Tambah Kategori Keuangan
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) formulir "Tambah Kategori Keuangan" pada sistem informasi manajemen sekolah Yayasan La Tahzan. Formulir ini merupakan langkah spesifik saat admin memilih untuk mendaftarkan jenis aliran dana yang baru.
+
+Desain antarmuka menggunakan gaya panel tersegmentasi (segmented control / kartu opsi) untuk memilih jenis aliran dana, yang jauh lebih ergonomis dan terkesan interaktif dibandingkan menggunakan menu tarik-turun (dropdown) klasik. Kartu opsi ini diberikan respons perubahan warna pinggiran (border) apabila dipilih (state aktif).
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Sidebar (Menu Navigasi Samping)
+Pada susunan navigasi vertikal di kiri layar, sorotan aktif belum beranjak dari menu "Kategori Keuangan".
+
+2. Bagian Header dan Tombol Kembali
+Di sisi atas layar kerja, tersusun breadcrumb detail lokasi halaman, diikuti dengan judul formulir "Tambah Kategori Keuangan" yang letaknya di sebelah kanan tombol kembali (tombol berlogo panah penunjuk kiri).
+
+3. Formulir Klasifikasi Dana
+Keseluruhan isian dibalut di dalam sebuah kanvas putih berbingkai melengkung. Formulir ini berisi isian fungsional wajib:
+- Jenis Aliran Dana: Elemen seleksi khusus berwujud dua kotak pilhan raksasa yang saling berdampingan. Pilihan kiri adalah "Pemasukan (Kas Masuk)" yang, jika dipilih, akan berubah warnanya menjadi hijau cerah. Pilihan kanan adalah "Pengeluaran (Kas Keluar)" dengan corak dasar keabu-abuan. Keduanya diperjelas dengan ikon dan teks deskriptif pendukung.
+- Nama Kategori: Isian teks standar untuk memberikan label identitas kategori (contoh petunjuk masukan: "Contoh: Dana BOS"). Isian ini ditutup dengan paragraf panduan kecil terkait cara memberikan penamaan yang baik.
+
+4. Area Tombol Eksekusi
+Sejajar pada bagian bawah formulir, terdapat tombol ganda: tombol pembatalan sekunder ("Batal") dan tombol simpan data primer ("Simpan Kategori") yang dalam kasus ini diberikan perlakuan warna hijau tegas untuk mencocokkan konteks penambahan dana yang berhubungan dengan masuknya uang.
+
+---
+
+### 15. Halaman Kategori Tagihan
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) dari halaman "Kategori Tagihan" pada sistem informasi manajemen sekolah Yayasan La Tahzan. Halaman khusus modul "Data Master" ini mengatur klasifikasi komponen tagihan atau kewajiban finansial yang dibebankan kepada siswa.
+
+Desain antarmuka menempatkan blok informasi pengenalan (educational blocks) di area teratas yang digambarkan seperti panel pemberitahuan berwarna pastel yang memanjakan mata. Elemen tabelnya ditiadakan dan diganti menjadi tumpukan daftar bergaya baris (list style) di dalam kotak agar dapat memuat rincian naratif yang lebih padat.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Sidebar (Menu Navigasi Samping)
+Menu "Kategori Tagihan" di dalam sidebar kiri terlihat sedang disorot biru terang, mengonfirmasi modul fungsional yang sedang dikerjakan pengguna.
+
+2. Bagian Header dan Aksi Utama
+Pada bagian teratas ruang kerja, disusun elemen navigasi breadcrumb dan judul halaman. Berbeda dengan warna biru pada layar navigasi lainnya, di layar ini tombol primer "+ Tambah Kategori" di sisi kanan atas dirancang menggunakan isian warna hitam yang solid dan elegan.
+
+3. Blok Informasi Jenis Tagihan
+Tepat di bawah judul, terdapat dua kotak panel informasi berlatar belakang gradasi warna pastel tipis (biru muda dan ungu muda) yang berfungsi sebagai kamus (legend) penjelasan jenis tagihan kepada admin.
+- Kotak Kiri (Tagihan Bulanan): Menjelaskan definisi tagihan berulang beserta ikon kalender biru.
+- Kotak Kanan (Tagihan Sekali Bayar): Menjelaskan definisi tagihan yang sifatnya insidental dengan ikon lembar uang kertas ungu.
+
+4. Area Filter dan Indikator Jumlah
+Satu lapis di bawah blok informasi, disediakan isian kotak pencarian tunggal ("Cari nama atau kode tagihan..."). Di ujung kanan sejajar dengan bilah pencarian tersebut, terdapat informasi teks yang merekapitulasi total keseluruhan item yang terdaftar ("Total 1 Kategori").
+
+5. Daftar Baris Item Tagihan
+Area paling bawah merupakan kontainer penyajian data yang menampilkan daftar kategori ke dalam format kotak blok per baris (row block) bergaris tepi halus. Contoh yang ada di layar memuat data satu kategori: "Infaq Syahriah". Baris ini menampilkan informasi yang cukup kaya, antara lain label jenisnya ("Bulanan" berhuruf biru), ID referensi kode ("INFAQ-01"), tarif dasar standar ("Default: Rp 450.000"), sifat keterikatan ("Wajib"), indikator tombol status nyala ("Aktif"), serta penyematan kumpulan ikon fungsi pengeditan (pensil dan tempat sampah) di sisi yang paling kanan.
+
+---
+
+### 16. Halaman Tambah Kategori Tagihan
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) formulir "Tambah Kategori Tagihan" pada sistem informasi manajemen sekolah Yayasan La Tahzan. Formulir ini merupakan langkah spesifik untuk mendefinisikan parameter dasar dari sebuah jenis tagihan baru sebelum tagihan tersebut dibebankan kepada siswa.
+
+Desain antarmuka menggunakan pendekatan visual yang sangat intuitif, mengadopsi pilihan berbasis kartu (card-based selection) untuk opsi siklus penagihan, yang memberikan area klik yang lebih luas dan nyaman (user-friendly) dibandingkan tombol radio tradisional.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Sidebar (Menu Navigasi Samping)
+Pada panel navigasi di kiri layar, sorotan aktif biru masih berada pada menu "Kategori Tagihan" di dalam kelompok "Data Master".
+
+2. Bagian Header dan Navigasi
+Tersusun rapi di bagian atas, terdapat rangkaian breadcrumb hierarki halaman, diikuti dengan tombol kembali (berupa panah penunjuk kiri), judul formulir "Tambah Kategori Tagihan", dan teks sub-judul yang menjelaskan fungsi halaman (sebagai acuan dasar pembuatan tagihan siswa seperti SPP, DSP, dll).
+
+3. Formulir Parameter Tagihan
+Di dalam kontainer utama berlatar putih, disajikan beberapa isian formulir krusial:
+- Siklus Penagihan: Isian wajib yang disajikan dalam bentuk dua kartu besar. Pilihan "Rutin Bulanan" sedang berstatus aktif (ditandai dengan bingkai dan ikon berwarna biru), sedangkan pilihan "Insidental / 1x" berwarna abu-abu redup di sebelahnya. Keduanya memiliki deksripsi ringkas.
+- Nama Tagihan: Isian wajib berwujud kotak teks (contoh masukan: "Infaq Syahriah Bulanan").
+- Kode & Nominal: Dua kolom berdampingan, yaitu isian opsional "Kode" untuk identifikasi unik (contoh: INFAQ-01) dan isian wajib "Nominal Default" yang sudah disertai awalan mata uang "Rp".
+- Deskripsi: Isian opsional berwujud kotak teks area yang luas untuk memberikan penjelasan ekstra (maksimal 255 karakter).
+
+---
+
+### 17. Halaman Profil Yayasan
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) dari halaman "Profil Yayasan" pada sistem informasi manajemen sekolah Yayasan La Tahzan. Halaman ini bertindak sebagai pusat pengaturan identitas instansi, tempat informasi-informasi fundamental institusi disimpan dan diperbarui.
+
+Desain antarmuka sangat rapi dengan pendekatan pemisahan dua kolom (two-column layout) asimetris. Pemisahan identitas visual (logo) di sebelah kiri dan informasi tekstual di sebelah kanan membuat halaman ini sangat seimbang dan estetis.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Sidebar (Menu Navigasi Samping)
+Pada panel sebelah kiri, menu "Profil Yayasan" yang merupakan menu penutup pada kelompok "Data Master" terlihat sedang aktif dan disorot.
+
+2. Bagian Header
+Di ruang fungsional teratas, disematkan petunjuk arah navigasi (breadcrumb) "Dashboard > Data Master > Profil Yayasan". Di bawahnya membentang judul halaman utama "Profil Yayasan" dan deskripsi fungsionalnya.
+
+3. Kartu Identitas Visual (Kiri)
+Bagian kiri halaman memuat sebuah kartu vertikal khusus yang didedikasikan untuk menampilkan Logo resmi "Pondok Pesantren La Tahzan". Di bawah logo tersebut tertera nama yayasan, diikuti dengan tombol fungsi unggah "Ganti Logo" (dengan ketentuan maksimal 2MB, format JPG/PNG).
+
+4. Kartu Formulir Informasi Yayasan (Kanan)
+Mengisi porsi ruang yang lebih lebar di sisi kanan, kontainer ini menampung rincian isian data tekstual yayasan yang terstruktur:
+- Baris pertama: "Nama Yayasan" dengan isian penuh (Yayasan La Tahzan Citeras).
+- Baris kedua: Terbagi dua kolom sejajar untuk isian "Kepala Yayasan" dan "NIP Kepala Yayasan".
+- Baris ketiga: Kotak teks panjang untuk masukan "Alamat" institusi secara lengkap.
+- Baris keempat: Terbagi dua kolom sejajar untuk isian kontak "Telepon" dan "Email".
+- Baris kelima: Isian "Website" untuk alamat situs web resmi lembaga.
+Pada sudut kanan bawah dari formulir ini, bersiap sebuah tombol aksi utama "Simpan Perubahan" yang berwarna solid biru ungu.
+
+---
+
+### 18. Halaman Pembayaran & Verifikasi
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) dari halaman "Pembayaran & Verifikasi" pada sistem informasi manajemen sekolah Yayasan La Tahzan. Halaman ini adalah inti dari operasional transaksi harian (point-of-sale/POS system) untuk modul Keuangan, di mana admin mencatat uang yang masuk atau memverifikasi bukti transfer pembayaran siswa.
+
+Desain antarmuka merangkum nuansa fungsionalitas yang cepat dan terpusat. Penggunaan kartu informasi berwarna gelap bergaya gradasi (dark gradient) menonjolkan sorotan utama pada "Total (Pemasukan) Hari Ini", membedakannya dengan kartu statistik biasa.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Sidebar (Menu Navigasi Samping)
+Menu "Pembayaran & Verifikasi" disorot sebagai menu aktif. Letaknya ada di bawah naungan kelompok menu operasional "Keuangan".
+
+2. Bagian Header
+Pada sisi atas halaman, menyajikan penunjuk hierarki breadcrumb yang terstruktur jelas, diikuti judul halaman yang tegas, "Pembayaran & Verifikasi", beserta narasi deskriptif ringkas fungsinya.
+
+3. Kartu Ringkasan Transaksi Harian
+Berjejer tepat di bawah header, ada tiga widget penampil status transaksi khusus hari ini:
+- Total Hari Ini: Sebuah kartu hitam elegan bergradasi abu-abu yang menampilkan angka "Rp 0" dalam huruf raksasa, mengindikasikan total akumulasi uang tunai yang diterima hari ini.
+- Transaksi Hari Ini: Kartu berlatar putih dengan indikator angka "0 Lunas".
+- Menunggu Verifikasi: Kartu berlatar putih dengan teks dan angka "0" berwarna oranye, yang memberi notifikasi visual jika ada transfer masuk yang belum dikonfirmasi.
+
+4. Modul Pencarian dan Pemilihan Siswa
+Bagian operasional di bawahnya diawali dengan sebuah kolom bilah pencarian besar berjudul "Cari Siswa" ("Ketik Nama atau NISN..."). Ini merupakan titik awal alur kerja (workflow) transaksi.
+Di bawah kolom pencarian tersebut, terdapat ruang kosong (empty state) yang dibatasi garis tepi putus-putus halus, ditengahnya terdapat sebuah ikon kuitansi/tagihan abstrak abu-abu terang dengan pesan petunjuk: "Pilih siswa terlebih dahulu untuk melihat tagihan", menandakan bahwa rincian tagihan akan muncul secara dinamis di area ini setelah seorang siswa dipilih.
+
+---
+
+### 19. Halaman Generate Tagihan Batch (Buat Tagihan Baru)
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) formulir kompleks untuk "Generate Tagihan Batch" pada sistem informasi manajemen sekolah Yayasan La Tahzan. Halaman ini bertugas memfasilitasi otomasi pembuatan tagihan massal untuk ratusan siswa sekaligus hanya dengan beberapa klik (bulk action).
+
+Desain antarmuka memecah kompleksitas proses menjadi bagian yang logis dan aman. Pembagian antara area parameter *input* di sebelah kiri dan *Ringkasan Eksekusi* (sebagai tinjauan pra-eksekusi) di sebelah kanan menjamin admin tidak salah mendistribusikan tagihan ke orang yang salah.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Sidebar (Menu Navigasi Samping)
+Masih berada di dalam modul "Keuangan", namun halaman ini adalah sub-proses, sehingga menu utama yang menyala adalah menu induknya, yaitu "Tagihan Siswa".
+
+2. Bagian Header dan Navigasi Kembali
+Menyediakan informasi rute breadcrumb panjang ("Dashboard > Keuangan > Tagihan Siswa > Buat Tagihan Baru"). Di bawahnya terdapat tombol lingkaran kembali, dan judul utama "Generate Tagihan Batch" dengan teks keterangan pendukung.
+
+3. Panel Formulir Parameter (Kiri)
+Diberi label "Informasi Dasar Tagihan", panel putih ini adalah area penentuan kondisi tagihan:
+- Pilih Jenis Tagihan: Menu *dropdown* (terpilih "Infaq Syahriah (Bulanan)"). Di bawahnya disematkan panel peringatan informasi berwarna biru muda yang memberitahukan tarif otomatis per siswa (Rp 450.000).
+- Target Bulan (Periode): Penentuan siklus tagihan dengan menggunakan dua kartu opsi: "1 Tahun Penuh" atau "Bulan Spesifik Saja" (yang saat ini berstatus aktif/terpilih dengan tepian gelap).
+- Pilih Bulan Tagihan: Menu *dropdown* turunan untuk memilih bulan spesifik (contoh: "Juni").
+
+4. Panel Ringkasan Eksekusi (Kanan)
+Panel ini berwarna abu-abu sangat muda dan berfungsi sebagai "Kalkulator Cerdas" pra-tinjauan yang merangkum parameter yang dipilih di sebelah kiri menjadi data statistik konkret sebelum eksekusi dilakukan:
+- Kategori (Infaq Syahriah), Periode (Bulan Juni).
+- Target Siswa (Kelas 1, 2, 3), lengkap dengan jumlah taksiran jiwa (contoh: 2 Siswa).
+- Total Nilai Tagihan (Rp 900.000).
+Di bagian paling bawah panel ringkasan ini, disematkan sebuah peringatan berboks kuning (warning) mengenai estimasi lama proses *generate* data, memastikan admin paham akan ada *loading* proses yang berjalan.
+
+---
+
+### 20. Halaman Data Tabungan Siswa
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) dari halaman "Data Tabungan Siswa" pada sistem informasi manajemen sekolah Yayasan La Tahzan. Halaman ini merupakan pusat kontrol utama untuk modul "Tabungan", yang berfungsi menampilkan rekam jejak saldo seluruh siswa.
+
+Desain antarmuka dibuat sangat minimalis dan efisien. Pada kondisi ketika belum ada data yang tersimpan atau dicari, layar memvisualisasikan "Empty State" (kondisi kosong) dengan sebuah ilustrasi celengan babi (piggy bank) abu-abu untuk menjaga estetika halaman agar tidak terlihat rusak.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Sidebar (Menu Navigasi Samping)
+Pada bagian kiri layar, terlihat grup menu "Tabungan" sedang dibuka (expanded). Submenu "Data Tabungan" disorot sebagai halaman yang sedang aktif.
+
+2. Bagian Header dan Aksi Utama
+Pada area atas, terdapat urutan navigasi breadcrumb. Di bawahnya adalah judul "Data Tabungan Siswa" dengan deskripsi singkat. Di sisi kanan atas, terdapat dua buah tombol aksi utama yang mencolok: tombol "Setor" berwarna hijau (dengan ikon panah ke bawah) dan tombol "Tarik" berwarna oranye (dengan ikon panah ke atas).
+
+3. Area Pencarian
+Di bawah judul, sebuah kotak pencarian panjang (search bar) berbunyi "Cari siswa..." disediakan untuk mempercepat penemuan data tabungan siswa tertentu tanpa harus menggulir halaman.
+
+4. Tabel Data Tabungan
+Pada bagian terbawah, terdapat kerangka tabel yang siap memuat rincian informasi. Kolom-kolom yang disiapkan meliputi: NISN, NAMA SISWA, KELAS, SALDO (jumlah uang yang tersimpan), TRANSAKSI TERAKHIR (waktu aktivitas terbaru), dan kolom AKSI.
+
+---
+
+### 21. Halaman Pembayaran & Verifikasi (Siswa Terpilih)
+Gambar tersebut menyajikan antarmuka pengguna dari halaman "Pembayaran & Verifikasi", namun kali ini dalam kondisi (state) di mana seorang siswa telah dipilih untuk melakukan proses transaksi pembayaran tagihan.
+
+Desain antarmuka ini sangat interaktif dan responsif (stateful design). Ketika pengguna memilih siswa, area kosong di bawah panel pencarian seketika berubah menjadi antarmuka kasir (Point of Sale/POS) yang komprehensif, dengan pemisahan visual antara daftar rincian tagihan dan panel ringkasan pembayaran.
+
+Secara struktural, halaman ini memiliki elemen tambahan di luar blok header dan ringkasan transaksi harian, sebagai berikut:
+
+1. Kartu Profil Siswa Terpilih
+Di sebelah kanan kotak "Cari Siswa", muncul sebuah kartu profil siswa yang dipilih (contoh: Udin Sedunia, Kelas 1). Kartu ini juga memuat peringatan berwarna merah yang menginformasikan total tagihan yang belum lunas ("1 tagihan belum lunas - Total Rp 450.000"). Terdapat tombol silang (x) untuk membatalkan pilihan siswa tersebut.
+
+2. Panel Daftar Tagihan Siswa
+Di area tengah, sistem menampilkan daftar tagihan yang dimiliki siswa tersebut. Pada contoh ini, terdapat satu tagihan "Infaq Syahriah 1". Admin dapat mencentang kotak (checkbox) di sebelah kiri untuk memilih tagihan yang akan dibayar. Di sisi kanan baris tagihan, terdapat kolom input nominal berwarna putih yang memungkinkan siswa melakukan pembayaran penuh atau sekadar mencicil sebagian (partial payment).
+
+3. Panel Metode Pembayaran dan Eksekusi
+Di bagian paling bawah, antarmuka terbagi dua. Sisi kiri adalah tombol pilihan "Metode Pembayaran" (Tunai, Transfer, QRIS), dengan status "Tunai" sedang aktif (hitam). Sisi kanan adalah panel "Total Bayar" yang merangkum keseluruhan nilai uang yang harus diterima (Rp 450.000) beserta satu tombol eksekusi transaksi yang besar dan tegas berwarna hitam bertuliskan "Konfirmasi Pembayaran".
+
+---
+
+### 22. Halaman Cetak Kuitansi Pembayaran
+Gambar tersebut menyajikan tampilan (preview) dari dokumen "Kwitansi Pembayaran" digital yang dihasilkan oleh sistem secara otomatis setelah transaksi pelunasan berhasil dikonfirmasi. Layar ini disiapkan khusus untuk diformat ke dalam ukuran kertas cetak (print layout).
+
+Desain kuitansi mengadopsi standar administrasi formal konvensional, namun dikemas dengan tipografi modern yang bersih. Kuitansi tidak memiliki ornamen warna-warni (kecuali logo) agar menghemat tinta pencetak (printer-friendly).
+
+Secara struktural, dokumen kuitansi ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Tombol Utilitas Eksternal
+Di luar area batas kertas (di bagian atas kiri layar), melayang sebuah tombol interaktif "Cetak Kuitansi" berwarna biru terang yang berfungsi untuk memicu dialog pencetakan pada peramban web (browser).
+
+2. Kop Surat Yayasan (Kiri Atas)
+Bagian kiri atas kuitansi memuat logo resmi Yayasan La Tahzan Citeras yang diiringi dengan teks identitas lengkap, termasuk alamat fisik, nomor telepon, dan alamat email yayasan.
+
+3. Informasi Transaksi (Kanan Atas)
+Bagian kanan atas menegaskan judul dokumen "KWITANSI PEMBAYARAN" dalam huruf kapital besar, disusul rincian nomor seri transaksi yang unik (contoh: PAY-R10YI35G) dan tanggal pelaksanaan transaksi.
+
+4. Identitas Siswa
+Berada di bawah garis pembatas ganda, terdapat satu baris informasi profil pembayar yang merangkum: Nama siswa (Udin Sedunia), Kelas, NISN, dan rentang Tahun Ajaran aktif.
+
+5. Tabel Rincian dan Nominal Terbilang
+Inti dari kuitansi ini adalah sebuah tabel yang mendaftar "Item Pembayaran" (contoh: Infaq Syahriah) beserta rincian jumlah biayanya. Di bawah tabel disajikan "Grand Total" akhir. Untuk menjamin keabsahan hukum administratif, sistem secara otomatis menerjemahkan angka total tersebut menjadi kalimat alfabetis pada blok "Terbilang" (contoh: "Empat Ratus Lima Puluh Ribu Rupiah").
+
+6. Kolom Pengesahan
+Bagian terbawah dokumen menyediakan ruang untuk tanda tangan "Bendahara" dan "Administrator". Di bawahnya lagi, terdapat catatan kaki (disclaimer) yang menyatakan bahwa dokumen digital ini tetap sah meskipun tanpa tanda tangan basah.
+
+---
+
+### 23. Halaman Setor Tunai (Tabungan)
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) dari halaman "Catat Setoran Baru" pada sub-modul Tabungan. Halaman ini digunakan oleh administrator untuk mencatat uang masuk (kredit) ke dalam rekening tabungan mandiri milik siswa.
+
+Desain antarmuka memisahkan ruang kerja menjadi dua kolom: area operasi input di kiri dan area informasi historis di kanan. Penggunaan aksen garis hijau tebal di sisi kiri formulir secara psikologis mengonfirmasi kepada pengguna bahwa tindakan ini merupakan penambahan dana (positif/kredit).
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Sidebar (Menu Navigasi Samping)
+Pada sidebar kiri, fokus penanda aktif (active state) telah berpindah ke menu "Setoran" di bawah hierarki modul "Tabungan".
+
+2. Formulir Catat Setoran Baru (Sisi Kiri)
+Formulir input data ini memiliki beberapa tahapan masukan:
+- Pencarian Siswa: Fitur pencarian instan (autocomplete) untuk memanggil data siswa.
+- Tanggal Transaksi: Kolom berikon kalender untuk menentukan tanggal setoran.
+- Nominal Setoran: Kotak isian utama dengan awalan mata uang "Rp" untuk mengetik besaran uang. Di bawahnya (terpotong pada gambar) disajikan deretan tombol angka cepat (quick amount buttons) seperti 10rb, 20rb, dst untuk mempercepat pengisian manual.
+
+3. Panel Ringkasan dan Riwayat (Sisi Kanan)
+- Total Setoran Hari Ini: Sebuah widget di pojok kanan atas yang merekapitulasi jumlah total uang setoran yang berhasil dikumpulkan pada hari tersebut (contoh: Rp 100.000 dari 1 Transaksi).
+- Riwayat Transaksi: Tabel mini di bawahnya yang mendaftar jejak setoran terbaru hari ini. Tabel ini menampilkan jam (WAKTU), nama SISWA, KELAS, NOMINAL yang disetor (dengan warna hijau teks positif "+Rp 100.000"), dan ikon centang hijau penanda STATUS sukses. Terdapat pula tombol tautan "Lihat Semua" untuk merujuk ke tabel penuh.
+
+---
+
+### 24. Halaman Catat Penarikan (Tabungan)
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) dari halaman "Catat Penarikan" pada sub-modul Tabungan. Halaman ini berfungsi sebagai kasir pengeluaran (debit) untuk mendokumentasikan saat siswa mengambil saldo tabungan mandiri mereka.
+
+Desain antarmuka pada dasarnya mempertahankan tata letak dua kolom (two-column layout) yang identik dengan halaman Setoran. Namun, perbedaan krusialnya terletak pada penggunaan palet warna: formulir ini mengadopsi aksen tepi berwarna oranye, yang memberi peringatan bawah sadar kepada admin bahwa transaksi ini menyebabkan uang keluar/pengurangan saldo.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama sebagai berikut:
+
+1. Sidebar (Menu Navigasi Samping)
+Dalam daftar menu, submenu "Penarikan" di bawah kelompok "Tabungan" sedang disorot, mencerminkan ruang lingkup tugas yang sedang aktif.
+
+2. Formulir Catat Penarikan (Sisi Kiri)
+Sama seperti form setoran, formulir berbingkai tepi kiri warna oranye ini memandu pengguna untuk menginput data melalui:
+- Cari Siswa: Bilah pencarian wajib untuk memuat profil penarik dana.
+- Nominal Penarikan: Kotak teks khusus untuk memasukkan nominal uang yang ditarik.
+- Tanggal: Kolom input penyesuaian waktu transaksi berikon kalender.
+
+3. Panel Ringkasan dan Riwayat (Sisi Kanan)
+- Ringkasan Penarikan Hari Ini: Berbeda dengan widget setoran yang terang, widget ini sengaja menggunakan warna latar belakang biru dongker (dark blue) bernada tegas. Angka total dana yang keluar ("Total Dana Keluar") ditulis dalam tipografi berwarna oranye yang terang (contoh: Rp 50.000 dari 1 Transaksi).
+- Riwayat Penarikan Hari Ini: Sebuah tabel pencatatan singkat di bagian kanan bawah yang memperlihatkan histori log penarikan terkini. Di dalam tabel ini, warna teks pada kolom NOMINAL diubah menjadi merah (contoh: "-Rp 50.000") untuk memberi penekanan ekstra pada sifat mengurangi dari transaksi tersebut.
+
+---
+
+### 25. Halaman Catat Pengeluaran Baru (Kas Keluar)
+Gambar tersebut menyajikan antarmuka pengguna (User Interface) dari halaman "Catat Pengeluaran Baru" pada modul Kas Sekolah. Halaman ini digunakan oleh administrator untuk mencatat pengeluaran operasional atau belanja sekolah di luar sistem penggajian terpusat.
+
+Desain antarmuka difokuskan pada sebuah formulir input tunggal (single-column form) yang bersih. Untuk memberikan konteks visual yang jelas bahwa tindakan ini adalah "uang keluar", elemen antarmuka menggunakan palet warna merah, mulai dari ikon judul, garis bingkai input (jika aktif/validasi), hingga warna tombol simpan utama.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian:
+
+1. Sidebar dan Header
+Pada menu navigasi samping, "Kas Keluar" di bawah hierarki "Kas Sekolah" terlihat aktif. Di bagian atas, breadcrumb menunjukkan jalur lengkap halaman, disusul dengan judul "Catat Pengeluaran Baru" dan tombol kembali yang berbentuk bulat.
+
+2. Panel Formulir Detail Pengeluaran
+Formulir dibingkai dengan latar putih bersudut melengkung. Kolom-kolom isian yang tersedia meliputi:
+- Kategori (wajib): Menu tarik-turun (dropdown) untuk menstandarkan jenis pengeluaran (contoh: Gaji Guru).
+- Tanggal Keluar (wajib): Pemetik tanggal (date picker) berikon kalender.
+- Nominal (wajib): Kolom input angka untuk nominal rupiah.
+- Keterangan: Kotak teks area yang lebar (textarea) untuk mendeskripsikan secara spesifik rincian pengeluaran tersebut.
+Tanda bintang (*) merah digunakan sebagai indikator bawaan (built-in indicator) bahwa bidang tersebut wajib diisi.
+
+3. Area Tombol Eksekusi
+Di sudut kanan bawah formulir, terdapat tombol "Batal" dan sebuah tombol utama "Simpan Pengeluaran" berwarna merah pekat yang mempertegas sifat transaksi debit (pengurangan kas).
+
+---
+
+### 26. Halaman Catat Pemasukan Kas Baru
+Gambar tersebut menyajikan antarmuka pengguna dari halaman "Catat Pemasukan Kas Baru" pada modul Kas Sekolah. Halaman ini adalah kebalikan dari halaman pengeluaran, yang ditujukan untuk merekam penerimaan uang tambahan (kredit) di luar mekanisme tagihan siswa reguler (misalnya: donasi, dana hibah, dsb).
+
+Desain antarmuka secara struktural merupakan salinan (mirror/clone) dari halaman Catat Pengeluaran, yang membedakannya adalah pergeseran psikologi warna secara drastis. Seluruh aksen merah kini diubah menjadi warna hijau segar untuk merepresentasikan "penambahan kas" atau uang masuk.
+
+Secara struktural, elemen yang ada di halaman ini adalah:
+
+1. Sidebar dan Header
+Sidebar menyoroti menu "Kas Masuk". Breadcrumb dan judul telah diperbarui menjadi "Catat Pemasukan Kas Baru" dengan tombol kembali ke halaman sebelumnya.
+
+2. Panel Formulir Detail Pemasukan
+Formulir input menggunakan ikon judul dokumen berwarna hijau. Struktur *field*-nya identik namun disesuaikan konteksnya:
+- Kategori (wajib): Menu *dropdown* (contoh: Pembayaran SPP).
+- Tanggal Terima (wajib): Pemetik tanggal masuknya uang.
+- Nominal (wajib): Besaran uang masuk.
+- Keterangan: Area teks untuk mencatat sumber atau detail penerimaan (contoh diisi dengan kata "SPP", dibingkai dengan garis hijau).
+
+3. Area Tombol Eksekusi
+Sejajar dengan formulir pengeluaran, bagian bawah dihuni oleh tombol "Batal" dan sebuah tombol eksekusi "Simpan Penerimaan" berwarna hijau solid.
+
+---
+
+### 27. Halaman Kas Keluar (Dashboard/Daftar Pengeluaran)
+Gambar tersebut menyajikan antarmuka pengguna dari halaman utama (Dashboard) "Kas Keluar" pada modul Kas Sekolah. Halaman ini berfungsi sebagai pusat pantauan (monitoring center) dan rekapitulasi data seluruh transaksi belanja/pengeluaran sekolah.
+
+Desain antarmuka memprioritaskan penyajian data berbentuk tabel daftar riwayat dengan didukung oleh deretan kartu ringkasan (summary widgets) di bagian atas untuk memberikan wawasan data secara cepat tanpa perlu menjumlahkan manual.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian:
+
+1. Header dan Tombol Tindakan
+Bagian atas memuat judul halaman dan keterangan. Di pojok kanan atas, sangat kontras dengan latar, disematkan sebuah tombol aksi cepat berwarna merah bertuliskan "+ Catat Pengeluaran" untuk mengarahkan pengguna ke halaman formulir.
+
+2. Kartu Widget Ringkasan (Top Cards)
+Terdapat deretan tiga buah kartu informasi horizontal:
+- Total Belanja: Menampilkan agregasi nominal uang yang keluar pada bulan berjalan (contoh: Rp 3.100.000) dan label merah kecil penanda jumlah transaksi (2 transaksi tercatat).
+- Info Transaksi: Merangkum total jumlah riwayat transaksi yang terjadi.
+- Periode Aktif: Menunjukkan bulan referensi data yang sedang ditampilkan (Juni 2026).
+
+3. Area Pencarian dan Tabel Riwayat
+Di bawah *widget*, terdapat bilah pencarian panjang "Cari keterangan..." untuk memfilter teks. Tabel utama di bawahnya menyusun data ke dalam susunan baris dan kolom yang mencakup: TANGGAL, KATEGORI (ditampilkan dalam bentuk lencana/badge berwarna merah muda terang), KETERANGAN, NOMINAL (teks merah dengan awalan minus, contoh: "- Rp 3.000.000"), dan kolom AKSI. 
+
+---
+
+### 28. Halaman Penggajian Pegawai (Gaji Guru & Staf)
+Gambar tersebut menyajikan antarmuka pengguna dari halaman "Penggajian Pegawai" yang merupakan bagian dari modul Kas Sekolah. Halaman ini bertugas mengelola proses pencatatan beban gaji (payroll) dan penerbitan slip gaji bulanan bagi para tenaga pendidik dan staf.
+
+Desain antarmuka dirancang untuk memfasilitasi alur kerja (workflow) bulanan. Karena sifat pembayarannya yang masal namun bertahap, halaman ini menyajikan daftar pegawai beserta status pelacakan masing-masing individu untuk memastikan tidak ada yang terlewat.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian:
+
+1. Header dan Widget Pemantauan
+Terdapat judul "Penggajian Pegawai" dan tombol "Cetak Rekap" di kanan atas. Di bawahnya terdapat tiga *widget* informatif:
+- Periode Aktif: Menu pilihan (dropdown) untuk mengunci siklus bulan gaji yang dikerjakan (contoh: Februari 2026).
+- Progres Pembayaran: Menampilkan bilah kemajuan (progress bar) dan penghitung rasio staf yang sudah dibayar (contoh: 0 dari 3 Staf, 0%).
+- Realisasi Beban Gaji: Kartu biru gelap yang membandingkan dana yang sudah dikeluarkan terhadap total estimasi keseluruhan (contoh: Rp 0 / Rp 0).
+
+2. Tabel Daftar Pegawai
+Area tabel dilengkapi dengan bilah pencarian NIP/Nama dan filter menu *dropdown* "Semua Status".
+Tabel ini memuat baris untuk setiap guru/staf dengan struktur informasi: 
+- Nomor urut dan Avatar inisial.
+- Nama PEGAWAI, ID/NIP, beserta lencana (badge) unit penugasan (contoh: SMP, Keduanya/Yayasan, SMA).
+- STATUS PENGGAJIAN: Label penanda kondisi *payroll* (contoh: label "Menunggu Proses" berwarna kekuningan).
+- ESTIMASI / DITERIMA: Nominal proyeksi *Take Home Pay* (THP).
+- AKSI: Terdapat tombol "Proses Gaji" berwarna biru-ungu terang di setiap baris untuk masuk ke kalkulator gaji individual.
+
+---
+
+### 29. Halaman Proses Gaji (Kalkulator Detail Gaji)
+Gambar tersebut menyajikan antarmuka pengguna dari halaman "Proses Gaji", sebuah sub-halaman di mana administrator melakukan perhitungan rincian kompensasi final (kalkulator komponen gaji) untuk satu orang pegawai secara spesifik sebelum uang disalurkan.
+
+Desain antarmuka membagi ruang layar menjadi dua fungsionalitas (split-view): sebelah kiri untuk proses *input* aritmatika (menambah/mengurang komponen pendanaan) secara dinamis, dan sebelah kanan sebagai panel pra-tinjauan hasil (preview) sekaligus eksekusi penarikan dana.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian:
+
+1. Header Kartu Profil
+Di area atas kiri, identitas pegawai yang sedang diproses ditampilkan dengan jelas (Budi Santoso, S.Ag) beserta lencana unit kerjanya (SMP) agar tidak terjadi salah transfer.
+
+2. Panel Kiri: Rincian Komponen Gaji
+Panel ini merupakan formulir dinamis tempat mengolah komponen hitungan:
+- Pendapatan Pokok: Gaji dasar yang sudah ditetapkan (contoh: Rp 500.000).
+- Pendapatan Tambahan / Tunjangan: Ditandai teks hijau, admin bisa memasukkan nilai *default* (seperti Transport: Rp 300.000) dan dapat terus menambah baris tunjangan kustom baru menggunakan tombol "[+]".
+- Potongan: Ditandai teks merah, tempat menginput pemotongan kasbon atau iuran (contoh saat ini tidak ada potongan).
+
+3. Panel Kanan: Ringkasan & Sumber Dana (Kas)
+- Widget THP (Take Home Pay): Sebuah kartu visual dengan gradasi biru keunguan yang secara seketika menghitung akumulasi *Take Home Pay* (contoh: Rp 800.000) dari hasil hitungan panel kiri.
+- Tarik Pencairan dari Kas: Bagian krusial ini memungkinkan admin memilih "sumber dompet" yayasan untuk membayar gaji. Opsi berupa tombol radio, contoh "Kas Umum Yayasan" (yang bersaldo Rp 1.250.000) atau "Dana BOS Pusat" (saldo Rp 0).
+- Tombol Aksi Akhir: Terdapat dua opsi penyelesaian, yakni "Simpan & Update Kas" (tombol biru padat) atau "Simpan & Cetak Slip" (tombol putih garis biru).
+
+---
+
+### 30. Halaman Buku Kas Umum (Tab Dana BOS)
+Gambar tersebut menyajikan antarmuka dari halaman "Buku Kas Umum" pada modul Kas Sekolah, secara khusus menampilkan sub-tampilan (tab) untuk pengelolaan "Dana BOS" (Bantuan Operasional Sekolah).
+
+Desain antarmuka memisahkan pembukuan antara Kas Umum dan Dana BOS melalui navigasi *tab* di bagian atas, memungkinkan sekolah memisahkan dana reguler dengan dana bantuan pemerintah secara rapi dan akuntabel.
+
+Secara struktural, halaman ini terbagi menjadi beberapa area:
+
+1. Sistem Navigasi Tab
+Di bagian kiri atas terdapat dua *tab*: "Kas Umum" dan "Dana BOS". Pada gambar ini, *tab* "Dana BOS" sedang aktif (ditandai dengan garis bawah tebal berwarna hijau toska).
+
+2. Panel Ringkasan Dana BOS
+Tiga buah kartu besar menyajikan status makro dana BOS bulan ini:
+- Dana BOS Masuk: Nominal total penerimaan (contoh: Rp 50.000.000).
+- Dana BOS Keluar: Nominal total yang telah dibelanjakan (contoh: Rp 6.000.000), dilengkapi label persentase serapan anggaran ("12% Terserap").
+- Saldo Dana BOS: Kalkulasi sisa dana riil (contoh: Rp 44.000.000) yang didampingi oleh grafik donat (circular progress chart) penanda rasio serapan 12%.
+
+3. Tabel Transaksi Dana BOS
+Bagian utama di bawah adalah buku besar khusus transaksi BOS:
+- Judul Tengah: Ditandai ikon topi toga berwarna hijau dan keterangan periode "Bulan Ini".
+- Tabel Data: Memuat rincian jejak aliran kas dengan kolom TANGGAL, KETERANGAN, TIPE (ditampilkan sebagai lencana "Masuk" hijau atau "Keluar" merah), serta pemisahan kolom uang MASUK (RP) dan KELUAR (RP) untuk pembukuan berganda (double-entry).
+
+---
+
+### 31. Halaman Laporan Buku Kas Umum (Tab Kas Umum)
+Gambar ini masih menampilkan halaman "Buku Kas Umum", namun kali ini berfokus pada *tab* "Kas Umum" dengan kondisi data yang sudah difilter pada periode waktu tertentu (Februari 2026).
+
+3. Tabel Daftar Transaksi (Mutasi)
+Tabel ini menampilkan log mutasi mendetail. Setiap baris mewakili satu pergerakan uang:
+- Dilengkapi dengan filter bulan (dropdown Februari 2026) di sudut kanan daftar.
+- Menyediakan kolom standar pembukuan akuntansi: TANGGAL, NO. REF (Nomor Referensi/Kode Bukti Kas), URAIAN TRANSAKSI, DEBIT (MASUK), KREDIT (KELUAR), dan SALDO berjalan. Angka debit dan kredit diberi latar blok transparan hijau/merah untuk kemudahan baca.
+
+---
+
+### 32. Halaman Kas Masuk (Dashboard Penerimaan dengan Notifikasi)
+Gambar tersebut memperlihatkan antarmuka halaman utama "Kas Masuk (Penerimaan)" pada modul Kas Sekolah. Halaman ini adalah kembaran (mirror) dari Dashboard Kas Keluar, namun didedikasikan untuk pencatatan penerimaan kas non-tagihan siswa.
+
+Satu fitur antarmuka tambahan yang tertangkap pada gambar ini adalah keberadaan "Toast Notification" (notifikasi melayang) berwarna hijau di sudut kanan atas yang berbunyi "Pemasukan berhasil dicatat." Pesan ini muncul secara dinamis/sementara sesaat setelah admin berhasil menyimpan data formulir baru.
+
+Secara struktural, isi halaman identik dengan dasbor kas keluar:
+
+1. Kartu Widget Ringkasan (Top Cards)
+- Total Pemasukan (Bulan Ini): Rp 450.000 dengan indikator 1 transaksi.
+- Info Transaksi: Menunjukkan sifat transaksi (Pemasukan manual di luar SPP).
+- Periode Aktif: Filter referensi bulan (Juni 2026).
+
+2. Area Pencarian dan Tabel Riwayat
+- Tombol "+ Catat Penerimaan" berwarna hijau terang di kanan atas.
+- Tabel daftar transaksi penerimaan dengan kolom TANGGAL, KATEGORI (berwarna teks biru), KETERANGAN, dan NOMINAL (dicetak dengan warna hijau solid dan awalan positif "+ Rp 450.000" sebagai validasi visual).
+
+---
+
+### 33. Halaman Pusat Analitik Keuangan (Dashboard Laporan)
+Gambar tersebut menyajikan antarmuka dari halaman "Dashboard Analitik" pada modul "Laporan". Halaman ini adalah panel data eksekutif (Executive Dashboard) tingkat tinggi yang tidak lagi menampilkan angka transaksi mentah, melainkan memvisualisasikannya ke dalam format agregat spasial dan grafik analitis.
+
+Desain halaman ini jauh lebih mengedepankan elemen infografis, *chart*, dan *dashboarding layout* dengan tujuan memudahkan pimpinan sekolah dalam membaca postur dan kesehatan finansial sekolah secara "sekilas pandang" (bird-eye view).
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian:
+
+1. Header dan Ekspor Laporan
+Menampilkan judul besar "Pusat Analitik Keuangan". Di sisi kanan, tersedia utilitas "Filter Periode" (untuk mengatur rentang bacaan seluruh grafik) dan tombol "Unduh Laporan" (berwarna ungu pekat).
+
+2. Kartu Indikator Utama (Key Performance Indicators/KPI)
+Terdapat empat *widget* kecil namun krusial di barisan teratas:
+- Total Pemasukan (didampingi ikon kotak hijau tren naik).
+- Total Pengeluaran (didampingi ikon kotak merah tren turun).
+- Surplus Bersih (selisih uang, didampingi ikon kotak ungu).
+- Tingkat Kepatuhan SPP (indikator kedisiplinan bayar siswa dalam persentase, didampingi ikon kotak biru).
+
+3. Panel Visualisasi Data (Grafik)
+- Tren Pemasukan & Pengeluaran: Sebuah grafik garis (Line Chart) lebar yang memetakan fluktuasi garis uang masuk (hijau) versus uang keluar (merah) dari bulan ke bulan.
+- Distribusi Pengeluaran Terbesar: Sebuah grafik donat (Donut Chart) yang membedah komposisi/porsi pos-pos pengeluaran terbesar yayasan, dibantu dengan sistem legenda warna (contoh: Gaji Guru warna hijau, Gaji Guru BOS warna ungu).
+
+---
+
+### 34. Halaman Buku Besar Keuangan (Ledger)
+Gambar tersebut menyajikan antarmuka pengguna dari halaman "Buku Besar Keuangan (Ledger)" yang berada di bawah hierarki menu "Laporan Keuangan". Halaman ini merupakan arsip komprehensif, konsolidasi final dari seluruh jenis arus kas (SPP, Tabungan, Kas Masuk, Gaji) menjadi satu aliran daftar kronologis (log) terpusat untuk keperluan audit (auditing).
+
+Desain antarmuka dibuat lebar (full-width) untuk memuat kerumitan data akuntansi. Elemen estetik ditekan demi memaksimalkan kepadatan informasi dan kejelasan angka, namun tetap modern berkat penggunaan sistem lencana (badges).
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian utama:
+
+1. Header dan Filter Presisi
+Bagian judul dibarengi dengan deskripsi fungsi audit transparansi. Di sudut kanan atas, tersedia pemetik rentang waktu presisi tinggi (tanggal mulai s/d tanggal akhir) dan ikon kaca pembesar, disusul tombol ungu "Cetak PDF" untuk penarikan dokumen resmi.
+
+2. Panel Agregasi Laporan (Summary)
+Terdapat tiga *widget* bernuansa pastel:
+- Total Kredit (Pemasukan): Kotak latar hijau lembut untuk jumlah kas masuk agregat.
+- Total Debit (Pengeluaran): Kotak latar merah lembut untuk jumlah kas keluar agregat.
+- Keseimbangan Rasio Margin: Kotak latar ungu pudar yang menyajikan margin kotor/surplus akhir (Rp 44.450.000).
+
+3. Tabel Konsolidasi *Ledger*
+Tabel utama memuat lajur kolom yang sangat lengkap: TANGGAL, NO. REFERENSI (ditampilkan sebagai lencana kode abu-abu yang unik tiap transaksi), URAIAN TRANSAKSI, KATEGORI (berupa lencana bergaris tepi sesuai sifatnya: merah/hijau), METODE / STATUS (misal: "Tunai Lunas"), KREDIT (MASUK) dengan teks hijau (+), dan DEBIT (KELUAR) dengan teks merah (-).
+
+---
+
+### 35. Halaman Laporan Tagihan Siswa
+Gambar tersebut menampilkan antarmuka pengguna dari halaman "Laporan Tagihan Siswa" yang terletak di bawah modul "Laporan". Halaman ini didedikasikan untuk memantau performa pembayaran SPP dan tagihan lainnya, serta mengidentifikasi piutang/tunggakan yang belum diselesaikan oleh siswa.
+
+Desain antarmuka dirancang untuk efisiensi penagihan, memadukan angka agregat di bagian atas dengan data granular (rincian siswa) di bagian bawah.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian:
+
+1. Header dan Instrumen Filter
+Di bagian atas, sejajar dengan judul halaman, terdapat barisan utilitas pemfilteran yang komprehensif: menu *dropdown* "Semua Kategori", "Semua Status", pemetik rentang tanggal khusus, kotak pencarian, serta tombol hijau "Cetak PDF" untuk mengekspor rekapitulasi data.
+
+2. Kartu Indikator Piutang (Top Widgets)
+Tiga kartu status makro memberikan ringkasan performa finansial:
+- Total Proyeksi Penerimaan: Target total uang yang seharusnya masuk (contoh: Rp 900.000, latar biru muda).
+- Total Terkumpul / Lunas: Realisasi uang yang sudah berhasil ditarik (contoh: Rp 900.000, latar hijau muda).
+- Tunggakan (Piutang Siswa): Sisa tagihan yang belum dibayar (contoh: Rp 0). Kartu ini dicetak dengan warna merah peringatan agar admin waspada terhadap besarnya angka macet.
+
+3. Tabel Detail Status Tagihan
+Tabel di bawahnya menjabarkan status per individu siswa. Kolom yang ditampilkan meliputi: NO, NAMA SISWA (beserta NISN), KELAS, JENIS / KATEGORI tagihan (berwarna teks biru interaktif), JATUH TEMPO, NOMINAL (RP), SISA (RP), dan STATUS (ditampilkan dalam bentuk lencana, contoh: "Lunas" berwarna hijau).
+
+---
+
+### 36. Halaman Analisis Kategori Pengeluaran (Rekap Kategori)
+Gambar tersebut memperlihatkan antarmuka halaman "Analisis Kategori Pengeluaran" yang dapat diakses melalui menu "Rekap Kategori" di modul Laporan. Halaman ini adalah alat analisis grafis murni yang bertujuan untuk membandingkan proporsi penyerapan anggaran antar berbagai pos pengeluaran.
+
+Desain halaman ini sangat bersih, meniadakan tabel angka mentah dan sepenuhnya mengandalkan visualisasi data (data visualization) berskala besar.
+
+Secara struktural, elemen pada halaman ini meliputi:
+
+1. Header Laporan
+Memuat judul utama halaman dan sebuah filter periode berbasis "Tahun Ajaran" (contoh: 2025/2026). Di ujung kanan, terdapat tombol aksi berwarna ungu "Cetak Eksekutif Laporan".
+
+2. Grafik Komparasi Pengeluaran
+Inti halaman ini diisi oleh sebuah grafik batang horizontal (Horizontal Bar Chart) berukuran penuh. 
+- Sumbu Y (Vertikal) mendaftar kategori pengeluaran, misalnya "Gaji Guru (BOS)" dan "Gaji Guru" (reguler).
+- Sumbu X (Horizontal) mewakili rentang nominal uang, disederhanakan dalam satuan juta (contoh: 0 Jt, 2 Jt, 4 Jt, dst).
+- Visualisasi Balok: Menampilkan garis balok yang membentang sesuai besaran uang yang dihabiskan. Contohnya, balok warna ungu untuk Gaji Guru (BOS) tampak sangat panjang (melampaui angka 6 Jt), sedangkan balok oranye untuk Gaji Guru reguler lebih pendek.
+
+---
+
+### 37. Halaman Pusat Notifikasi Sistem
+Gambar tersebut menyajikan antarmuka halaman "Notifikasi" yang dapat diakses dari menu Pengaturan. Halaman ini berfungsi sebagai kotak masuk terpusat (inbox) yang mencatat log pemberitahuan otomatis dari sistem terkait kejadian-kejadian penting.
+
+Desain halaman dibuat minimalis dan berfokus pada aliran teks (text feed) yang nyaman dibaca, mirip dengan panel notifikasi pada media sosial.
+
+Secara struktural, halaman ini terbagi menjadi dua bagian:
+
+1. Header Notifikasi
+Memuat judul "Notifikasi" dan tombol praktis "Tandai Semua Dibaca" di pojok kanan atas untuk membersihkan indikator *unread* secara instan.
+
+2. Daftar Kartu Pemberitahuan
+Notifikasi disusun dari atas ke bawah dalam bentuk kartu-kartu melebar. Setiap kartu memuat:
+- Ikon representatif di sebelah kiri (contoh: ikon lonceng biru).
+- Judul notifikasi yang dicetak tebal (contoh: "Tagihan Baru Dibuat") yang didampingi oleh titik biru kecil sebagai penanda belum dibaca (unread indicator).
+- Pesan detail di bawahnya (contoh: "Tagihan Infaq Syahriah berhasil digenerate untuk 2 siswa.").
+- Stempel waktu (tanggal: 11 Apr 2026) di bagian bawah.
+- Tanda centang abu-abu di ujung kanan sebagai tombol interaktif.
+
+---
+
+### 38. Halaman Backup & Restore Database
+Gambar tersebut memperlihatkan antarmuka halaman "Operasi Database" di dalam modul Pengaturan. Halaman pemeliharaan kritikal ini memberikan antarmuka visual bagi administrator untuk melakukan pencadangan (backup) dan pemulihan (restore) basis data secara mandiri tanpa harus mengakses *server* atau panel *hosting*.
+
+Desain halaman dipecah menjadi dua zona simetris (split view) untuk memisahkan fungsi "mengambil data" dan "menimpa data" guna menghindari kesalahan fatal pengguna.
+
+Secara struktural, elemen antarmuka halaman ini meliputi:
+
+1. Zona Pencadangan (Panel Kiri - Backup Data)
+Area ini didesain dengan nuansa abu-abu netral. Terdapat kotak informasi yang menginformasikan bahwa sistem akan mengekspor database MySQL ke dalam format .zip (beserta statistik file yang tersimpan). Di bagian paling bawah panel, disematkan tombol tegas berwarna hitam "Buat Backup Baru".
+
+2. Zona Pemulihan (Panel Kanan - Restore Data)
+Area ini didesain dengan banyak peringatan warna merah/oranye untuk fungsi kehati-hatian. Terdapat kotak "PERHATIAN PENTING" bertuliskan merah yang memperingatkan pengguna bahwa proses ini akan menimpa seluruh data yang ada. Di bawahnya disediakan zona unggah area jatuh (dropzone) bergaris putus-putus untuk menarik dan menaruh (drag & drop) file .SQL atau .ZIP. Tombol "Mulai Restore" di bagian bawah berada dalam keadaan nonaktif (abu-abu/disabled) hingga file berhasil diunggah.
+
+---
+
+### 39. Halaman Log Aktivitas Sistem
+Gambar tersebut menyajikan antarmuka halaman "Log Aktivitas Sistem" pada modul Pengaturan. Halaman ini adalah perwujudan sistem *audit trail* yang merekam setiap jejak rekam pergerakan pengguna dan memonitor aktivitas demi alasan keamanan dan akuntabilitas.
+
+Desain antarmuka diformat dalam susunan tabel yang padat informasi, menyerupai catatan *server* namun dikemas dalam antarmuka web modern agar mudah dibaca oleh non-teknisi.
+
+Secara struktural, halaman ini terbagi menjadi beberapa bagian:
+
+1. Header Log Aktivitas
+Di area atas terdapat judul halaman. Di sisi kanan, disediakan dua tombol aksi: "Konfigurasi Log" (untuk mengatur retensi atau filter lanjutan) dan "Export Log" (berwarna hitam) untuk mengunduh log tersebut.
+
+2. Tabel Rekam Jejak (Audit Trail)
+Tabel utama ini mencatat rincian peristiwa dengan lajur kolom yang sangat detail:
+- WAKTU: Menampilkan tanggal dan stempel detik (timestamp) yang akurat (contoh: 19 Jun 2026, 21.16.34).
+- PENGGUNA: Identitas aktor pelaksana (contoh: Administrator).
+- AKSI: Tindakan spesifik yang dilakukan (ditampilkan dalam format lencana abu-abu, contoh: "Kas Keluar", "Proses Gaji").
+- MODUL: Modul sistem tempat aktivitas terjadi, didampingi ikon (contoh: TransaksiKas, Penggajian).
+- DETAIL: Keterangan tekstual mentah dari kejadian (contoh: "Kas Keluar TransaksiKas #23").
+- IP ADDRESS: Merekam alamat jaringan perangkat yang digunakan pengguna (contoh: "::1" untuk localhost).

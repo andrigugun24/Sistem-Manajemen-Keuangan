@@ -1,0 +1,42 @@
+@startuml
+skinparam Activity {
+  BackgroundColor #FFF2CC
+  BorderColor #D6B656
+}
+skinparam swimlane {
+  BorderColor #333333
+  BorderThickness 2
+}
+
+|Bendahara|
+|Sistem|
+|Orang Tua|
+
+|Bendahara|
+start
+:Buka Menu "Kelola Tagihan";
+:Pilih "Buat Tagihan Baru";
+:Pilih Kategori Tagihan & Tahun Ajaran;
+:Input Nominal Tagihan & Tenggat Waktu Pembayaran;
+:Pilih Siswa / Kelas Penerima Tagihan;
+:Klik Tombol "Generate Tagihan";
+
+|Sistem|
+:Validasi Kelengkapan Form Input;
+if (Data Lengkap?) then (Ya)
+  :Generate Record Tagihan ke Database Berdasarkan Total Siswa;
+  :Buat Rincian Tunggakan Per Akun Siswa Terkait;
+  :Kirim Pesan Email / Notifikasi Internal;
+else (Tidak)
+  :Tampilkan Pesan Error "Input Parameter Ada Yang Kosong";
+  |Bendahara|
+  :Perbaiki Form Tagihan;
+  stop
+endif
+
+|Orang Tua|
+:Menerima Notifikasi Tagihan Baru (Email/App);
+:Login Untuk Melihat Rincian;
+:Tampilkan Rincian Hutang Tagihan di Dashboard Area;
+stop
+@enduml

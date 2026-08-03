@@ -1,0 +1,84 @@
+**STRUKTUR SLIDE PRESENTASI SKRIPSI & SISTEM APLIKASI**
+*(Berdasarkan dokumen Skripsi: Sistem Informasi Manajemen Keuangan Terintegrasi Berbasis Web pada Pondok Pesantren Latahzan Citeras Menggunakan Framework Laravel dan React)*
+
+---
+
+**SLIDE 1: JUDUL (Title Slide)**
+*   **Judul Penelitian:** Rancang Bangun Sistem Informasi Manajemen Keuangan Terintegrasi Berbasis Web pada Pondok Pesantren Latahzan Citeras Menggunakan Framework Laravel dan React
+*   **Nama Mahasiswa:** Andri Gugun (NIM: [Isi NIM Anda])
+*   **Dosen Pembimbing:** [Isi Nama Dosen Pembimbing]
+*   **Logo Institusi / Tanggal Presentasi**
+
+**SLIDE 2: LATAR BELAKANG**
+*   **Kondisi Saat Ini:** Pondok Pesantren Latahzan Citeras memiliki aktivitas transaksi yang beragam (SPP, tabungan santri, gaji guru, arus kas operasional), namun pencatatan masih mengandalkan buku besar fisik secara manual.
+*   **Masalah yang Timbul:** Rentan terjadi *human error* dalam perhitungan, proses rekapitulasi memakan waktu lama (laporan lambat), dan orang tua harus menunggu lama hanya untuk validasi riwayat pembayaran.
+*   **Urgensi:** Keterlambatan birokrasi ini menghambat pengambilan kebijakan taktis oleh pimpinan yayasan, sehingga migrasi ke ekosistem digital sangat mendesak.
+
+**SLIDE 3: RUMUSAN MASALAH & TUJUAN PENELITIAN**
+*   **Rumusan Masalah (Poin Utama):**
+    1. Bagaimana memformulasikan arsitektur sistem digital untuk memangkas kelambatan birokrasi pembukuan konvensional?
+    2. Bagaimana menerapkan komputasi otomatis untuk menekan *human error*?
+    3. Bagaimana memfasilitasi transparansi informasi finansial bagi wali santri?
+*   **Tujuan Penelitian:**
+    1. Mentransformasi efisiensi manajemen pembukuan.
+    2. Mengimplementasikan algoritma otomatis untuk akurasi saldo kas.
+    3. Menyediakan media transparansi yang valid bagi orang tua santri dan pimpinan yayasan.
+
+**SLIDE 4: BATASAN MASALAH**
+*   **Ruang Lingkup:** Dioperasikan secara eksklusif untuk kebutuhan operasional internal di Pondok Pesantren Latahzan Citeras.
+*   **Fitur Inti:** Terbatas pada manajemen SPP bulanan, tabungan santri, penggajian tenaga pendidik, dan laporan pos kas operasional.
+*   **Teknologi:** Arsitektur berbasis Web dengan integrasi *framework* Laravel (Backend), React (Frontend), dan Inertia.js.
+*   **Metode Pembayaran:** Belum menggunakan *payment gateway* pihak ketiga (verifikasi bukti transfer masih manual oleh bendahara).
+
+**SLIDE 5: METODOLOGI PENELITIAN**
+*   **Pengumpulan Data:** Observasi (workflow pencatatan manual), Wawancara (dengan bendahara dan pengurus yayasan), Studi Pustaka.
+*   **Metode Pengembangan Sistem:** Menggunakan **Agile Development** (Iterative Development) yang adaptif terhadap perubahan kebutuhan.
+*   **Fase Agile:** *Plan* (Formulasi Kebutuhan), *Design* (Pemodelan UML & Basis Data), *Develop* (Konstruksi Kode), *Test* (Validasi Mutu), *Deploy*, dan *Review*.
+
+**SLIDE 6: ANALISIS SISTEM BERJALAN vs USULAN**
+*   **Sistem Berjalan:** Pencatatan SPP, tabungan, dan perhitungan gaji (dana BOS) bersifat atomik dan manual (kalkulator & kertas). Arsip rentan hilang/rusak.
+*   **Sistem Usulan:** 
+    *   Sentralisasi data dalam satu *database* MySQL.
+    *   Otomatisasi perhitungan tagihan, saldo tabungan, dan gaji.
+    *   *Generate* dokumen nota/kuitansi dan slip gaji secara digital (PDF).
+    *   Sistem hak akses (Multi-user) terintegrasi.
+
+**SLIDE 7: PERANCANGAN SISTEM (Use Case)**
+*   *(Tampilkan gambar Use Case Diagram dari skripsi)*
+*   **5 Aktor Utama:**
+    1. **Admin:** Kelola data master (siswa, kelas, guru), akun pengguna, dan pengaturan sistem.
+    2. **Bendahara:** Mengelola tagihan, memproses pembayaran (tunai/transfer), mutasi tabungan, dan transaksi kas keluar/gaji.
+    3. **Orang Tua / Wali:** Melihat rincian tagihan dan riwayat pembayaran anak.
+    4. **Kepala Sekolah & Ketua Yayasan:** Memantau laporan dan statistik keuangan via *Dashboard Analitik*.
+
+**SLIDE 8: PERANCANGAN BASIS DATA**
+*   *(Tampilkan gambar Logical Record Structure (LRS) atau sebutkan konsep utamanya)*
+*   **Segmentasi 4 Modul Database:** Autentikasi, Akademik & Pegawai, Keuangan (Tagihan), dan Arus Kas & Tabungan.
+*   **Keunggulan Desain:** Menggunakan pendekatan **Relasi Polimorfik** pada tabel `transaksi_kas` agar dapat mencatat arus kas secara dinamis dari berbagai sumber transaksi (baik dari pembayaran SPP maupun pengeluaran gaji guru) tanpa redundansi.
+
+**SLIDE 9: IMPLEMENTASI ANTARMUKA (UI)**
+*   *(Tampilkan 2-3 Screenshot penting: Dashboard, Form Pembayaran, atau Laporan)*
+*   Dibangun dengan pendekatan *Single Page Application* (SPA) yang responsif dan cepat.
+*   **Dashboard Analitik:** Menyajikan grafik tren pemasukan vs pengeluaran dan status kepatuhan SPP secara *real-time*.
+*   **Otomatisasi PDF:** Fitur *Export* dan Cetak untuk slip gaji, bukti kuitansi, dan buku kas umum.
+
+**SLIDE 10: PENGUJIAN SISTEM**
+*   **Black-Box Testing:** Menguji fungsionalitas antarmuka dan kesesuaian output. (Hasil: Valid, perhitungan saldo dan manajemen CRUD berfungsi dengan baik).
+*   **White-Box Testing (Basis Path Testing):** Difokuskan pada modul krusial yaitu logika **Penarikan Tabungan** (Fungsi `tarikStore`).
+    *   *Hasil:* Tiga jalur independen (Basis Path) dieksekusi dengan baik (menangani saldo kurang, data tidak ditemukan, hingga transaksi valid). Algoritma dinyatakan aman dari cacat logika.
+
+**SLIDE 11: KESIMPULAN**
+*   Sistem berhasil mentransformasikan pencatatan manual menjadi digital terintegrasi, mempercepat pembuatan laporan, dan menekan angka *human error*.
+*   Fragmentasi data terselesaikan dengan baik karena manajemen SPP, tabungan, gaji, dan kas kini berada dalam satu wadah basis data.
+*   Transparansi dan akuntabilitas meningkat signifikan berkat dasbor analitik untuk yayasan dan riwayat pembayaran *real-time* bagi orang tua.
+
+**SLIDE 12: SARAN / PENGEMBANGAN KE DEPAN**
+*   **Integrasi Payment Gateway:** (Seperti Midtrans / Xendit) untuk otomatisasi verifikasi pembayaran tanpa intervensi bendahara.
+*   **Aplikasi Mobile (Android/iOS):** Memudahkan orang tua dan siswa memantau saldo tabungan atau tagihan langsung dari *smartphone*.
+*   **Notifikasi WhatsApp / Email:** Sistem pengingat jatuh tempo tagihan otomatis kepada orang tua wali.
+
+---
+**SLIDE 13: PENUTUP**
+*   Ucapan Terima Kasih.
+*   Sesi Tanya Jawab (Q&A) & Live Demo Sistem.
+*(Pastikan Anda bersiap untuk mendemokan alur login, pembuatan tagihan, dan transaksi di depan penguji)*

@@ -1,0 +1,137 @@
+## 1. Activity Diagram: Alur Pembayaran & Validasi Keuangan (Core Business)
+Kode ini mencakup alur paling inti di mana Orang Tua melakukan aksi, Sistem memproses, lalu Bendahara memverifikasinya.
+
+```plantuml
+@startuml
+' Warna dan Style Dasar
+skinparam Activity {
+  BackgroundColor #D5E8D4
+  BorderColor #82B366
+}
+skinparam swimlane {
+  BorderColor #333333
+  BorderThickness 2
+}
+
+' Mendefinisikan Swimlanes
+|Orang Tua|
+|Sistem|
+|Bendahara|
+
+' -------- ALUR MULAI --------
+|Orang Tua|
+start
+:Pilih Menu "Tagihan";
+:Pilih Data Tagihan yang Akan Dibayar;
+:Input Rekening Asal & Unggah Bukti Transfer;
+:Klik Tombol "Submit Pembayaran";
+
+|Sistem|
+:Menerima HTTP Request Form Pembayaran;
+:Sistem Memeriksa Ekstensi & Ukuran File Bukti;
+
+' Keputusan Sistem (Mengecek file bukti valid secara teknis)
+if (Validasi Bukti Lengkap?) then (Ya)
+  :Ubah Status Tagihan = "Tunggu Verifikasi";
+  :Simpan Transaksi Masuk ke Database;
+  :Update Notifikasi di Dasbor Bendahara;
+else (Tidak/Kurang)
+  :Sistem Memberi Notifikasi Error (Format file salah, dsb);
+  |Orang Tua|
+  :Unggah Ulang Bukti Transfer;
+  stop
+endif
+
+|Bendahara|
+:Login & Buka Menu "Validasi Pembayaran Masuk";
+:Pilih Transaksi yang Berstatus "Tunggu Verifikasi";
+:Cocokkan Bukti Struk dengan Dana Mutasi di Rekening Bank;
+
+' Percabangan Bendahara (Decision Node Belah Ketupat)
+if (Dana Masuk Valid & Sesuai?) then (Valid)
+  :Klik Tombol "Setujui Transaksi";
+  
+  |Sistem|
+  :Ubah Status Tagihan = "Lunas";
+  :Kurangi Total Outstanding Tunggakan;
+  :Masukkan Jurnal Laporan Keuangan Harian (Kas Masuk);
+  :Kirim Notifikasi "Pembayaran Berhasil" ke Orang Tua;
+  :Generate Kwitansi PDF Otomatis;
+  
+  |Orang Tua|
+  :Terima Email/Notif Keberhasilan;
+  :Unduh Kwitansi Pembayaran Penuh;
+  
+else (Palsu/Belum Masuk)
+  |Bendahara|
+  :Tolak Transaksi & Input Alasan Penolakan;
+  
+  |Sistem|
+  :Ubah Status Tagihan = "Batal/Gagal";
+  :Kirim Notifikasi Penolakan ke Orang Tua;
+  
+  |Orang Tua|
+  :Cek Alasan Kegagalan di Halaman Info;
+endif
+
+|Orang Tua|
+stop
+@enduml
+```
+
+---
+
+## 2. Activity Diagram: Alur Login & Hak Akses (Authentication)
+Kode ini memberikan gambaran dasar alur ketika entitas Aktor (siapapun) mencoba mengakses sistem dari awal.
+
+```plantuml
+@startuml
+skinparam Activity {
+  BackgroundColor #DDA0DD
+  BorderColor #800080
+}
+
+|Aktor (Pengguna)|
+|Sistem|
+
+|Aktor (Pengguna)|
+start
+:Akses Halaman URL Sistem;
+
+|Sistem|
+:Menampilkan Antarmuka Form Login;
+
+|Aktor (Pengguna)|
+:Input Email Akun;
+:Input Kata Sandi (Password);
+:Klik "Login";
+
+|Sistem|
+:Sistem Mencari User berdasarkan Email;
+if (Email Ditemukan?) then (Ditemukan)
+  :Bandingkan Hash Password dengan Data Database;
+  if (Password Cocok?) then (Cocok)
+    :Periksa Role / Hak Akses Pengguna;
+    if (Role == Admin?) then (Ya)
+      :Set Sesi Keamanan Admin;
+      :Alihkan ke '/admin/dashboard';
+    else (Bukan Admin)
+      :Set Sesi Keamanan General;
+      :Alihkan ke '/dashboard' sesuai Role;
+    endif
+  else (Tidak Cocok)
+    :Kirim Pesan Error "Password Salah";
+    |Aktor (Pengguna)|
+    stop
+  endif
+else (Tidak Ditemukan)
+  |Sistem|
+  :Kirim Pesan Error "Akun Tidak Terdaftar";
+  |Aktor (Pengguna)|
+  stop
+endif
+
+|Sistem|
+stop
+@enduml
+```

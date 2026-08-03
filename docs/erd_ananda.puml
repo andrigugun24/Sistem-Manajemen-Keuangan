@@ -1,0 +1,316 @@
+@startuml ERD_Sistem_Ananda
+
+!define TABLE(x) entity x << (T,#FFAAAA) >>
+!define PRIMARY_KEY(x) <b><u>x</u></b>
+!define FOREIGN_KEY(x) <i><u>x</u></i>
+
+skinparam linetype ortho
+skinparam entity {
+  BackgroundColor #FEFECE
+  BorderColor #A80036
+  ArrowColor #A80036
+}
+
+' ===========================
+' ENTITAS MASTER
+' ===========================
+
+entity "users" as users {
+  PRIMARY_KEY(id) : BIGINT
+  --
+  name : VARCHAR
+  email : VARCHAR <<unique>>
+  role : VARCHAR {admin, bendahara, orangtua}
+  email_verified_at : TIMESTAMP <<nullable>>
+  password : VARCHAR
+  remember_token : VARCHAR <<nullable>>
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "kelas" as kelas {
+  PRIMARY_KEY(id) : BIGINT
+  --
+  nama_kelas : VARCHAR
+  instansi : ENUM {SMP, SMA}
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "siswas" as siswas {
+  PRIMARY_KEY(id) : BIGINT
+  --
+  nisn : VARCHAR <<unique>>
+  nama_lengkap : VARCHAR
+  tempat_lahir : VARCHAR <<nullable>>
+  tanggal_lahir : DATE <<nullable>>
+  jenis_kelamin : ENUM {L, P}
+  agama : VARCHAR <<nullable>>
+  alamat : TEXT <<nullable>>
+  FOREIGN_KEY(kelas_id) : BIGINT <<FK>>
+  instansi : ENUM {SMP, SMA}
+  nama_ayah : VARCHAR <<nullable>>
+  nama_ibu : VARCHAR <<nullable>>
+  telepon_ortu : VARCHAR <<nullable>>
+  pekerjaan_ortu : VARCHAR <<nullable>>
+  status : ENUM {aktif, nonaktif, lulus, pindah}
+  foto : VARCHAR <<nullable>>
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+  deleted_at : TIMESTAMP <<nullable>>
+}
+
+entity "gurus" as gurus {
+  PRIMARY_KEY(id) : BIGINT
+  --
+  nama_guru : VARCHAR
+  nip : VARCHAR <<nullable>>
+  instansi : ENUM {SMP, SMA, Keduanya/Yayasan}
+  foto : VARCHAR <<nullable>>
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+  deleted_at : TIMESTAMP <<nullable>>
+}
+
+entity "tahun_ajarans" as tahun_ajarans {
+  PRIMARY_KEY(id) : BIGINT
+  --
+  nama_tahun_ajaran : VARCHAR
+  semester : ENUM {Ganjil, Genap}
+  aktif : BOOLEAN
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "kategori_tagihans" as kategori_tagihans {
+  PRIMARY_KEY(id) : BIGINT
+  --
+  nama_kategori : VARCHAR
+  kode_tagihan : VARCHAR <<nullable>>
+  jenis_tagihan : VARCHAR {Bulanan, Tahunan}
+  nominal_default : INTEGER <<nullable>>
+  deskripsi : TEXT <<nullable>>
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "kategori_keuangans" as kategori_keuangans {
+  PRIMARY_KEY(id) : BIGINT
+  --
+  nama_kategori : VARCHAR
+  jenis : ENUM {Pemasukan, Pengeluaran}
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+' ===========================
+' ENTITAS TRANSAKSI TAGIHAN
+' ===========================
+
+entity "tagihans" as tagihans {
+  PRIMARY_KEY(id) : BIGINT
+  --
+  FOREIGN_KEY(siswa_id) : BIGINT <<FK>>
+  FOREIGN_KEY(kategori_tagihan_id) : BIGINT <<FK>>
+  FOREIGN_KEY(tahun_ajaran_id) : BIGINT <<FK>>
+  bulan_tagihan : VARCHAR <<nullable>>
+  target_kelas : VARCHAR
+  nominal_tagihan : INTEGER
+  sisa_tagihan : INTEGER
+  status : ENUM {lunas, sebagian, belum_lunas}
+  jatuh_tempo : DATE
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+  deleted_at : TIMESTAMP <<nullable>>
+}
+
+entity "pembayarans" as pembayarans {
+  PRIMARY_KEY(id) : BIGINT
+  --
+  no_referensi : VARCHAR <<unique>>
+  FOREIGN_KEY(siswa_id) : BIGINT <<FK>>
+  FOREIGN_KEY(user_id) : BIGINT <<FK>>
+  total_bayar : INTEGER
+  metode_pembayaran : ENUM {tunai, transfer, qris}
+  status_pembayaran : ENUM {menunggu, lunas, ditolak}
+  tanggal_bayar : DATETIME
+  bukti_transfer : VARCHAR <<nullable>>
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+  deleted_at : TIMESTAMP <<nullable>>
+}
+
+entity "detail_pembayarans" as detail_pembayarans {
+  PRIMARY_KEY(id) : BIGINT
+  --
+  FOREIGN_KEY(pembayaran_id) : BIGINT <<FK>>
+  FOREIGN_KEY(tagihan_id) : BIGINT <<FK>>
+  nominal_bayar : INTEGER
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+' ===========================
+' ENTITAS KEUANGAN / KAS
+' ===========================
+
+entity "transaksi_kas" as transaksi_kas {
+  PRIMARY_KEY(id) : BIGINT
+  --
+  FOREIGN_KEY(kategori_keuangan_id) : BIGINT <<FK>>
+  tipe_transaksi : ENUM {masuk, keluar}
+  nominal : INTEGER
+  keterangan : TEXT <<nullable>>
+  tanggal_transaksi : DATETIME
+  referensi_type : VARCHAR <<nullable>>
+  referensi_id : BIGINT <<nullable>>
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+  deleted_at : TIMESTAMP <<nullable>>
+}
+
+' ===========================
+' ENTITAS TABUNGAN
+' ===========================
+
+entity "tabungans" as tabungans {
+  PRIMARY_KEY(id) : BIGINT
+  --
+  FOREIGN_KEY(siswa_id) : BIGINT <<FK, unique>>
+  saldo : INTEGER
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "mutasi_tabungans" as mutasi_tabungans {
+  PRIMARY_KEY(id) : BIGINT
+  --
+  FOREIGN_KEY(tabungan_id) : BIGINT <<FK>>
+  FOREIGN_KEY(user_id) : BIGINT <<FK>>
+  jenis_mutasi : ENUM {setor, tarik}
+  nominal : INTEGER
+  saldo_sebelum : INTEGER
+  saldo_sesudah : INTEGER
+  keperluan : VARCHAR <<nullable>>
+  tanggal_mutasi : DATETIME
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+' ===========================
+' ENTITAS PENGGAJIAN
+' ===========================
+
+entity "penggajians" as penggajians {
+  PRIMARY_KEY(id) : BIGINT
+  --
+  FOREIGN_KEY(guru_id) : BIGINT <<FK>>
+  periode_bulan : VARCHAR
+  gaji_pokok : INTEGER
+  tunjangan : INTEGER
+  potongan : INTEGER
+  total_gaji : INTEGER
+  status : ENUM {draft, dibayar}
+  tanggal_pembayaran : DATE <<nullable>>
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+  deleted_at : TIMESTAMP <<nullable>>
+}
+
+' ===========================
+' ENTITAS PIVOT & PENDUKUNG
+' ===========================
+
+entity "siswa_user" as siswa_user {
+  PRIMARY_KEY(id) : BIGINT
+  --
+  FOREIGN_KEY(siswa_id) : BIGINT <<FK>>
+  FOREIGN_KEY(user_id) : BIGINT <<FK>>
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "log_aktivitas" as log_aktivitas {
+  PRIMARY_KEY(id) : BIGINT
+  --
+  FOREIGN_KEY(user_id) : BIGINT <<FK, nullable>>
+  action : VARCHAR
+  model_type : VARCHAR <<nullable>>
+  model_id : VARCHAR <<nullable>>
+  data_lama : TEXT <<nullable, JSON>>
+  data_baru : TEXT <<nullable, JSON>>
+  ip_address : VARCHAR <<nullable>>
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "profil_sekolahs" as profil_sekolahs {
+  PRIMARY_KEY(id) : BIGINT
+  --
+  nama_sekolah : VARCHAR
+  alamat : TEXT <<nullable>>
+  telepon : VARCHAR <<nullable>>
+  email : VARCHAR <<nullable>>
+  website : VARCHAR <<nullable>>
+  kepala_sekolah : VARCHAR <<nullable>>
+  nip_kepala_sekolah : VARCHAR <<nullable>>
+  logo : VARCHAR <<nullable>>
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+' ===========================
+' RELASI
+' ===========================
+
+' -- Kelas -> Siswa (1:N)
+kelas ||--o{ siswas : "kelas_id"
+
+' -- Siswa -> Tagihan (1:N)
+siswas ||--o{ tagihans : "siswa_id"
+
+' -- Siswa -> Pembayaran (1:N)
+siswas ||--o{ pembayarans : "siswa_id"
+
+' -- Siswa -> Tabungan (1:1)
+siswas ||--o| tabungans : "siswa_id"
+
+' -- Kategori Tagihan -> Tagihan (1:N)
+kategori_tagihans ||--o{ tagihans : "kategori_tagihan_id"
+
+' -- Tahun Ajaran -> Tagihan (1:N)
+tahun_ajarans ||--o{ tagihans : "tahun_ajaran_id"
+
+' -- Tagihan -> Detail Pembayaran (1:N)
+tagihans ||--o{ detail_pembayarans : "tagihan_id"
+
+' -- Pembayaran -> Detail Pembayaran (1:N)
+pembayarans ||--o{ detail_pembayarans : "pembayaran_id"
+
+' -- User -> Pembayaran (1:N) -- bendahara yg memproses
+users ||--o{ pembayarans : "user_id"
+
+' -- User -> Mutasi Tabungan (1:N) -- petugas yg memproses
+users ||--o{ mutasi_tabungans : "user_id"
+
+' -- Tabungan -> Mutasi Tabungan (1:N)
+tabungans ||--o{ mutasi_tabungans : "tabungan_id"
+
+' -- Kategori Keuangan -> Transaksi Kas (1:N)
+kategori_keuangans ||--o{ transaksi_kas : "kategori_keuangan_id"
+
+' -- Guru -> Penggajian (1:N)
+gurus ||--o{ penggajians : "guru_id"
+
+' -- User <-> Siswa (M:N via siswa_user)
+users ||--o{ siswa_user : "user_id"
+siswas ||--o{ siswa_user : "siswa_id"
+
+' -- User -> Log Aktivitas (1:N)
+users ||--o{ log_aktivitas : "user_id"
+
+' -- Polymorphic: Pembayaran/Penggajian -> Transaksi Kas
+pembayarans ||--o{ transaksi_kas : "referensi (polymorphic)"
+penggajians ||--o{ transaksi_kas : "referensi (polymorphic)"
+
+@enduml

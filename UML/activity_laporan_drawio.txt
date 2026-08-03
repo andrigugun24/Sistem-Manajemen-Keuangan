@@ -1,0 +1,47 @@
+@startuml
+skinparam Activity {
+  BackgroundColor #E1D5E7
+  BorderColor #9673A6
+}
+skinparam swimlane {
+  BorderColor #333333
+  BorderThickness 2
+}
+
+|Pimpinan (Kepsek / Yayasan)|
+|Sistem|
+
+|Pimpinan (Kepsek / Yayasan)|
+start
+:Login / Beralih ke Menu "Laporan Keuangan";
+:Pilih Kategori (Arus Kas, Tunggakan, atau Global);
+:Pilih Rentang Filter Data Tampilan (Mulai Bulan S/D Selesai);
+:Klik "Tampilkan";
+
+|Sistem|
+:Terima Request Filter Laporan Keuangan;
+:Jalankan Query Seleksi ke Entitas Database;
+
+if (Apakah Data Tersedia?) then (Tersedia)
+  :Sistem Menjalankan Kalkulasi Pivot Table;
+  :Menampilkan Visual Tabel Laporan;
+  
+  |Pimpinan (Kepsek / Yayasan)|
+  :Review Evaluasi Data Laporan di Tabel UX;
+  :Mengeksekusi Aksi "Cetak ke PDF / Excel";
+  
+  |Sistem|
+  :Mulai Operasi Parser File;
+  :Satukan Hasil Laporan & Format Ke Header Institusi;
+  :Generate File Unduhan (Download stream);
+  
+  |Pimpinan (Kepsek / Yayasan)|
+  :File Selesai Diunduh (Tersimpan Secara Lokal);
+else (Kosong)
+  |Sistem|
+  :Tampilkan Lencana Alert "Belum Ada Catatan Transaksi di Periode Tersebut";
+endif
+
+|Pimpinan (Kepsek / Yayasan)|
+stop
+@enduml

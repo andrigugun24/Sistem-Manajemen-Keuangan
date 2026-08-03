@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Spesifikasi Basis Data</title>
+<style>
+    body { font-family: "Times New Roman", Times, serif; font-size: 12pt; line-height: 1.5; padding: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 30px; margin-top: 10px; }
+    th, td { border: 1px solid black; padding: 5px 10px; text-align: left; }
+    th { background-color: #f2f2f2; text-align: center; font-weight: bold; }
+    .table-caption { text-align: center; margin-bottom: 5px; font-weight: normal; }
+    .table-info { margin-bottom: 5px; }
+    .table-info div { display: flex; }
+    .table-info div span:first-child { width: 120px; }
+    ol { padding-left: 20px; }
+</style>
+</head>
+<body>
+<ol>
+<li>Tabel Users
+<div class="table-info">
+<div><span>Nama Tabel</span><span>: users</span></div>
+<div><span>Primary Key</span><span>: id</span></div>
+<div><span>Foreign Key</span><span>: -</span></div>
+</div>
+<div class="table-caption">Tabel 3.1 Spesifikasi Tabel Users</div>
+<table>
+<thead><tr><th style="width: 50px;">No</th><th>Nama Field</th><th>Tipe Data</th><th>Keterangan</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td>id</td><td>bigint(20) unsigned</td><td>Primary Key</td></tr>
+<tr><td style="text-align: center;">2</td><td>name</td><td>varchar(255)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">3</td><td>email</td><td>varchar(255)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">4</td><td>email_verified_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">5</td><td>password</td><td>varchar(255)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">6</td><td>remember_token</td><td>varchar(100)</td><td>Null</td></tr>
+<tr><td style="text-align: center;">7</td><td>created_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">8</td><td>updated_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">9</td><td>role</td><td>varchar(255)</td><td>Not Null</td></tr>
+</tbody>
+</table>
+</li>
+<li>Tabel Cache
+<div class="table-info">
+<div><span>Nama Tabel</span><span>: cache</span></div>
+<div><span>Primary Key</span><span>: key</span></div>
+<div><span>Foreign Key</span><span>: -</span></div>
+</div>
+<div class="table-caption">Tabel 3.2 Spesifikasi Tabel Cache</div>
+<table>
+<thead><tr><th style="width: 50px;">No</th><th>Nama Field</th><th>Tipe Data</th><th>Keterangan</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td>key</td><td>varchar(255)</td><td>Primary Key</td></tr>
+<tr><td style="text-align: center;">2</td><td>value</td><td>mediumText</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">3</td><td>expiration</td><td>int(11)</td><td>Not Null</td></tr>
+</tbody>
+</table>
+</li>
+<li>Tabel Jobs
+<div class="table-info">
+<div><span>Nama Tabel</span><span>: jobs</span></div>
+<div><span>Primary Key</span><span>: id</span></div>
+<div><span>Foreign Key</span><span>: -</span></div>
+</div>
+<div class="table-caption">Tabel 3.3 Spesifikasi Tabel Jobs</div>
+<table>
+<thead><tr><th style="width: 50px;">No</th><th>Nama Field</th><th>Tipe Data</th><th>Keterangan</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td>id</td><td>bigint(20) unsigned</td><td>Primary Key</td></tr>
+<tr><td style="text-align: center;">2</td><td>queue</td><td>varchar(255)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">3</td><td>payload</td><td>text</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">4</td><td>attempts</td><td>unsignedTinyInteger</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">5</td><td>reserved_at</td><td>unsignedInteger</td><td>Null</td></tr>
+<tr><td style="text-align: center;">6</td><td>available_at</td><td>unsignedInteger</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">7</td><td>created_at</td><td>unsignedInteger</td><td>Not Null</td></tr>
+</tbody>
+</table>
+</li>
+<li>Tabel Gurus
+<div class="table-info">
+<div><span>Nama Tabel</span><span>: gurus</span></div>
+<div><span>Primary Key</span><span>: id</span></div>
+<div><span>Foreign Key</span><span>: -</span></div>
+</div>
+<div class="table-caption">Tabel 3.4 Spesifikasi Tabel Gurus</div>
+<table>
+<thead><tr><th style="width: 50px;">No</th><th>Nama Field</th><th>Tipe Data</th><th>Keterangan</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td>id</td><td>bigint(20) unsigned</td><td>Primary Key</td></tr>
+<tr><td style="text-align: center;">2</td><td>nama_guru</td><td>varchar(255)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">3</td><td>nip</td><td>varchar(255)</td><td>Null</td></tr>
+<tr><td style="text-align: center;">4</td><td>instansi</td><td>enum('SMP', 'SMA', 'Keduanya/Yayasan')</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">5</td><td>created_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">6</td><td>updated_at</td><td>timestamp</td><td>Null</td></tr>
+</tbody>
+</table>
+</li>
+<li>Tabel Tahun Ajarans
+<div class="table-info">
+<div><span>Nama Tabel</span><span>: tahun_ajarans</span></div>
+<div><span>Primary Key</span><span>: id</span></div>
+<div><span>Foreign Key</span><span>: -</span></div>
+</div>
+<div class="table-caption">Tabel 3.5 Spesifikasi Tabel Tahun Ajarans</div>
+<table>
+<thead><tr><th style="width: 50px;">No</th><th>Nama Field</th><th>Tipe Data</th><th>Keterangan</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td>id</td><td>bigint(20) unsigned</td><td>Primary Key</td></tr>
+<tr><td style="text-align: center;">2</td><td>nama_tahun_ajaran</td><td>varchar(255)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">3</td><td>semester</td><td>enum('Ganjil', 'Genap')</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">4</td><td>aktif</td><td>tinyint(1)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">5</td><td>created_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">6</td><td>updated_at</td><td>timestamp</td><td>Null</td></tr>
+</tbody>
+</table>
+</li>
+<li>Tabel Kategori Tagihans
+<div class="table-info">
+<div><span>Nama Tabel</span><span>: kategori_tagihans</span></div>
+<div><span>Primary Key</span><span>: id</span></div>
+<div><span>Foreign Key</span><span>: -</span></div>
+</div>
+<div class="table-caption">Tabel 3.6 Spesifikasi Tabel Kategori Tagihans</div>
+<table>
+<thead><tr><th style="width: 50px;">No</th><th>Nama Field</th><th>Tipe Data</th><th>Keterangan</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td>id</td><td>bigint(20) unsigned</td><td>Primary Key</td></tr>
+<tr><td style="text-align: center;">2</td><td>nama_kategori</td><td>varchar(255)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">3</td><td>nominal_default</td><td>int(11)</td><td>Null</td></tr>
+<tr><td style="text-align: center;">4</td><td>created_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">5</td><td>updated_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">6</td><td>kode_tagihan</td><td>varchar(255)</td><td>Null</td></tr>
+<tr><td style="text-align: center;">7</td><td>jenis_tagihan</td><td>varchar(255)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">8</td><td>deskripsi</td><td>text</td><td>Null</td></tr>
+</tbody>
+</table>
+</li>
+<li>Tabel Kelas
+<div class="table-info">
+<div><span>Nama Tabel</span><span>: kelas</span></div>
+<div><span>Primary Key</span><span>: id</span></div>
+<div><span>Foreign Key</span><span>: -</span></div>
+</div>
+<div class="table-caption">Tabel 3.7 Spesifikasi Tabel Kelas</div>
+<table>
+<thead><tr><th style="width: 50px;">No</th><th>Nama Field</th><th>Tipe Data</th><th>Keterangan</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td>id</td><td>bigint(20) unsigned</td><td>Primary Key</td></tr>
+<tr><td style="text-align: center;">2</td><td>nama_kelas</td><td>varchar(255)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">3</td><td>instansi</td><td>enum('SMP', 'SMA')</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">4</td><td>created_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">5</td><td>updated_at</td><td>timestamp</td><td>Null</td></tr>
+</tbody>
+</table>
+</li>
+<li>Tabel Kategori Keuangans
+<div class="table-info">
+<div><span>Nama Tabel</span><span>: kategori_keuangans</span></div>
+<div><span>Primary Key</span><span>: id</span></div>
+<div><span>Foreign Key</span><span>: -</span></div>
+</div>
+<div class="table-caption">Tabel 3.8 Spesifikasi Tabel Kategori Keuangans</div>
+<table>
+<thead><tr><th style="width: 50px;">No</th><th>Nama Field</th><th>Tipe Data</th><th>Keterangan</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td>id</td><td>bigint(20) unsigned</td><td>Primary Key</td></tr>
+<tr><td style="text-align: center;">2</td><td>nama_kategori</td><td>varchar(255)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">3</td><td>jenis</td><td>enum('Pemasukan', 'Pengeluaran')</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">4</td><td>created_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">5</td><td>updated_at</td><td>timestamp</td><td>Null</td></tr>
+</tbody>
+</table>
+</li>
+<li>Tabel Siswas
+<div class="table-info">
+<div><span>Nama Tabel</span><span>: siswas</span></div>
+<div><span>Primary Key</span><span>: id</span></div>
+<div><span>Foreign Key</span><span>: kelas_id</span></div>
+</div>
+<div class="table-caption">Tabel 3.9 Spesifikasi Tabel Siswas</div>
+<table>
+<thead><tr><th style="width: 50px;">No</th><th>Nama Field</th><th>Tipe Data</th><th>Keterangan</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td>id</td><td>bigint(20) unsigned</td><td>Primary Key</td></tr>
+<tr><td style="text-align: center;">2</td><td>nisn</td><td>varchar(255)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">3</td><td>nama_lengkap</td><td>varchar(255)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">4</td><td>tempat_lahir</td><td>varchar(255)</td><td>Null</td></tr>
+<tr><td style="text-align: center;">5</td><td>tanggal_lahir</td><td>date</td><td>Null</td></tr>
+<tr><td style="text-align: center;">6</td><td>jenis_kelamin</td><td>enum('L', 'P')</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">7</td><td>agama</td><td>varchar(255)</td><td>Null</td></tr>
+<tr><td style="text-align: center;">8</td><td>alamat</td><td>text</td><td>Null</td></tr>
+<tr><td style="text-align: center;">9</td><td>kelas_id</td><td>bigint(20) unsigned</td><td>Foreign Key</td></tr>
+<tr><td style="text-align: center;">10</td><td>instansi</td><td>enum('SMP', 'SMA')</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">11</td><td>nama_ayah</td><td>varchar(255)</td><td>Null</td></tr>
+<tr><td style="text-align: center;">12</td><td>nama_ibu</td><td>varchar(255)</td><td>Null</td></tr>
+<tr><td style="text-align: center;">13</td><td>telepon_ortu</td><td>varchar(255)</td><td>Null</td></tr>
+<tr><td style="text-align: center;">14</td><td>pekerjaan_ortu</td><td>varchar(255)</td><td>Null</td></tr>
+<tr><td style="text-align: center;">15</td><td>status</td><td>enum('aktif', 'nonaktif', 'lulus', 'pindah')</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">16</td><td>created_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">17</td><td>updated_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">18</td><td>nis</td><td>renameColumn</td><td>Not Null</td></tr>
+</tbody>
+</table>
+</li>
+<li>Tabel Tagihans
+<div class="table-info">
+<div><span>Nama Tabel</span><span>: tagihans</span></div>
+<div><span>Primary Key</span><span>: id</span></div>
+<div><span>Foreign Key</span><span>: siswa_id, kategori_tagihan_id, tahun_ajaran_id</span></div>
+</div>
+<div class="table-caption">Tabel 3.10 Spesifikasi Tabel Tagihans</div>
+<table>
+<thead><tr><th style="width: 50px;">No</th><th>Nama Field</th><th>Tipe Data</th><th>Keterangan</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td>id</td><td>bigint(20) unsigned</td><td>Primary Key</td></tr>
+<tr><td style="text-align: center;">2</td><td>siswa_id</td><td>bigint(20) unsigned</td><td>Foreign Key</td></tr>
+<tr><td style="text-align: center;">3</td><td>kategori_tagihan_id</td><td>bigint(20) unsigned</td><td>Foreign Key</td></tr>
+<tr><td style="text-align: center;">4</td><td>tahun_ajaran_id</td><td>bigint(20) unsigned</td><td>Foreign Key</td></tr>
+<tr><td style="text-align: center;">5</td><td>bulan_tagihan</td><td>varchar(255)</td><td>Null</td></tr>
+<tr><td style="text-align: center;">6</td><td>nominal_tagihan</td><td>int(11)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">7</td><td>sisa_tagihan</td><td>int(11)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">8</td><td>status</td><td>enum('lunas', 'sebagian', 'belum_lunas')</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">9</td><td>jatuh_tempo</td><td>date</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">10</td><td>created_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">11</td><td>updated_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">12</td><td>target_kelas</td><td>varchar(255)</td><td>Not Null</td></tr>
+</tbody>
+</table>
+</li>
+<li>Tabel Pembayarans
+<div class="table-info">
+<div><span>Nama Tabel</span><span>: pembayarans</span></div>
+<div><span>Primary Key</span><span>: id</span></div>
+<div><span>Foreign Key</span><span>: siswa_id, user_id</span></div>
+</div>
+<div class="table-caption">Tabel 3.11 Spesifikasi Tabel Pembayarans</div>
+<table>
+<thead><tr><th style="width: 50px;">No</th><th>Nama Field</th><th>Tipe Data</th><th>Keterangan</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td>id</td><td>bigint(20) unsigned</td><td>Primary Key</td></tr>
+<tr><td style="text-align: center;">2</td><td>no_referensi</td><td>varchar(255)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">3</td><td>siswa_id</td><td>bigint(20) unsigned</td><td>Foreign Key</td></tr>
+<tr><td style="text-align: center;">4</td><td>user_id</td><td>bigint(20) unsigned</td><td>Foreign Key</td></tr>
+<tr><td style="text-align: center;">5</td><td>total_bayar</td><td>int(11)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">6</td><td>metode_pembayaran</td><td>enum('tunai', 'transfer', 'qris')</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">7</td><td>status_pembayaran</td><td>enum('menunggu', 'lunas', 'ditolak')</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">8</td><td>tanggal_bayar</td><td>dateTime</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">9</td><td>created_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">10</td><td>updated_at</td><td>timestamp</td><td>Null</td></tr>
+</tbody>
+</table>
+</li>
+<li>Tabel Detail Pembayarans
+<div class="table-info">
+<div><span>Nama Tabel</span><span>: detail_pembayarans</span></div>
+<div><span>Primary Key</span><span>: id</span></div>
+<div><span>Foreign Key</span><span>: pembayaran_id, tagihan_id</span></div>
+</div>
+<div class="table-caption">Tabel 3.12 Spesifikasi Tabel Detail Pembayarans</div>
+<table>
+<thead><tr><th style="width: 50px;">No</th><th>Nama Field</th><th>Tipe Data</th><th>Keterangan</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td>id</td><td>bigint(20) unsigned</td><td>Primary Key</td></tr>
+<tr><td style="text-align: center;">2</td><td>pembayaran_id</td><td>bigint(20) unsigned</td><td>Foreign Key</td></tr>
+<tr><td style="text-align: center;">3</td><td>tagihan_id</td><td>bigint(20) unsigned</td><td>Foreign Key</td></tr>
+<tr><td style="text-align: center;">4</td><td>nominal_bayar</td><td>int(11)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">5</td><td>created_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">6</td><td>updated_at</td><td>timestamp</td><td>Null</td></tr>
+</tbody>
+</table>
+</li>
+<li>Tabel Transaksi Kas
+<div class="table-info">
+<div><span>Nama Tabel</span><span>: transaksi_kas</span></div>
+<div><span>Primary Key</span><span>: id</span></div>
+<div><span>Foreign Key</span><span>: kategori_keuangan_id</span></div>
+</div>
+<div class="table-caption">Tabel 3.13 Spesifikasi Tabel Transaksi Kas</div>
+<table>
+<thead><tr><th style="width: 50px;">No</th><th>Nama Field</th><th>Tipe Data</th><th>Keterangan</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td>id</td><td>bigint(20) unsigned</td><td>Primary Key</td></tr>
+<tr><td style="text-align: center;">2</td><td>kategori_keuangan_id</td><td>bigint(20) unsigned</td><td>Foreign Key</td></tr>
+<tr><td style="text-align: center;">3</td><td>tipe_transaksi</td><td>enum('masuk', 'keluar')</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">4</td><td>nominal</td><td>int(11)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">5</td><td>keterangan</td><td>text</td><td>Null</td></tr>
+<tr><td style="text-align: center;">6</td><td>tanggal_transaksi</td><td>dateTime</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">7</td><td>referensi</td><td>nullableMorphs</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">8</td><td>created_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">9</td><td>updated_at</td><td>timestamp</td><td>Null</td></tr>
+</tbody>
+</table>
+</li>
+<li>Tabel Tabungans
+<div class="table-info">
+<div><span>Nama Tabel</span><span>: tabungans</span></div>
+<div><span>Primary Key</span><span>: id</span></div>
+<div><span>Foreign Key</span><span>: siswa_id</span></div>
+</div>
+<div class="table-caption">Tabel 3.14 Spesifikasi Tabel Tabungans</div>
+<table>
+<thead><tr><th style="width: 50px;">No</th><th>Nama Field</th><th>Tipe Data</th><th>Keterangan</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td>id</td><td>bigint(20) unsigned</td><td>Primary Key</td></tr>
+<tr><td style="text-align: center;">2</td><td>siswa_id</td><td>bigint(20) unsigned</td><td>Foreign Key</td></tr>
+<tr><td style="text-align: center;">3</td><td>saldo</td><td>int(11)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">4</td><td>created_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">5</td><td>updated_at</td><td>timestamp</td><td>Null</td></tr>
+</tbody>
+</table>
+</li>
+<li>Tabel Mutasi Tabungans
+<div class="table-info">
+<div><span>Nama Tabel</span><span>: mutasi_tabungans</span></div>
+<div><span>Primary Key</span><span>: id</span></div>
+<div><span>Foreign Key</span><span>: tabungan_id, user_id</span></div>
+</div>
+<div class="table-caption">Tabel 3.15 Spesifikasi Tabel Mutasi Tabungans</div>
+<table>
+<thead><tr><th style="width: 50px;">No</th><th>Nama Field</th><th>Tipe Data</th><th>Keterangan</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td>id</td><td>bigint(20) unsigned</td><td>Primary Key</td></tr>
+<tr><td style="text-align: center;">2</td><td>tabungan_id</td><td>bigint(20) unsigned</td><td>Foreign Key</td></tr>
+<tr><td style="text-align: center;">3</td><td>user_id</td><td>bigint(20) unsigned</td><td>Foreign Key</td></tr>
+<tr><td style="text-align: center;">4</td><td>jenis_mutasi</td><td>enum('setor', 'tarik')</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">5</td><td>nominal</td><td>int(11)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">6</td><td>keperluan</td><td>varchar(255)</td><td>Null</td></tr>
+<tr><td style="text-align: center;">7</td><td>tanggal_mutasi</td><td>dateTime</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">8</td><td>created_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">9</td><td>updated_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">10</td><td>saldo_sebelum</td><td>int(11)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">11</td><td>saldo_sesudah</td><td>int(11)</td><td>Not Null</td></tr>
+</tbody>
+</table>
+</li>
+<li>Tabel Penggajians
+<div class="table-info">
+<div><span>Nama Tabel</span><span>: penggajians</span></div>
+<div><span>Primary Key</span><span>: id</span></div>
+<div><span>Foreign Key</span><span>: guru_id</span></div>
+</div>
+<div class="table-caption">Tabel 3.16 Spesifikasi Tabel Penggajians</div>
+<table>
+<thead><tr><th style="width: 50px;">No</th><th>Nama Field</th><th>Tipe Data</th><th>Keterangan</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td>id</td><td>bigint(20) unsigned</td><td>Primary Key</td></tr>
+<tr><td style="text-align: center;">2</td><td>guru_id</td><td>bigint(20) unsigned</td><td>Foreign Key</td></tr>
+<tr><td style="text-align: center;">3</td><td>periode_bulan</td><td>varchar(255)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">4</td><td>gaji_pokok</td><td>int(11)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">5</td><td>tunjangan</td><td>int(11)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">6</td><td>potongan</td><td>int(11)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">7</td><td>total_gaji</td><td>int(11)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">8</td><td>status</td><td>enum('draft', 'dibayar')</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">9</td><td>tanggal_pembayaran</td><td>date</td><td>Null</td></tr>
+<tr><td style="text-align: center;">10</td><td>created_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">11</td><td>updated_at</td><td>timestamp</td><td>Null</td></tr>
+</tbody>
+</table>
+</li>
+<li>Tabel Siswa User
+<div class="table-info">
+<div><span>Nama Tabel</span><span>: siswa_user</span></div>
+<div><span>Primary Key</span><span>: id</span></div>
+<div><span>Foreign Key</span><span>: siswa_id, user_id</span></div>
+</div>
+<div class="table-caption">Tabel 3.17 Spesifikasi Tabel Siswa User</div>
+<table>
+<thead><tr><th style="width: 50px;">No</th><th>Nama Field</th><th>Tipe Data</th><th>Keterangan</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td>id</td><td>bigint(20) unsigned</td><td>Primary Key</td></tr>
+<tr><td style="text-align: center;">2</td><td>siswa_id</td><td>bigint(20) unsigned</td><td>Foreign Key</td></tr>
+<tr><td style="text-align: center;">3</td><td>user_id</td><td>bigint(20) unsigned</td><td>Foreign Key</td></tr>
+<tr><td style="text-align: center;">4</td><td>created_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">5</td><td>updated_at</td><td>timestamp</td><td>Null</td></tr>
+</tbody>
+</table>
+</li>
+<li>Tabel Log Aktivitas
+<div class="table-info">
+<div><span>Nama Tabel</span><span>: log_aktivitas</span></div>
+<div><span>Primary Key</span><span>: id</span></div>
+<div><span>Foreign Key</span><span>: user_id</span></div>
+</div>
+<div class="table-caption">Tabel 3.18 Spesifikasi Tabel Log Aktivitas</div>
+<table>
+<thead><tr><th style="width: 50px;">No</th><th>Nama Field</th><th>Tipe Data</th><th>Keterangan</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td>id</td><td>bigint(20) unsigned</td><td>Primary Key</td></tr>
+<tr><td style="text-align: center;">2</td><td>user_id</td><td>bigint(20) unsigned</td><td>Foreign Key</td></tr>
+<tr><td style="text-align: center;">3</td><td>action</td><td>varchar(255)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">4</td><td>model_type</td><td>varchar(255)</td><td>Null</td></tr>
+<tr><td style="text-align: center;">5</td><td>model_id</td><td>varchar(255)</td><td>Null</td></tr>
+<tr><td style="text-align: center;">6</td><td>data_lama</td><td>text</td><td>Null</td></tr>
+<tr><td style="text-align: center;">7</td><td>data_baru</td><td>text</td><td>Null</td></tr>
+<tr><td style="text-align: center;">8</td><td>ip_address</td><td>varchar(255)</td><td>Null</td></tr>
+<tr><td style="text-align: center;">9</td><td>created_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">10</td><td>updated_at</td><td>timestamp</td><td>Null</td></tr>
+</tbody>
+</table>
+</li>
+<li>Tabel Notifications
+<div class="table-info">
+<div><span>Nama Tabel</span><span>: notifications</span></div>
+<div><span>Primary Key</span><span>: id</span></div>
+<div><span>Foreign Key</span><span>: -</span></div>
+</div>
+<div class="table-caption">Tabel 3.19 Spesifikasi Tabel Notifications</div>
+<table>
+<thead><tr><th style="width: 50px;">No</th><th>Nama Field</th><th>Tipe Data</th><th>Keterangan</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td>id</td><td>char(36)</td><td>Primary Key</td></tr>
+<tr><td style="text-align: center;">2</td><td>type</td><td>varchar(255)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">3</td><td>notifiable</td><td>morphs</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">4</td><td>data</td><td>text</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">5</td><td>read_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">6</td><td>created_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">7</td><td>updated_at</td><td>timestamp</td><td>Null</td></tr>
+</tbody>
+</table>
+</li>
+<li>Tabel Profil Sekolahs
+<div class="table-info">
+<div><span>Nama Tabel</span><span>: profil_sekolahs</span></div>
+<div><span>Primary Key</span><span>: id</span></div>
+<div><span>Foreign Key</span><span>: -</span></div>
+</div>
+<div class="table-caption">Tabel 3.20 Spesifikasi Tabel Profil Sekolahs</div>
+<table>
+<thead><tr><th style="width: 50px;">No</th><th>Nama Field</th><th>Tipe Data</th><th>Keterangan</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td>id</td><td>bigint(20) unsigned</td><td>Primary Key</td></tr>
+<tr><td style="text-align: center;">2</td><td>nama_sekolah</td><td>varchar(255)</td><td>Not Null</td></tr>
+<tr><td style="text-align: center;">3</td><td>alamat</td><td>text</td><td>Null</td></tr>
+<tr><td style="text-align: center;">4</td><td>telepon</td><td>varchar(255)</td><td>Null</td></tr>
+<tr><td style="text-align: center;">5</td><td>email</td><td>varchar(255)</td><td>Null</td></tr>
+<tr><td style="text-align: center;">6</td><td>website</td><td>varchar(255)</td><td>Null</td></tr>
+<tr><td style="text-align: center;">7</td><td>kepala_sekolah</td><td>varchar(255)</td><td>Null</td></tr>
+<tr><td style="text-align: center;">8</td><td>nip_kepala_sekolah</td><td>varchar(255)</td><td>Null</td></tr>
+<tr><td style="text-align: center;">9</td><td>logo</td><td>varchar(255)</td><td>Null</td></tr>
+<tr><td style="text-align: center;">10</td><td>created_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">11</td><td>updated_at</td><td>timestamp</td><td>Null</td></tr>
+</tbody>
+</table>
+</li>
+<li>Tabel Notifikasis
+<div class="table-info">
+<div><span>Nama Tabel</span><span>: notifikasis</span></div>
+<div><span>Primary Key</span><span>: id</span></div>
+<div><span>Foreign Key</span><span>: -</span></div>
+</div>
+<div class="table-caption">Tabel 3.21 Spesifikasi Tabel Notifikasis</div>
+<table>
+<thead><tr><th style="width: 50px;">No</th><th>Nama Field</th><th>Tipe Data</th><th>Keterangan</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">1</td><td>id</td><td>bigint(20) unsigned</td><td>Primary Key</td></tr>
+<tr><td style="text-align: center;">2</td><td>created_at</td><td>timestamp</td><td>Null</td></tr>
+<tr><td style="text-align: center;">3</td><td>updated_at</td><td>timestamp</td><td>Null</td></tr>
+</tbody>
+</table>
+</li>
+</ol>
+</body>
+</html>

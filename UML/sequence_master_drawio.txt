@@ -1,0 +1,38 @@
+@startuml
+actor "Admin" as admin
+boundary "View\n(Halaman Data Siswa)" as view
+control "SiswaController\n(Controller)" as ctrl
+entity "Siswa\n(Model)" as model
+database "Database" as db
+
+admin -> view : 1. Akses Modul Data Siswa & Klik Tambah Data
+activate view
+view --> admin : Menampilkan Form Tambah Pendaftaran Siswa
+
+admin -> view : 2. Form Submit: Input Data Diri & Atribut Akademik Lengkap
+view -> ctrl : 3. POST /siswa/store (Data Input Mentah)
+activate ctrl
+
+ctrl -> ctrl : 4. Eksekusi Rule Validasi Standar (Mengecek Form Kosong/Format)
+alt Jika Validasi Request Diterima (Lolos)
+    ctrl -> model : 5. Panggil Method Eloquent Create(Data Tervalidasi)
+    activate model
+    
+    model -> db : 6. INSERT INTO siswa (nama, nisn, kelas) VALUES (...)
+    activate db
+    db --> model : Konfirmasi INSERT Berhasil (Transaction OK)
+    deactivate db
+    
+    model --> ctrl : Kembalikan Objek Instance Siswa Teregister Baru
+    deactivate model
+    
+    ctrl --> view : 7. Return Redirect ke Halaman Index (List Data) 
+    view --> admin : Menampilkan SweetAlert "Data Berhasil Disimpan" di Pojok Layar
+else Form Kosong / Tidak Memenuhi Standar Integritas
+    ctrl --> view : 8. Return Redirect Back with Validator Errors
+    view --> admin : Tampilkan Peringatan merah di setiap baris inputan yang keliru
+end
+
+deactivate ctrl
+deactivate view
+@enduml

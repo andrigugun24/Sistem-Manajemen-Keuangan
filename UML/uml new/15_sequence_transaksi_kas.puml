@@ -1,0 +1,62 @@
+@startuml SEQ_TransaksiKas
+' ============================================================
+' SEQUENCE DIAGRAM - Transaksi Kas (Simplified)
+' Sistem Informasi Keuangan Sekolah Ananda
+' ============================================================
+skinparam sequence {
+  ArrowColor #6A1B9A
+  ActorBorderColor #4A148C
+  ActorBackgroundColor #F3E5F5
+  LifeLineBorderColor #90A4AE
+  ParticipantBorderColor #37474F
+  ParticipantBackgroundColor #FAFAFA
+}
+skinparam roundcorner 8
+
+title Sequence Diagram — Transaksi Kas Buku Kas (Disederhanakan)\nSistem Informasi Keuangan Sekolah Ananda
+
+actor "Bendahara" as Bendahara
+participant "Sistem" as Sys
+database "Database" as DB
+
+== Alur: Tampilkan Buku Kas ==
+Bendahara -> Sys : Buka Halaman Transaksi Kas
+activate Sys
+Sys -> DB : Ambil Transaksi & Rekapitulasi Saldo
+activate DB
+DB --> Sys : Data Transaksi & Saldo
+deactivate DB
+Sys --> Bendahara : Render Tabel & Grafik
+deactivate Sys
+
+== Alur: Tambah Kas Masuk / Keluar ==
+Bendahara -> Sys : Isi Form & Submit (Masuk / Keluar)
+activate Sys
+Sys -> Sys : Validasi Input (& Cek Saldo Jika Keluar)
+Sys -> DB : Simpan Transaksi Kas Baru
+activate DB
+DB --> Sys : Sukses
+deactivate DB
+Sys -> Sys : Hitung Ulang Saldo
+Sys --> Bendahara : Tampilkan Notifikasi Sukses
+deactivate Sys
+
+== Alur: Edit / Hapus Transaksi ==
+Bendahara -> Sys : Edit / Hapus Transaksi Manual
+activate Sys
+Sys -> DB : Cek Tipe Transaksi (Otomatis/Manual)
+activate DB
+DB --> Sys : Hasil
+deactivate DB
+
+alt Transaksi Otomatis
+  Sys --> Bendahara : Error (Tidak Bisa Diubah Manual)
+else Transaksi Manual
+  Sys -> DB : Update / Soft Delete Transaksi
+  activate DB
+  DB --> Sys : Sukses
+  deactivate DB
+  Sys --> Bendahara : Tampilkan Notifikasi Sukses
+end
+deactivate Sys
+@enduml

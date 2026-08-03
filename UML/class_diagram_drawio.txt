@@ -1,0 +1,99 @@
+@startuml
+' Memberikan skin / pewarnaan yang profesional, kotak rapi khas visual studio
+skinparam class {
+    BackgroundColor #F8F9FA
+    ArrowColor #2C3E50
+    BorderColor #34495E
+}
+skinparam classAttributeIconSize 0
+
+class User {
+  - id : int
+  - name : string
+  - email : string
+  - password : string
+  - role : string
+  - created_at : datetime
+  + login(email, pass) : boolean
+  + logout() : void
+  + resetPassword(newPass) : boolean
+}
+
+class Siswa {
+  - id : int
+  - user_id : int
+  - kelas_id : int
+  - nisn : string
+  - nama_lengkap : string
+  - jenkel : string
+  - alamat : text
+  + getDetailSiswa() : object
+  + getRiwayatTagihan() : list<Tagihan>
+}
+
+class Kelas {
+  - id : int
+  - tingkat_kelas : string
+  - nama_kelas : string
+  - wali_kelas : string
+  + getDaftarSiswa() : list<Siswa>
+}
+
+class KategoriTagihan {
+  - id : int
+  - nama_kategori : string
+  - nominal_default : double
+  - tipe_pembayaran : string
+  + createKategori() : boolean
+  + ubahNominal(newNominal) : void
+}
+
+class Tagihan {
+  - id : int
+  - siswa_id : int
+  - kategori_id : int
+  - nominal_tertagih : double
+  - batas_waktu : date
+  - status : string
+  + generateMassal(kelas_id, kat_id) : boolean
+  + cekTunggakanActive(siswa_id) : list<Tagihan>
+  + getSisaHutang() : double
+}
+
+class Pembayaran {
+  - id : int
+  - tagihan_id : int
+  - verified_by : int
+  - tgl_bayar : datetime
+  - nominal_dibayar : double
+  - file_bukti : string
+  - catatan : text
+  + unggahBukti(fileStream) : boolean
+  + setujuiPembayaran(bendahara_id) : boolean
+  + tolakPembayaran(alasan_tolak) : void
+  + cetakKwitansiLunas() : PDFDocument
+}
+
+class Pengeluaran {
+  - id : int
+  - author_id : int
+  - tgl_pengeluaran : date
+  - deskripsi_keperluan : string
+  - nominal_keluar : double
+  - nota_lampiran : string
+  + catatKasKeluar(data) : boolean
+  + hitungTotalArusKasKeluar(start, end) : double
+}
+
+' MENENTUKAN RELASI & MULTIPLICITY KELAS
+' Format: Kelas1 "Kuantitas" GarisRelasi "Kuantitas" Kelas2 : Penjelasan Garis >
+
+Kelas "1" -- "0..*" Siswa : memiliki anggota >
+User "1" -- "0..*" Siswa : mewakili sbg OrangTua >
+User "1" -- "0..*" Pembayaran : memvalidasi sbg Bendahara >
+User "1" -- "0..*" Pengeluaran : dicatat oleh Bendahara >
+Siswa "1" -- "0..*" Tagihan : dibebankan tunggakan >
+KategoriTagihan "1" -- "0..*" Tagihan : bersumber & merujuk dari >
+Tagihan "1" -- "0..*" Pembayaran : memiliki history struk >
+
+@enduml

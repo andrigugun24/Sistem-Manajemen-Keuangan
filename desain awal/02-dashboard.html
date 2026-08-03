@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Wireframe - Dashboard</title>
+<link href="wireframe-style.css" rel="stylesheet"/>
+<!-- Google Fonts for Hand-drawn Sketch Style -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&amp;display=swap" rel="stylesheet"/>
+</head>
+<body>
+<!-- Annotasi Penjelasan Skripsi -->
+<div class="wireframe-title">
+<h1>DESAIN ANTARMUKA — HALAMAN DASHBOARD</h1>
+<p>Gambar 4.X — Rancangan tampilan halaman dashboard utama (Bendahara/Admin)</p>
+</div>
+<!-- Layout Utama -->
+<div class="wf-layout">
+<!-- Sidebar / Menu Navigasi -->
+<aside class="wf-sidebar">
+<div class="wf-sidebar-brand">
+<div class="wf-sidebar-logo">
+<span class="material-symbols-outlined" style="font-size:22px">account_balance</span>
+</div>
+<div class="wf-sidebar-brand-text">
+<h2>La Tahzan Citeras</h2>
+<span>Sistem Keuangan</span>
+</div>
+</div>
+<nav class="wf-sidebar-nav">
+<div class="wf-nav-section">
+<div class="wf-nav-section-title">Menu Utama</div>
+<a class="wf-nav-item active" href="02-dashboard.html">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+                    </a>
+</div>
+<div class="wf-nav-section">
+<div class="wf-nav-section-title">Data Master</div>
+<a class="wf-nav-item" href="03-data-siswa.html">
+<span class="material-symbols-outlined">groups</span> Data Siswa
+                    </a>
+<a class="wf-nav-item" href="#">
+<span class="material-symbols-outlined">badge</span> Data Guru
+                    </a>
+<a class="wf-nav-item" href="#">
+<span class="material-symbols-outlined">meeting_room</span> Data Kelas
+                    </a>
+<a class="wf-nav-item" href="#">
+<span class="material-symbols-outlined">calendar_month</span> Tahun Ajaran
+                    </a>
+</div>
+<div class="wf-nav-section">
+<div class="wf-nav-section-title">Keuangan</div>
+<a class="wf-nav-item" href="04-tagihan.html">
+<span class="material-symbols-outlined">receipt_long</span> Tagihan
+                    </a>
+<a class="wf-nav-item" href="05-pembayaran.html">
+<span class="material-symbols-outlined">payments</span> Pembayaran
+                    </a>
+<a class="wf-nav-item" href="06-transaksi-kas.html">
+<span class="material-symbols-outlined">account_balance_wallet</span> Transaksi Kas
+                    </a>
+<a class="wf-nav-item" href="#">
+<span class="material-symbols-outlined">savings</span> Tabungan
+                    </a>
+<a class="wf-nav-item" href="#">
+<span class="material-symbols-outlined">work</span> Penggajian
+                    </a>
+</div>
+<div class="wf-nav-section">
+<div class="wf-nav-section-title">Laporan</div>
+<a class="wf-nav-item" href="07-laporan.html">
+<span class="material-symbols-outlined">assessment</span> Laporan Keuangan
+                    </a>
+</div>
+<div class="wf-nav-section">
+<div class="wf-nav-section-title">Sistem</div>
+<a class="wf-nav-item" href="08-manajemen-pengguna.html">
+<span class="material-symbols-outlined">manage_accounts</span> Manajemen Pengguna
+                    </a>
+<a class="wf-nav-item" href="#">
+<span class="material-symbols-outlined">history</span> Log Aktivitas
+                    </a>
+</div>
+</nav>
+<div class="wf-sidebar-footer">
+<div class="wf-sidebar-avatar"></div>
+<div class="wf-sidebar-user-info">
+<div class="name">[Nama User]</div>
+<div class="role">[Role]</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="wf-main">
+<header class="wf-header">
+<div class="wf-breadcrumb">
+<span>Dashboard</span>
+<span class="separator">/</span>
+<span class="current">Dashboard Utama</span>
+</div>
+<div class="wf-header-actions">
+<span class="wf-year-tag">
+<span class="material-symbols-outlined">calendar_month</span>
+                        TA 2025/2026
+                    </span>
+<div class="wf-header-btn">
+<span class="material-symbols-outlined" style="font-size:20px">notifications</span>
+<span class="badge">3</span>
+</div>
+</div>
+</header>
+<div class="wf-content">
+<!-- Page Header -->
+<div class="wf-page-header">
+<div>
+<h2>Dashboard Utama</h2>
+<p>Ringkasan statistik sekolah dan aktivitas sistem hari ini.</p>
+</div>
+</div>
+<!-- Welcome Card -->
+<div class="wf-welcome-card">
+<div class="wf-welcome-avatar"></div>
+<div class="wf-welcome-text">
+<h3>Selamat Datang, Administrator! </h3>
+<p>Role: Admin — Sistem berjalan normal</p>
+</div>
+<div class="wf-welcome-meta">
+<div class="status">[Status]</div>
+</div>
+</div>
+<!-- Stat Cards Grid -->
+<div class="wf-stats-grid">
+<div class="wf-stat-card">
+<div class="wf-stat-icon indigo">
+<span class="material-symbols-outlined">groups</span>
+</div>
+<div class="wf-stat-info">
+<h4>Total Siswa</h4>
+<div class="value"></div>
+<div class="sub">[Deskripsi Data]</div>
+</div>
+</div>
+<div class="wf-stat-card">
+<div class="wf-stat-icon emerald">
+<span class="material-symbols-outlined">badge</span>
+</div>
+<div class="wf-stat-info">
+<h4>Total Guru &amp; Staf</h4>
+<div class="value"></div>
+<div class="sub">[Deskripsi Data]</div>
+</div>
+</div>
+<div class="wf-stat-card">
+<div class="wf-stat-icon amber">
+<span class="material-symbols-outlined">meeting_room</span>
+</div>
+<div class="wf-stat-info">
+<h4>Total Kelas</h4>
+<div class="value"></div>
+<div class="sub">[Deskripsi Data]</div>
+</div>
+</div>
+<div class="wf-stat-card">
+<div class="wf-stat-icon purple">
+<span class="material-symbols-outlined">laptop_mac</span>
+</div>
+<div class="wf-stat-info">
+<h4>Pengguna Aktif</h4>
+<div class="value"></div>
+<div class="sub">[Deskripsi Data]</div>
+</div>
+</div>
+</div>
+<!-- Quick Actions + Activity Log Grid -->
+<div class="wf-grid-1-2">
+<!-- Quick Actions -->
+<div class="wf-card">
+<div class="wf-card-header">
+<h3>
+<span class="material-symbols-outlined">bolt</span>
+                                Aksi Cepat
+                            </h3>
+</div>
+<div class="wf-card-body" style="display:flex;flex-direction:column;gap:12px;">
+<a href="#" style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:10px;background:#F8FAFC;border:1px solid #E2E8F0;text-decoration:none;color:inherit;">
+<div class="wf-stat-icon indigo" style="width:40px;height:40px;border-radius:10px;">
+<span class="material-symbols-outlined" style="font-size:20px">person_add</span>
+</div>
+<div>
+<div style="font-weight:700;font-size:13px;color:#0F172A;">Tambah Siswa</div>
+<div style="font-size:11px;color:#94A3B8;">Akses menu cepat navigasi</div>
+</div>
+</a>
+<a href="#" style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:10px;background:#F8FAFC;border:1px solid #E2E8F0;text-decoration:none;color:inherit;">
+<div class="wf-stat-icon purple" style="width:40px;height:40px;border-radius:10px;">
+<span class="material-symbols-outlined" style="font-size:20px">manage_accounts</span>
+</div>
+<div>
+<div style="font-weight:700;font-size:13px;color:#0F172A;">Kelola Pengguna</div>
+<div style="font-size:11px;color:#94A3B8;">Akses menu cepat navigasi</div>
+</div>
+</a>
+<a href="#" style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:10px;background:#F8FAFC;border:1px solid #E2E8F0;text-decoration:none;color:inherit;">
+<div style="width:40px;height:40px;border-radius:10px;background:#F1F5F9;display:flex;align-items:center;justify-content:center;color:#64748B;">
+<span class="material-symbols-outlined" style="font-size:20px">settings</span>
+</div>
+<div>
+<div style="font-weight:700;font-size:13px;color:#0F172A;">Pengaturan Sekolah</div>
+<div style="font-size:11px;color:#94A3B8;">Akses menu cepat navigasi</div>
+</div>
+</a>
+</div>
+</div>
+<!-- Activity Log -->
+<div class="wf-card">
+<div class="wf-card-header">
+<h3>
+<span class="material-symbols-outlined">manage_search</span>
+                                Log Aktivitas Sistem
+                            </h3>
+<a href="#" style="font-size:13px;font-weight:500;color:var(--wf-primary);text-decoration:none;">Lihat
+                                Semua</a>
+</div>
+<div class="wf-card-body">
+<div class="wf-timeline">
+<div class="wf-timeline-item">
+<div class="time">[Waktu]</div>
+<div class="desc">[Deskripsi Aktivitas]</div>
+</div>
+<div class="wf-timeline-item">
+<div class="time">[Waktu]</div>
+<div class="desc">[Deskripsi Aktivitas]</div>
+</div>
+<div class="wf-timeline-item">
+<div class="time">[Waktu]</div>
+<div class="desc">[Deskripsi Aktivitas]</div>
+</div>
+<div class="wf-timeline-item">
+<div class="time">[Waktu]</div>
+<div class="desc">[Deskripsi Aktivitas]</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script src="wireframe-switcher.js"></script>
+</body>
+</html>

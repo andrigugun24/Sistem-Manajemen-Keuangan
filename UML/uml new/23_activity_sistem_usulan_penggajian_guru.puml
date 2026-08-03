@@ -1,0 +1,109 @@
+@startuml ACT_Sistem_Usulan_Penggajian_Guru
+' ============================================================
+' ACTIVITY DIAGRAM 3.1.2.B — Sistem Usulan (Terkomputerisasi)
+' Penggajian Guru — Siklus Dana BOS Triwulan
+' Merujuk pada: 21_activity_sistem_berjalan_penggajian_guru.puml
+' Sistem Informasi Keuangan Sekolah Ananda
+' ============================================================
+skinparam Activity {
+  BackgroundColor #E8F5E9
+  BorderColor #2E7D32
+  StartColor #1B5E20
+  EndColor #1B5E20
+  DiamondBackgroundColor #FFF9C4
+  DiamondBorderColor #F57F17
+}
+skinparam swimlane {
+  BorderColor #37474F
+  BorderThickness 2
+  TitleFontStyle Bold
+}
+skinparam ArrowColor #37474F
+skinparam note {
+  BackgroundColor #ECEFF1
+  BorderColor #546E7A
+}
+
+title Activity Diagram: Sistem Usulan\nPenggajian Guru (Siklus Dana BOS Triwulan — Terkomputerisasi)
+
+|#FFF3E0| Bendahara |
+|#E8F5E9| Ketua Yayasan |
+|#E3F2FD| Guru |
+|#C8E6C9| Sistem |
+
+|Bendahara|
+start
+:START\n(Dana BOS Turun);
+
+note right
+  Setiap siklus dana BOS
+  **(3 bulan sekali)**
+end note
+
+:Login ke Sistem Keuangan;
+:Buka modul [Penggajian Guru];
+:Input Data Komponen Gaji\nper Guru (Pokok, Tunjangan, Potongan);
+
+|Sistem|
+:Hitung Total Gaji Otomatis\n(gaji_pokok + tunjangan - potongan);
+:Simpan data penggajian\nstatus = **draft**;
+
+note right
+  **Database**
+  penggajians, gurus
+end note
+
+label buat_laporan
+:Buat / Cetak Laporan Rekapitulasi\nGaji dari Sistem (PDF);
+
+|Ketua Yayasan|
+if (Validasi Laporan?) then (Salah)
+  |Bendahara|
+  :Revisi Data Gaji di Sistem\n& Hitung Ulang;
+  |Sistem|
+  :Perbarui perhitungan total gaji;
+  goto buat_laporan
+else (Benar)
+  :Menyetujui & Menandatangani Laporan;
+  |Bendahara|
+  if (Perlu perbaikan?) then (Return)
+    :Revisi Data Gaji di Sistem\n& Hitung Ulang;
+    |Sistem|
+    :Perbarui perhitungan total gaji;
+    goto buat_laporan
+  else (Lanjut)
+  endif
+endif
+
+:Proses Pembayaran di Sistem\n[Tandai Dibayar];
+
+|Sistem|
+:Perbarui status penggajian = **dibayar**;
+:Catat transaksi kas keluar;
+:Generate Slip Gaji (PDF);
+
+note right
+  **Database**
+  penggajians, transaksi_kas
+  **Dokumen Digital**
+  Slip Gaji PDF
+end note
+
+:Menyiapkan Uang Tunai\nke Amplop Gaji;
+:Menyerahkan Slip Gaji Cetak\n& Amplop ke Guru;
+
+|Guru|
+:Menerima Amplop Gaji\n& Uang Tunai;
+:Menandatangani Lembar\nTanda Terima / Slip Gaji;
+
+if (Setuju dengan Nominal?) then (Tidak)
+  |Bendahara|
+  :Penjelasan / Penyelesaian\n(Revisi di Sistem jika perlu);
+  |Guru|
+else (Ya)
+endif
+
+:Gaji Diterima &\nProses Selesai;
+stop
+
+@enduml

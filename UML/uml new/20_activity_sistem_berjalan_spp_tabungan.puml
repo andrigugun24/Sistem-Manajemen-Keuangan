@@ -1,0 +1,80 @@
+@startuml ACT_Sistem_Berjalan_SPP_Tabungan
+' ============================================================
+' ACTIVITY DIAGRAM 3.1.1.A — Sistem Berjalan (Manual)
+' Pembayaran SPP & Deposit Tabungan
+' Analisis Sistem Berjalan — Proses Manual di Sekolah
+' ============================================================
+skinparam Activity {
+  BackgroundColor #FFF8E1
+  BorderColor #E65100
+  StartColor #black
+  EndColor #BF360C
+  DiamondBackgroundColor #FFF9C4
+  DiamondBorderColor #F57F17
+}
+skinparam swimlane {
+  BorderColor #37474F
+  BorderThickness 2
+  TitleFontStyle Bold
+}
+skinparam ArrowColor #37474F
+skinparam note {
+  BackgroundColor #ECEFF1
+  BorderColor #546E7A
+}
+
+title Activity Diagram: Sistem Berjalan\nPembayaran SPP & Deposit Tabungan (Manual)
+
+|#E3F2FD| Orang Tua |
+|#FFF3E0| Bendahara |
+
+|Orang Tua|
+start
+:Menyerahkan Dana &\nMenyebutkan Keperluan;
+
+if (Keperluan?) then (Bayar SPP)
+  :Pembayaran SPP;
+else (Deposit Tabungan)
+  :Deposit Tabungan;
+endif
+
+|Bendahara|
+repeat
+  :Menerima Dana & Verifikasi;
+
+  if (Sesuai?) then (Tidak)
+    |Orang Tua|
+    :Penyesuaian Dana;
+    |Bendahara|
+  else (Ya)
+  endif
+
+repeat while (Sesuai?) is (Tidak) not (Ya)
+
+:Mencatat Transaksi Manual\nke Buku Besar (Kertas);
+
+note right
+  **Document**
+  Buku Besar / Ledger (Kertas)
+end note
+
+:Menulis Nota Pembayaran Manual;
+
+fork
+  :Nota Salinan;
+  :Arsip Nota Fisik;
+  note right
+    **Arsip Nota Fisik**
+    Penyimpanan fisik salinan nota
+  end note
+fork again
+  :Nota Asli;
+  |Orang Tua|
+  :Menerima Nota Asli &\nUang Sisa (jika ada);
+end fork
+
+:Menerima Kuitansi dan Dana Sisa;
+:Meninggalkan Area;
+stop
+
+@enduml

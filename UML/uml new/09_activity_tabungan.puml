@@ -1,0 +1,52 @@
+@startuml ACT_Tabungan
+' ============================================================
+' ACTIVITY DIAGRAM - Tabungan Siswa (Simplified)
+' Sistem Informasi Keuangan Sekolah Ananda
+' ============================================================
+skinparam Activity {
+  BackgroundColor #E0F7FA
+  BorderColor #00838F
+  StartColor #006064
+  EndColor #006064
+  DiamondBackgroundColor #FFF9C4
+  DiamondBorderColor #F57F17
+}
+skinparam swimlane {
+  BorderColor #37474F
+  BorderThickness 2
+  TitleFontStyle Bold
+}
+skinparam ArrowColor #37474F
+
+title Activity Diagram — Manajemen Tabungan Siswa (Disederhanakan)\nSistem Informasi Keuangan Sekolah Ananda
+
+|#E0F7FA| Bendahara |
+|#E8F5E9| Sistem |
+|#FFF9C4| Database |
+|#E3F2FD| Orang Tua / Wali |
+
+start
+:Akses Menu Tabungan;
+
+if (Aktor?) then (Bendahara)
+  |Bendahara|
+  :Pilih Siswa & Aksi (Setor/Tarik);
+  repeat
+    :Input Nominal Transaksi;
+    |Sistem|
+    :Validasi Saldo (Bila Tarik);
+  repeat while (Valid?) is (Tidak Valid)
+  ->Valid;
+  |Database|
+  :Simpan Mutasi & Update Saldo;
+  |Sistem|
+  :Tampilkan Notifikasi Sukses;
+else (Orang Tua)
+  |Orang Tua / Wali|
+  :Lihat Tabungan Anak;
+  |Sistem|
+  :Tampilkan Saldo & Riwayat Mutasi;
+endif
+
+stop
+@enduml

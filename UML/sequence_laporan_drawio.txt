@@ -1,0 +1,41 @@
+@startuml
+actor "Pimpinan (Kepsek/Yayasan)" as user
+boundary "View\n(Modul Laporan)" as view
+control "LaporanController\n(Controller)" as ctrl
+entity "Keuangan\n(Model)" as model
+entity "Library PDF\n(Plugin)" as pdf
+database "Database" as db
+
+user -> view : 1. Pilih Laporan Rekapitulasi & Input Rentang Tanggal Eksekusi Cek (Periodik)
+activate view
+view -> ctrl : 2. Endpoint HTTP Request GET /laporan/generate?start=X&end=Y
+activate ctrl
+
+ctrl -> model : 3. Membangun Instance Kelas : AmbilRekapanData(X,Y)
+activate model
+model -> db : 4. Eksekusi Kompleks SELECT Transaksi Dimana Tanggal Antara X,Y
+activate db
+db --> model : Koleksi Data Relasi Kas Mentah 
+deactivate db
+
+model -> model : 5. Restrukturasi Matriks Kalkulasi Laba / Rugi Berjalan, Serta Akumulasi Saldo Total
+model --> ctrl : Penyerahan Kumpulan Object Lengkap Laporan Termutasi Siap Disajikan
+deactivate model
+
+alt Jika Tombol Export ke PDF Yang Ditekan Pimpinan
+    ctrl -> pdf : 6. Parsing Kumpulan Object ke loadHTML(File Template_Invoice_Garis)
+    activate pdf
+    pdf -> pdf : 7. Generator Mesin PHP Mereplikasi Baris Menjadi Halaman File Kertas PDF Baru 
+    pdf --> ctrl : Objek Pointer File PDF Binary (Binary Blob)
+    deactivate pdf
+    
+    ctrl --> view : 8. Mulai Meproyeksikan Penalti Header Type Kepada Ekstensi Downloadable Attachment
+    view --> user : Memunculkan Pop up Modal Di OS (Save As) Agar File Tersimpan
+else Jika Tombol Refresh atau Tampilkan Preview Saja
+    ctrl --> view : 9. Return View HTML (Membawa Data Inject Array Mentah Rekapan ke Komponen)
+    view --> user : Merender Tabel Elegan Serta Grafik Diagram Evaluasi Pertumbuhan Uang Keuangan Di Layar Pimpinan
+end
+
+deactivate ctrl
+deactivate view
+@enduml

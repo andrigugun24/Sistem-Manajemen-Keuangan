@@ -1,0 +1,36 @@
+Sistem Informasi Keuangan Sekolah - Tataruma BI
+
+Sistem ini adalah platform manajemen keuangan sekolah komprehensif yang dibangun menggunakan:
+- Framework Backend: Laravel 10 (PHP)
+- Framework Frontend: React JS dengan Inertia.js
+- Styling: Tailwind CSS
+- Database: MySQL
+
+1. Cara Mengakses Sistem
+Sistem dapat diakses secara lokal melalui URL: http://localhost/FinalProject/public
+
+2. Hak Akses (Role)
+Sistem memiliki beberapa tingkatan akses pengguna:
+- Admin: Akses penuh ke seluruh fitur sistem (Data Master, Keuangan, Tabungan, Kas, Laporan, Pengaturan).
+- Bendahara: Akses fokus pada manajemen Keuangan, Tabungan, Kas, dan Laporan Keuangan.
+- Kepala Sekolah / Kepala Yayasan: Akses untuk melihat Laporan dan Data Master (Siswa, Guru).
+- Orang Tua: Akses portal untuk melihat tagihan, pembayaran, dan tabungan anak (belum sepenuhnya diimplementasikan di versi demo).
+
+3. Akun Demo Berjalan
+Silakan gunakan akun berikut untuk masuk dan menguji coba sistem:
+
+[Role Admin]
+Email: admin@sekolah.id
+Password: password
+
+4. Struktur Navigasi (Menu Admin)
+- Dashboard
+- Data Master (Siswa, Kelas, Guru & Staf, Pengguna, Tahun Ajaran, dll)
+- Keuangan (Tagihan, Pembayaran)
+- Tabungan (Data Tabungan, Setor, Tarik)
+- Kas Sekolah (Masuk, Keluar, Gaji, Buku Kas Umum)
+- Laporan
+- Pengaturan
+
+5. Lingkungan Saat Ini
+Proyek berjalan dengan aman dan lancar di lingkungan WAMP Server dengan Node.JS aktif (`npm run dev`).

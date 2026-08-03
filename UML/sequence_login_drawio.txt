@@ -1,0 +1,36 @@
+@startuml
+actor "Pengguna" as actor
+boundary "View\n(Halaman Login)" as view
+control "AuthController\n(Controller)" as ctrl
+entity "User\n(Model)" as model
+database "Database" as db
+
+actor -> view : 1. Akses Halaman Login
+activate view
+view --> actor : Menampilkan Form Login
+
+actor -> view : 2. Input Email & Password (Kredensial)
+view -> ctrl : 3. POST /login (Kredensial)
+activate ctrl
+
+ctrl -> model : 4. Cek Email & Verifikasi Hash(Password)
+activate model
+model -> db : 5. Parameterized Query SELECT User
+activate db
+db --> model : Return Data User Tunggal (Row)
+deactivate db
+model --> ctrl : Hasil Keputusan Validasi
+deactivate model
+
+alt Kredensial Valid & Sesuai
+    ctrl -> ctrl : 6. Generasi Sesi / Access Token
+    ctrl --> view : 7. Redirect ke Halaman Dashboard
+    view --> actor : Menampilkan Antarmuka Awal Sesuai Hak Akses (Role)
+else Password Salah / Email Invalid
+    ctrl --> view : 8. Redirect Back dengan pesan Error (Flash Bag)
+    view --> actor : Menampilkan Peringatan Kesalahan (Merah) di Layar
+end
+
+deactivate ctrl
+deactivate view
+@enduml

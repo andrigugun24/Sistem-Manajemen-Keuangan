@@ -1,0 +1,102 @@
+@startuml
+' Aturan Tampilan: Menghilangkan icon lingkaran class & Membuat garis belok kaku sudut 90-derajat persis Database SQL
+hide circle
+skinparam linetype ortho
+
+skinparam class {
+    BackgroundColor #FDFEFE
+    ArrowColor #2980B9
+    BorderColor #34495E
+}
+
+' ================= ENTITAS =================
+entity "users" as users {
+  * id : INT <<PK>>
+  --
+  * name : VARCHAR(100)
+  * email : VARCHAR(100) <<UNIQUE>>
+  * password : VARCHAR(255)
+  * role : ENUM('Admin', 'Bendahara', 'Kepsek', 'Yayasan', 'Ortu')
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "kelas" as kelas {
+  * id : INT <<PK>>
+  --
+  * tingkat : VARCHAR(20)
+  * nama_kelas : VARCHAR(50)
+  wali_kelas : VARCHAR(100)
+  created_at : TIMESTAMP
+}
+
+entity "siswa" as siswa {
+  * id : INT <<PK>>
+  --
+  * kelas_id : INT <<FK>>
+  * user_id : INT <<FK>>
+  * nisn : VARCHAR(30) <<UNIQUE>>
+  * nama_lengkap : VARCHAR(150)
+  jenis_kelamin : ENUM('L','P')
+  alamat : TEXT
+  created_at : TIMESTAMP
+}
+
+entity "kategori_tagihan" as kat_tagihan {
+  * id : INT <<PK>>
+  --
+  * nama_kategori : VARCHAR(100)
+  * nominal_default : DECIMAL(15,2)
+  tipe_tagihan : ENUM('Sekali', 'Bulanan')
+  tahun_ajaran : VARCHAR(20)
+  created_at : TIMESTAMP
+}
+
+entity "tagihan" as tagihan {
+  * id : INT <<PK>>
+  --
+  * siswa_id : INT <<FK>>
+  * kategori_id : INT <<FK>>
+  * nominal_tertagih : DECIMAL(15,2)
+  * status : ENUM('Belum', 'Menunggu', 'Lunas')
+  tenggat_waktu : DATE
+  created_at : TIMESTAMP
+}
+
+entity "pembayaran" as bayar {
+  * id : INT <<PK>>
+  --
+  * tagihan_id : INT <<FK>>
+  * user_verifikator_id : INT <<FK>>
+  * tgl_bayar : DATETIME
+  * nominal_bayar : DECIMAL(15,2)
+  * file_struk : VARCHAR(255)
+  catatan : TEXT
+  created_at : TIMESTAMP
+}
+
+entity "pengeluaran" as keluar {
+  * id : INT <<PK>>
+  --
+  * user_author_id : INT <<FK>>
+  * tgl_pengeluaran : DATE
+  * nama_pengeluaran : VARCHAR(150)
+  * nominal_keluar : DECIMAL(15,2)
+  lampiran_nota : VARCHAR(255)
+  created_at : TIMESTAMP
+}
+
+' ================= RELASI DENGAN NOTASI CROW'S FOOT =================
+' Representasi Notasi:
+' ||--o{ Artinya: "Tabel 1 (One) memiliki ke Tabel N (Many/Banyak)"
+
+users ||--o{ siswa : "membawahi akun ortu >"
+kelas ||--o{ siswa : "dihuni oleh >"
+
+kat_tagihan ||--o{ tagihan : "dijadikan dasar >"
+siswa ||--o{ tagihan : "mempunyai hutang >"
+
+tagihan ||--o{ bayar : "riwayat pelunasan >"
+users ||--o{ bayar : "divalidasi Bendahara >"
+users ||--o{ keluar : "dicatat Bendahara >"
+@enduml

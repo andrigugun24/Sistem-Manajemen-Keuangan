@@ -1,0 +1,72 @@
+@startuml SEQ_Penggajian
+' ============================================================
+' SEQUENCE DIAGRAM - Penggajian Guru (Simplified)
+' Sistem Informasi Keuangan Sekolah Ananda
+' ============================================================
+skinparam sequence {
+  ArrowColor #BF360C
+  ActorBorderColor #7F0000
+  ActorBackgroundColor #FBE9E7
+  LifeLineBorderColor #90A4AE
+  ParticipantBorderColor #37474F
+  ParticipantBackgroundColor #FAFAFA
+}
+skinparam roundcorner 8
+
+title Sequence Diagram — Penggajian Guru (Disederhanakan)\nSistem Informasi Keuangan Sekolah Ananda
+
+actor "Bendahara" as Bendahara
+participant "Sistem" as Sys
+database "Database" as DB
+
+== Alur: Tampilkan Penggajian Bulan Ini ==
+Bendahara -> Sys : Buka Menu Penggajian
+activate Sys
+Sys -> DB : Ambil Data Gaji Periode Ini
+activate DB
+DB --> Sys : Daftar Penggajian & Total
+deactivate DB
+Sys --> Bendahara : Tampilkan Daftar & Ringkasan Gaji
+deactivate Sys
+
+== Alur: Buat/Edit Draft Penggajian ==
+Bendahara -> Sys : Isi/Edit Komponen Gaji & Simpan Draft
+activate Sys
+Sys -> Sys : Hitung Total Gaji (Pokok + Tunjangan - Potongan)
+Sys -> DB : Cek Duplikasi Penggajian Bulan Ini
+activate DB
+DB --> Sys : Hasil Pengecekan
+deactivate DB
+
+alt Data Sudah Ada / Tidak Valid
+  Sys --> Bendahara : Tampilkan Error
+else Valid
+  Sys -> DB : Simpan / Update Draft Penggajian
+  activate DB
+  DB --> Sys : Sukses
+  deactivate DB
+  Sys --> Bendahara : Tampilkan Notifikasi Sukses
+end
+deactivate Sys
+
+== Alur: Proses Bayar & Cetak Slip ==
+Bendahara -> Sys : Proses Pembayaran Gaji (Tandai Dibayar)
+activate Sys
+Sys -> DB : Update Status & Catat Transaksi Kas Keluar
+activate DB
+DB --> Sys : Sukses
+deactivate DB
+Sys --> Bendahara : Tampilkan Status Dibayar
+deactivate Sys
+
+Bendahara -> Sys : Cetak Slip Gaji
+activate Sys
+Sys -> DB : Ambil Data Penggajian & Sekolah
+activate DB
+DB --> Sys : Data
+deactivate DB
+Sys -> Sys : Generate PDF Slip Gaji
+Sys --> Bendahara : Download File PDF
+deactivate Sys
+
+@enduml

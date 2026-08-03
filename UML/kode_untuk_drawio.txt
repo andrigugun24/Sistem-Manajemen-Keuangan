@@ -1,0 +1,71 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+' Mewarnai UseCase persis seperti gambar yang Anda minta
+skinparam usecase {
+  BackgroundColor #FFF2CC
+  BorderColor #D6B656
+}
+
+' Mendefinisikan Aktor sebagai Stick Figure
+actor "Orang Tua" as Ortu
+actor "Kepala Sekolah" as Kepsek
+actor "Kepala Yayasan" as Yayasan
+
+actor Admin
+actor Bendahara
+
+' Membuat boundary kotak sistem di tengah
+rectangle "Sistem Keuangan & Administrasi Sekolah" {
+  usecase "Login & Logout" as UC1
+  usecase "Lihat Profil Anak" as UC2
+  usecase "Cek Rincian Tagihan" as UC3
+  usecase "Lihat Riwayat Pembayaran" as UC4
+  usecase "Pantau Laporan Pembayaran" as UC5
+  usecase "Laporan Keuangan & Arus Kas" as UC6
+  usecase "Dasbor Statistik" as UC7
+  usecase "Kelola Pengumuman" as UC8
+  usecase "Kelola Data Master" as UC9
+  usecase "Kelola Data Pengguna" as UC10
+  usecase "Pengaturan Sistem" as UC11
+  usecase "Kelola Kategori Tagihan" as UC12
+  usecase "Buat & Kirim Tagihan" as UC13
+  usecase "Proses Pembayaran" as UC14
+  usecase "Catat Pengeluaran" as UC15
+  usecase "Cetak Kwitansi" as UC16
+}
+
+' Relasi Aktor Kiri (Garis Biasa tanpa Panah)
+Ortu -- UC1
+Ortu -- UC2
+Ortu -- UC3
+Ortu -- UC4
+
+Kepsek -- UC1
+Kepsek -- UC5
+Kepsek -- UC6
+Kepsek -- UC7
+Kepsek -- UC8
+
+Yayasan -- UC1
+Yayasan -- UC6
+Yayasan -- UC7
+
+' Relasi Aktor Kanan (Garis Biasa tanpa Panah)
+UC1 -- Admin
+UC9 -- Admin
+UC10 -- Admin
+UC11 -- Admin
+UC8 -- Admin
+
+UC1 -- Bendahara
+UC12 -- Bendahara
+UC13 -- Bendahara
+UC14 -- Bendahara
+UC15 -- Bendahara
+UC16 -- Bendahara
+UC5 -- Bendahara
+UC6 -- Bendahara
+
+@enduml

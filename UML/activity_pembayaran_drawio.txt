@@ -1,0 +1,70 @@
+@startuml
+skinparam Activity {
+  BackgroundColor #D5E8D4
+  BorderColor #82B366
+}
+skinparam swimlane {
+  BorderColor #333333
+  BorderThickness 2
+}
+
+|Orang Tua|
+|Sistem|
+|Bendahara|
+
+|Orang Tua|
+start
+:Pilih Menu "Tagihan";
+:Pilih Data Tagihan yang Akan Dibayar;
+:Input Rekening Asal & Unggah Bukti Transfer;
+:Klik Tombol "Submit Pembayaran";
+
+|Sistem|
+:Menerima HTTP Request Form Pembayaran;
+:Sistem Memeriksa Ekstensi & Ukuran File Bukti;
+
+if (Validasi Bukti Lengkap?) then (Ya)
+  :Ubah Status Tagihan = "Tunggu Verifikasi";
+  :Simpan Transaksi Masuk ke Database;
+  :Update Notifikasi di Dasbor Bendahara;
+else (Tidak/Kurang)
+  :Sistem Memberi Notifikasi Error;
+  |Orang Tua|
+  :Unggah Ulang Bukti Transfer;
+  stop
+endif
+
+|Bendahara|
+:Login & Buka Menu "Validasi Pembayaran Masuk";
+:Pilih Transaksi yang Berstatus "Tunggu Verifikasi";
+:Cocokkan Bukti Struk dengan Dana Mutasi di Rekening Bank;
+
+if (Dana Masuk Valid?) then (Valid)
+  :Klik Tombol "Setujui Transaksi";
+  
+  |Sistem|
+  :Ubah Status Tagihan = "Lunas";
+  :Kurangi Total Outstanding Tunggakan;
+  :Masukkan Jurnal Kas Masuk;
+  :Kirim Notifikasi "Pembayaran Berhasil";
+  :Generate Kwitansi PDF Otomatis;
+  
+  |Orang Tua|
+  :Terima Email/Notif Keberhasilan;
+  :Unduh Kwitansi Pembayaran Penuh;
+  
+else (Palsu/Belum Masuk)
+  |Bendahara|
+  :Tolak Transaksi & Input Alasan Penolakan;
+  
+  |Sistem|
+  :Ubah Status Tagihan = "Batal/Gagal";
+  :Kirim Notifikasi Penolakan;
+  
+  |Orang Tua|
+  :Cek Alasan Kegagalan di Halaman Info;
+endif
+
+|Orang Tua|
+stop
+@enduml

@@ -1,0 +1,273 @@
+@startuml UC_Sistem_Ananda
+' ============================================================
+' USE CASE DIAGRAM
+' Sistem Informasi Keuangan Sekolah Ananda
+' ============================================================
+
+skinparam usecase {
+  BackgroundColor #FFFDE7
+  BorderColor #F57F17
+  ArrowColor #37474F
+  ActorBorderColor #1565C0
+  ActorBackgroundColor #E3F2FD
+  ActorFontSize 13
+  ActorFontStyle Bold
+}
+skinparam rectangle {
+  BackgroundColor #FAFAFA
+  BorderColor #546E7A
+  BorderThickness 2
+  FontSize 14
+  FontStyle Bold
+}
+skinparam note {
+  BackgroundColor #E8F5E9
+  BorderColor #2E7D32
+  FontSize 11
+}
+skinparam ArrowFontSize 10
+
+left to right direction
+
+' ============================
+' AKTOR
+' ============================
+actor ":Admin\nSistem" as Admin #E8EAF6
+actor ":Bendahara" as Bendahara #E0F2F1
+actor ":Kepala\nSekolah" as Kepsek #FFF8E1
+actor ":Kepala\nYayasan" as Yayasan #FCE4EC
+actor ":Orang Tua\n/ Wali" as OrangTua #F1F8E9
+
+' ============================
+' SISTEM BOUNDARY
+' ============================
+rectangle "Sistem Informasi Keuangan Sekolah Ananda" {
+
+  ' --- AUTENTIKASI ---
+  package "Autentikasi" as PKG_AUTH {
+    usecase "Login ke Sistem" as UC01
+    usecase "Logout" as UC02
+    usecase "Ubah Password" as UC03
+  }
+
+  ' --- DASHBOARD ---
+  package "Dashboard & Monitoring" as PKG_DASH {
+    usecase "Lihat Dashboard\n& Statistik Keuangan" as UC04
+    usecase "Lihat Ringkasan\nTunggakan Siswa" as UC05
+    usecase "Lihat Log\nAktivitas Sistem" as UC06
+  }
+
+  ' --- DATA MASTER ---
+  package "Manajemen Data Master" as PKG_MASTER {
+    usecase "Kelola Data Siswa\n(Tambah/Edit/Hapus)" as UC07
+    usecase "Kelola Data Kelas" as UC08
+    usecase "Kelola Data Guru" as UC09
+    usecase "Kelola Tahun Ajaran\n& Set Aktif" as UC10
+    usecase "Kelola Pengguna\n& Hak Akses" as UC11
+    usecase "Assign Akun Ortu\nke Siswa" as UC12
+    usecase "Pengaturan Profil\nSekolah" as UC13
+    usecase "Kelola Kategori\nTagihan" as UC14
+    usecase "Kelola Kategori\nKeuangan" as UC15
+  }
+
+  ' --- TAGIHAN ---
+  package "Manajemen Tagihan" as PKG_TAGIHAN {
+    usecase "Buat Tagihan Massal\n(Per Kelas / Semua)" as UC16
+    usecase "Buat Tagihan Manual\n(Per Siswa)" as UC17
+    usecase "Lihat & Filter\nDaftar Tagihan" as UC18
+    usecase "Edit / Hapus\nTagihan" as UC19
+    usecase "Lihat Tagihan\nMilik Anak" as UC20
+  }
+
+  ' --- PEMBAYARAN ---
+  package "Manajemen Pembayaran" as PKG_BAYAR {
+    usecase "Input Pembayaran\nTunai (Manual)" as UC21
+    usecase "Upload Bukti\nTransfer / QRIS" as UC22
+    usecase "Validasi & Setujui\nPembayaran" as UC23
+    usecase "Tolak Pembayaran\n& Beri Keterangan" as UC24
+    usecase "Cetak / Unduh\nKwitansi Lunas" as UC25
+    usecase "Lihat Riwayat\nPembayaran Anak" as UC26
+  }
+
+  ' --- TRANSAKSI KAS ---
+  package "Transaksi Kas (Buku Kas)" as PKG_KAS {
+    usecase "Catat Kas Masuk\nManual" as UC27
+    usecase "Catat Kas Keluar\n(Pengeluaran)" as UC28
+    usecase "Lihat Buku Kas\nHarian / Periode" as UC29
+  }
+
+  ' --- TABUNGAN ---
+  package "Tabungan Siswa" as PKG_TAB {
+    usecase "Setor Tabungan\nSiswa" as UC30
+    usecase "Tarik Tabungan\nSiswa" as UC31
+    usecase "Lihat Saldo &\nRiwayat Mutasi" as UC32
+  }
+
+  ' --- PENGGAJIAN ---
+  package "Penggajian Guru" as PKG_GAJI {
+    usecase "Buat Data\nPenggajian Guru" as UC33
+    usecase "Edit Komponen\nGaji (Tunjangan/Potongan)" as UC34
+    usecase "Proses & Tandai\nGaji Dibayar" as UC35
+    usecase "Cetak Slip Gaji" as UC36
+  }
+
+  ' --- LAPORAN ---
+  package "Laporan & Ekspor" as PKG_LAP {
+    usecase "Laporan Arus Kas\n(Pemasukan & Pengeluaran)" as UC37
+    usecase "Laporan Rekapitulasi\nPembayaran Siswa" as UC38
+    usecase "Laporan Tunggakan\nSiswa Aktif" as UC39
+    usecase "Laporan Tabungan\nSiswa" as UC40
+    usecase "Laporan Penggajian\nGuru" as UC41
+    usecase "Ekspor Laporan\nke PDF / Excel" as UC42
+  }
+}
+
+' ============================
+' RELASI: ADMIN
+' ============================
+Admin --> UC01 : "akses"
+Admin --> UC02
+Admin --> UC03
+Admin --> UC04
+Admin --> UC05
+Admin --> UC06
+Admin --> UC07
+Admin --> UC08
+Admin --> UC09
+Admin --> UC10
+Admin --> UC11
+Admin --> UC12
+Admin --> UC13
+Admin --> UC14
+Admin --> UC15
+Admin --> UC16
+Admin --> UC17
+Admin --> UC18
+Admin --> UC19
+Admin --> UC20
+Admin --> UC21
+Admin --> UC22
+Admin --> UC23
+Admin --> UC24
+Admin --> UC25
+Admin --> UC26
+Admin --> UC27
+Admin --> UC28
+Admin --> UC29
+Admin --> UC30
+Admin --> UC31
+Admin --> UC32
+Admin --> UC33
+Admin --> UC34
+Admin --> UC35
+Admin --> UC36
+Admin --> UC37
+Admin --> UC38
+Admin --> UC39
+Admin --> UC40
+Admin --> UC41
+Admin --> UC42
+
+' ============================
+' RELASI: BENDAHARA
+' ============================
+Bendahara --> UC01
+Bendahara --> UC02
+Bendahara --> UC03
+Bendahara --> UC04
+Bendahara --> UC05
+Bendahara --> UC16
+Bendahara --> UC17
+Bendahara --> UC18
+Bendahara --> UC19
+Bendahara --> UC21
+Bendahara --> UC23
+Bendahara --> UC24
+Bendahara --> UC25
+Bendahara --> UC27
+Bendahara --> UC28
+Bendahara --> UC29
+Bendahara --> UC30
+Bendahara --> UC31
+Bendahara --> UC32
+Bendahara --> UC33
+Bendahara --> UC34
+Bendahara --> UC35
+Bendahara --> UC36
+Bendahara --> UC37
+Bendahara --> UC38
+Bendahara --> UC39
+Bendahara --> UC40
+Bendahara --> UC41
+Bendahara --> UC42
+
+' ============================
+' RELASI: KEPALA SEKOLAH
+' ============================
+UC01 <-- Kepsek
+UC02 <-- Kepsek
+UC04 <-- Kepsek
+UC05 <-- Kepsek
+UC37 <-- Kepsek
+UC38 <-- Kepsek
+UC39 <-- Kepsek
+UC40 <-- Kepsek
+UC41 <-- Kepsek
+UC42 <-- Kepsek
+
+' ============================
+' RELASI: YAYASAN
+' ============================
+UC01 <-- Yayasan
+UC02 <-- Yayasan
+UC04 <-- Yayasan
+UC37 <-- Yayasan
+UC38 <-- Yayasan
+UC39 <-- Yayasan
+UC42 <-- Yayasan
+
+' ============================
+' RELASI: ORANG TUA
+' ============================
+UC01 <-- OrangTua
+UC02 <-- OrangTua
+UC03 <-- OrangTua
+UC20 <-- OrangTua
+UC22 <-- OrangTua
+UC26 <-- OrangTua
+UC32 <-- OrangTua
+
+' ============================
+' RELASI <<include>> & <<extend>>
+' ============================
+UC16 .> UC14 : <<include>>
+UC17 .> UC14 : <<include>>
+UC23 .> UC25 : <<include>>
+UC21 .> UC25 : <<include>>
+UC23 .> UC27 : <<include>>
+UC35 .> UC28 : <<include>>
+UC42 .> UC37 : <<extend>>
+UC42 .> UC38 : <<extend>>
+UC22 .> UC23 : <<extend>>
+
+note right of UC16
+  Generate tagihan otomatis
+  untuk semua siswa aktif
+  berdasarkan kelas yang dipilih
+  dan kategori tagihan
+end note
+
+note right of UC23
+  Setelah disetujui:
+  - Status tagihan → Lunas
+  - Jurnal kas masuk otomatis
+  - Kwitansi PDF tersedia
+end note
+
+note bottom of UC12
+  Admin menghubungkan
+  akun User (role=Ortu)
+  dengan data Siswa
+end note
+
+@enduml

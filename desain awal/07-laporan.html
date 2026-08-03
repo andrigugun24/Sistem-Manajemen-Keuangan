@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Wireframe - Laporan Keuangan</title>
+<link href="wireframe-style.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="wireframe-title">
+<h1>DESAIN ANTARMUKA — HALAMAN LAPORAN KEUANGAN</h1>
+<p>Gambar 4.X — Rancangan tampilan halaman laporan dan rekapitulasi keuangan</p>
+</div>
+<div class="wf-layout">
+<!-- Sidebar -->
+<aside class="wf-sidebar">
+<div class="wf-sidebar-brand">
+<div class="wf-sidebar-logo">
+<span class="material-symbols-outlined" style="font-size:22px">account_balance</span>
+</div>
+<div class="wf-sidebar-brand-text">
+<h2>La Tahzan Citeras</h2>
+<span>Sistem Keuangan</span>
+</div>
+</div>
+<nav class="wf-sidebar-nav">
+<div class="wf-nav-section">
+<div class="wf-nav-section-title">Menu Utama</div>
+<a class="wf-nav-item" href="02-dashboard.html"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
+</div>
+<div class="wf-nav-section">
+<div class="wf-nav-section-title">Data Master</div>
+<a class="wf-nav-item" href="03-data-siswa.html"><span class="material-symbols-outlined">groups</span> Data Siswa</a>
+<a class="wf-nav-item" href="#"><span class="material-symbols-outlined">badge</span> Data Guru</a>
+<a class="wf-nav-item" href="#"><span class="material-symbols-outlined">meeting_room</span> Data Kelas</a>
+<a class="wf-nav-item" href="#"><span class="material-symbols-outlined">calendar_month</span> Tahun Ajaran</a>
+</div>
+<div class="wf-nav-section">
+<div class="wf-nav-section-title">Keuangan</div>
+<a class="wf-nav-item" href="04-tagihan.html"><span class="material-symbols-outlined">receipt_long</span> Tagihan</a>
+<a class="wf-nav-item" href="05-pembayaran.html"><span class="material-symbols-outlined">payments</span> Pembayaran</a>
+<a class="wf-nav-item" href="06-transaksi-kas.html"><span class="material-symbols-outlined">account_balance_wallet</span> Transaksi Kas</a>
+<a class="wf-nav-item" href="#"><span class="material-symbols-outlined">savings</span> Tabungan</a>
+<a class="wf-nav-item" href="#"><span class="material-symbols-outlined">work</span> Penggajian</a>
+</div>
+<div class="wf-nav-section">
+<div class="wf-nav-section-title">Laporan</div>
+<a class="wf-nav-item active" href="07-laporan.html"><span class="material-symbols-outlined">assessment</span> Laporan Keuangan</a>
+</div>
+<div class="wf-nav-section">
+<div class="wf-nav-section-title">Sistem</div>
+<a class="wf-nav-item" href="08-manajemen-pengguna.html"><span class="material-symbols-outlined">manage_accounts</span> Manajemen Pengguna</a>
+<a class="wf-nav-item" href="#"><span class="material-symbols-outlined">history</span> Log Aktivitas</a>
+</div>
+</nav>
+<div class="wf-sidebar-footer">
+<div class="wf-sidebar-avatar"></div>
+<div class="wf-sidebar-user-info">
+<div class="name">[Nama User]</div>
+<div class="role">[Role]</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="wf-main">
+<header class="wf-header">
+<div class="wf-breadcrumb">
+<span>Laporan</span>
+<span class="separator">/</span>
+<span class="current">Laporan Keuangan</span>
+</div>
+<div class="wf-header-actions">
+<span class="wf-year-tag">
+<span class="material-symbols-outlined">calendar_month</span>
+                        TA 2025/2026
+                    </span>
+<div class="wf-header-btn">
+<span class="material-symbols-outlined" style="font-size:20px">notifications</span>
+</div>
+</div>
+</header>
+<div class="wf-content">
+<div class="wf-page-header">
+<div>
+<h2>Laporan Keuangan</h2>
+<p>Rekapitulasi pemasukan, pengeluaran, dan status pembayaran siswa.</p>
+</div>
+<div style="display:flex;gap:8px;">
+<button class="wf-btn wf-btn-outline">
+<span class="material-symbols-outlined">print</span> Cetak
+                        </button>
+<button class="wf-btn wf-btn-primary">
+<span class="material-symbols-outlined">download</span> Export PDF
+                        </button>
+</div>
+</div>
+<!-- Filter Period -->
+<div class="wf-card" style="margin-bottom:20px;">
+<div class="wf-card-body">
+<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+<div class="wf-form-group" style="margin-bottom:0;flex:1;min-width:180px;">
+<label class="wf-form-label">Jenis Laporan</label>
+<select class="wf-form-input wf-form-select">
+<option>Laporan Arus Kas</option>
+<option>Rekap Pembayaran Siswa</option>
+<option>Rekap Tagihan Per Kelas</option>
+<option>Buku Kas Umum</option>
+</select>
+</div>
+<div class="wf-form-group" style="margin-bottom:0;">
+<label class="wf-form-label">Periode Mulai</label>
+<input class="wf-form-input" type="date" value="2026-01-01"/>
+</div>
+<div class="wf-form-group" style="margin-bottom:0;">
+<label class="wf-form-label">Periode Akhir</label>
+<input class="wf-form-input" type="date" value="2026-04-14"/>
+</div>
+<div style="align-self:flex-end;">
+<button class="wf-btn wf-btn-primary">
+<span class="material-symbols-outlined">filter_alt</span> Tampilkan
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Stats Row -->
+<div class="wf-stats-grid" style="grid-template-columns:repeat(3,1fr);">
+<div class="wf-stat-card">
+<div class="wf-stat-icon emerald">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<div class="wf-stat-info">
+<h4>Total Pemasukan</h4>
+<div class="value" style="color:#059669;"></div>
+<div class="sub">[Deskripsi Data]</div>
+</div>
+</div>
+<div class="wf-stat-card">
+<div class="wf-stat-icon rose">
+<span class="material-symbols-outlined">trending_down</span>
+</div>
+<div class="wf-stat-info">
+<h4>Total Pengeluaran</h4>
+<div class="value" style="color:#DC2626;"></div>
+<div class="sub">[Deskripsi Data]</div>
+</div>
+</div>
+<div class="wf-stat-card">
+<div class="wf-stat-icon blue">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<div class="wf-stat-info">
+<h4>Saldo Bersih</h4>
+<div class="value" style="color:#2563EB;"></div>
+<div class="sub">[Deskripsi Data]</div>
+</div>
+</div>
+</div>
+<!-- Chart + Summary -->
+<div class="wf-grid-2">
+<!-- Chart Area -->
+<div class="wf-card">
+<div class="wf-card-header">
+<h3>
+<span class="material-symbols-outlined">bar_chart</span>
+                                Grafik Arus Kas Bulanan
+                            </h3>
+</div>
+<div class="wf-card-body">
+<div class="wf-chart-placeholder">
+<span class="material-symbols-outlined">bar_chart</span>
+<span>Grafik Batang — Pemasukan vs Pengeluaran</span>
+<span style="font-size:11px;margin-top:4px;">(Jan, Feb, Mar, Apr 2026)</span>
+</div>
+</div>
+</div>
+<!-- Summary -->
+<div class="wf-card">
+<div class="wf-card-header">
+<h3>
+<span class="material-symbols-outlined">summarize</span>
+                                Ringkasan Per Kategori
+                            </h3>
+</div>
+<div class="wf-card-body">
+<div class="wf-summary-row">
+<span class="label">Pembayaran SPP</span>
+<span class="value" style="color:#059669;">Rp 85.750.000</span>
+</div>
+<div class="wf-summary-row">
+<span class="label">Uang Gedung</span>
+<span class="value" style="color:#059669;">Rp 35.000.000</span>
+</div>
+<div class="wf-summary-row">
+<span class="label">Donasi</span>
+<span class="value" style="color:#059669;">Rp 15.500.000</span>
+</div>
+<div class="wf-summary-row">
+<span class="label">Kegiatan Sekolah</span>
+<span class="value" style="color:#059669;">Rp 12.000.000</span>
+</div>
+<div class="wf-summary-row">
+<span class="label">Pendapatan Lainnya</span>
+<span class="value" style="color:#059669;">Rp 8.000.000</span>
+</div>
+<div class="wf-summary-row">
+<span class="label" style="font-weight:700;">TOTAL PEMASUKAN</span>
+<span class="value" style="color:#059669;font-size:18px;">Rp 156.250.000</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed Table -->
+<div class="wf-card" style="margin-top:20px;">
+<div class="wf-card-header">
+<h3>
+<span class="material-symbols-outlined">table_chart</span>
+                            Detail Transaksi
+                        </h3>
+</div>
+<div class="wf-table-wrapper">
+<table class="wf-table">
+<thead>
+<tr>
+<th>No</th>
+<th>Tanggal</th>
+<th>Keterangan</th>
+<th>Kategori</th>
+<th>Pemasukan</th>
+<th>Pengeluaran</th>
+<th>Saldo</th>
+</tr>
+</thead>
+<tbody><tr><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr><tr><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr><tr><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr></tbody>
+</table>
+</div>
+<div class="wf-pagination">
+<span>[Info Pagination]</span>
+<div class="wf-pagination-buttons">
+<button>&lt;</button>
+<button class="active">1</button>
+<button>2</button>
+<button>3</button>
+<button>...</button>
+<button>72</button>
+<button>&gt;</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script src="wireframe-switcher.js"></script>
+</body>
+</html>

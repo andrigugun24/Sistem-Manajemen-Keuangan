@@ -1,0 +1,64 @@
+@startuml ACT_Tagihan
+' ============================================================
+' ACTIVITY DIAGRAM - Manajemen Tagihan (Simplified)
+' Sistem Informasi Keuangan Sekolah Ananda
+' ============================================================
+skinparam Activity {
+  BackgroundColor #FFF8E1
+  BorderColor #F57F17
+  StartColor #E65100
+  EndColor #BF360C
+  DiamondBackgroundColor #F3E5F5
+  DiamondBorderColor #6A1B9A
+}
+skinparam swimlane {
+  BorderColor #37474F
+  BorderThickness 2
+  TitleFontStyle Bold
+}
+skinparam ArrowColor #37474F
+
+title Activity Diagram — Manajemen Tagihan (Disederhanakan)\nSistem Informasi Keuangan Sekolah Ananda
+
+|#FFF3E0| Bendahara |
+|#E8F5E9| Sistem |
+|#FFF9C4| Database |
+
+|Bendahara|
+start
+:Buka menu Tagihan;
+|Sistem|
+:Tampilkan Daftar Tagihan;
+
+|Bendahara|
+:Pilih Aksi Manajemen Tagihan;
+if (Aksi Berupa Input Data? \n(Buat Massal / Manual / Edit)) then (Ya)
+  |Bendahara|
+  repeat
+    :Isi Form Tagihan;
+    |Sistem|
+    :Validasi Input & Cek Duplikasi;
+  repeat while (Valid?) is (Tidak Valid)
+  ->Valid;
+  |Database|
+  :Generate & Simpan Tagihan;
+else (Tidak, Aksi Hapus)
+  |Bendahara|
+  :Konfirmasi Hapus;
+  |Sistem|
+  :Cek Riwayat Pembayaran;
+  if (Bisa Dihapus?) then (Ya)
+    |Database|
+    :Soft Delete Tagihan;
+  else (Tidak, Sudah Ada Pembayaran)
+    |Sistem|
+    :Tampilkan Pesan Error;
+    stop
+  endif
+endif
+
+|Sistem|
+:Kalkulasi Ulang Sisa Tagihan;
+:Tampilkan Sukses & Refresh Tabel;
+stop
+@enduml

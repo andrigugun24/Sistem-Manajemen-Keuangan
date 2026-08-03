@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hierarki Menu — Sistem Keuangan Yayasan La Tahzan Citeras</title>
+    <link rel="stylesheet" href="wireframe-style.css">
+    
+</head>
+<body>
+
+    <div class="wireframe-title">
+        <h1>HIERARKI MENU NAVIGASI SISTEM</h1>
+        <p>Struktur menu dan hak akses berdasarkan peran pengguna — Sistem Keuangan Yayasan La Tahzan Citeras</p>
+    </div>
+
+    <div class="hierarchy-container">
+
+        <a href="index.html" class="back-link">
+            <span class="material-symbols-outlined" style="font-size:18px">arrow_back</span>
+            Kembali ke Daftar Wireframe
+        </a>
+
+        <div class="hierarchy-header">
+            <div class="icon-circle">
+                <span class="material-symbols-outlined">account_tree</span>
+            </div>
+            <h1>Hierarki Menu Navigasi</h1>
+            <p>Daftar lengkap menu yang tersedia pada setiap peran pengguna dalam Sistem Informasi Keuangan Yayasan La Tahzan Citeras.</p>
+            <div class="figure-label">
+                <span class="material-symbols-outlined" style="font-size:14px">description</span>
+                Tabel Hierarki Menu — BAB IV
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- HALAMAN PUBLIK -->
+        <!-- ============================================== -->
+        <div class="role-section">
+            <div class="role-card">
+                <div class="role-header">
+                    <div class="role-icon public">
+                        <span class="material-symbols-outlined">public</span>
+                    </div>
+                    <div class="role-header-text">
+                        <h2>Halaman Publik</h2>
+                        <p>Halaman yang dapat diakses oleh semua pengguna tanpa autentikasi khusus</p>
+                    </div>
+                    <span class="role-badge public">Publik</span>
+                </div>
+                <div class="role-body">
+                    <div class="login-preview">
+                        <div class="login-preview-icon">
+                            <span class="material-symbols-outlined">login</span>
+                        </div>
+                        <div class="login-preview-text">
+                            <h3>Halaman Login</h3>
+                            <p>Form autentikasi dengan input username dan password untuk masuk ke sistem</p>
+                        </div>
+                        <a href="01-login.html" class="login-preview-link">Lihat Wireframe →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- HALAMAN ADMIN -->
+        <!-- ============================================== -->
+        <div class="role-section">
+            <div class="role-card">
+                <div class="role-header">
+                    <div class="role-icon admin">
+                        <span class="material-symbols-outlined">admin_panel_settings</span>
+                    </div>
+                    <div class="role-header-text">
+                        <h2>Halaman Admin</h2>
+                        <p>Menu yang tersedia untuk pengguna dengan peran Administrator</p>
+                    </div>
+                    <span class="role-badge admin">Admin</span>
+                </div>
+                <div class="role-body">
+                    <div class="menu-group">
+                        <div class="menu-group-title">Menu Utama</div>
+                        <div class="menu-tree">
+                            <div class="menu-item">
+                                <div class="menu-item-icon indigo">
+                                    <span class="material-symbols-outlined">dashboard</span>
+                                </div>
+                                <div class="menu-item-text">
+                                    <div class="name">Dashboard</div>
+                                    <div class="desc">Ringkasan data sekolah, statistik siswa, guru, kelas, dan aktivitas sistem</div>
+                                </div>
+                                <a href="02-dashboard.html" class="menu-item-link">Gambar 4.2</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-group">
+                        <div class="menu-group-title">Manajemen Data</div>
+                        <div class="menu-tree">
+                            <div class="menu-item">
+                                <div class="menu-item-icon purple">
+                                    <span class="material-symbols-outlined">manage_accounts</span>
+                                </div>
+                                <div class="menu-item-text">
+                                    <div class="name">Manajemen User</div>
+                                    <div class="desc">Kelola akun pengguna, buat akun baru, atur peran dan hak akses</div>
+                                </div>
+                                <a href="08-manajemen-pengguna.html" class="menu-item-link">Gambar 4.8</a>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-icon amber">
+                                    <span class="material-symbols-outlined">groups</span>
+                                </div>
+                                <div class="menu-item-text">
+                                    <div class="name">Manajemen Siswa</div>
+                                    <div class="desc">Data siswa: tambah, ubah, hapus, dan lihat detail profil siswa</div>
+                                </div>
+                                <a href="03-data-siswa.html" class="menu-item-link">Gambar 4.3</a>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-icon teal">
+                                    <span class="material-symbols-outlined">meeting_room</span>
+                                </div>
+                                <div class="menu-item-text">
+                                    <div class="name">Kelas</div>
+                                    <div class="desc">Kelola data kelas, wali kelas, dan jumlah siswa per kelas</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-icon cyan">
+                                    <span class="material-symbols-outlined">calendar_month</span>
+                                </div>
+                                <div class="menu-item-text">
+                                    <div class="name">Tahun Ajaran</div>
+                                    <div class="desc">Atur periode tahun ajaran aktif dan arsip tahun ajaran sebelumnya</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- HALAMAN BENDAHARA -->
+        <!-- ============================================== -->
+        <div class="role-section">
+            <div class="role-card">
+                <div class="role-header">
+                    <div class="role-icon bendahara">
+                        <span class="material-symbols-outlined">account_balance</span>
+                    </div>
+                    <div class="role-header-text">
+                        <h2>Halaman Bendahara</h2>
+                        <p>Menu yang tersedia untuk pengguna dengan peran Bendahara (pengelolaan keuangan)</p>
+                    </div>
+                    <span class="role-badge bendahara">Bendahara</span>
+                </div>
+                <div class="role-body">
+                    <div class="menu-group">
+                        <div class="menu-group-title">Transaksi Keuangan</div>
+                        <div class="menu-tree">
+                            <div class="menu-item">
+                                <div class="menu-item-icon rose">
+                                    <span class="material-symbols-outlined">receipt_long</span>
+                                </div>
+                                <div class="menu-item-text">
+                                    <div class="name">Manajemen Tagihan</div>
+                                    <div class="desc">Buat dan kelola tagihan (SPP, uang gedung, seragam, kegiatan) per kelas</div>
+                                </div>
+                                <a href="04-tagihan.html" class="menu-item-link">Gambar 4.4</a>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-icon blue">
+                                    <span class="material-symbols-outlined">payments</span>
+                                </div>
+                                <div class="menu-item-text">
+                                    <div class="name">Konfirmasi Pembayaran</div>
+                                    <div class="desc">Verifikasi dan catat pembayaran tagihan siswa, cetak kuitansi</div>
+                                </div>
+                                <a href="05-pembayaran.html" class="menu-item-link">Gambar 4.5</a>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-icon teal">
+                                    <span class="material-symbols-outlined">account_balance_wallet</span>
+                                </div>
+                                <div class="menu-item-text">
+                                    <div class="name">Buku Kas</div>
+                                    <div class="desc">Pencatatan pemasukan dan pengeluaran kas umum yayasan</div>
+                                </div>
+                                <a href="06-transaksi-kas.html" class="menu-item-link">Gambar 4.6</a>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-icon emerald">
+                                    <span class="material-symbols-outlined">savings</span>
+                                </div>
+                                <div class="menu-item-text">
+                                    <div class="name">Tabungan Siswa</div>
+                                    <div class="desc">Kelola tabungan siswa: setoran, penarikan, dan mutasi saldo</div>
+                                </div>
+                                <a href="09-tabungan.html" class="menu-item-link">Gambar 4.9</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-group">
+                        <div class="menu-group-title">Pelaporan</div>
+                        <div class="menu-tree">
+                            <div class="menu-item">
+                                <div class="menu-item-icon purple">
+                                    <span class="material-symbols-outlined">assessment</span>
+                                </div>
+                                <div class="menu-item-text">
+                                    <div class="name">Laporan Keuangan</div>
+                                    <div class="desc">Rekapitulasi keuangan, filter periode, grafik, dan ekspor PDF/Excel</div>
+                                </div>
+                                <a href="07-laporan.html" class="menu-item-link">Gambar 4.7</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- HALAMAN ORANG TUA -->
+        <!-- ============================================== -->
+        <div class="role-section">
+            <div class="role-card">
+                <div class="role-header">
+                    <div class="role-icon ortu">
+                        <span class="material-symbols-outlined">family_restroom</span>
+                    </div>
+                    <div class="role-header-text">
+                        <h2>Halaman Orang Tua</h2>
+                        <p>Menu yang tersedia untuk pengguna dengan peran Orang Tua / Wali Murid</p>
+                    </div>
+                    <span class="role-badge ortu">Orang Tua</span>
+                </div>
+                <div class="role-body">
+                    <div class="menu-group">
+                        <div class="menu-group-title">Informasi Anak</div>
+                        <div class="menu-tree">
+                            <div class="menu-item">
+                                <div class="menu-item-icon orange">
+                                    <span class="material-symbols-outlined">dashboard</span>
+                                </div>
+                                <div class="menu-item-text">
+                                    <div class="name">Dashboard Siswa</div>
+                                    <div class="desc">Ringkasan informasi anak: tagihan aktif, status pembayaran, saldo tabungan</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-icon blue">
+                                    <span class="material-symbols-outlined">history</span>
+                                </div>
+                                <div class="menu-item-text">
+                                    <div class="name">Riwayat Pembayaran</div>
+                                    <div class="desc">Lihat riwayat pembayaran tagihan anak, status lunas dan belum lunas</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-icon emerald">
+                                    <span class="material-symbols-outlined">savings</span>
+                                </div>
+                                <div class="menu-item-text">
+                                    <div class="name">Tabungan Anak</div>
+                                    <div class="desc">Pantau saldo tabungan anak dan lihat riwayat mutasi setoran/penarikan</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- DIAGRAM ALUR NAVIGASI -->
+        <!-- ============================================== -->
+        <div class="flow-section">
+            <h2>Diagram Alur Navigasi</h2>
+            <p>Alur akses pengguna dari halaman login menuju dashboard sesuai peran masing-masing</p>
+
+            <div class="flow-diagram">
+                <!-- Level 1: Login -->
+                <div class="flow-level">
+                    <div class="flow-node login">
+                        <span class="material-symbols-outlined">login</span>
+                        Halaman Login
+                    </div>
+                </div>
+
+                <div class="flow-arrow">
+                    <span class="material-symbols-outlined">south</span>
+                </div>
+
+                <div class="flow-level" style="margin-bottom:12px;">
+                    <div class="flow-node" style="background:#F1F5F9;color:var(--wf-text-secondary);border-color:var(--wf-border);font-size:12px;">
+                        <span class="material-symbols-outlined" style="font-size:16px;">verified_user</span>
+                        Verifikasi Peran Pengguna
+                    </div>
+                </div>
+
+                <div class="flow-arrow">
+                    <span class="material-symbols-outlined">south</span>
+                </div>
+
+                <!-- Level 2: Roles -->
+                <div class="flow-level">
+                    <div class="flow-branch">
+                        <div class="flow-node admin">
+                            <span class="material-symbols-outlined">admin_panel_settings</span>
+                            Dashboard Admin
+                        </div>
+                        <div style="font-size:11px;color:var(--wf-text-muted);max-width:180px;">Manajemen User, Siswa, Kelas, Tahun Ajaran</div>
+                    </div>
+                    <div class="flow-branch">
+                        <div class="flow-node bendahara">
+                            <span class="material-symbols-outlined">account_balance</span>
+                            Dashboard Bendahara
+                        </div>
+                        <div style="font-size:11px;color:var(--wf-text-muted);max-width:180px;">Tagihan, Pembayaran, Buku Kas, Tabungan, Laporan</div>
+                    </div>
+                    <div class="flow-branch">
+                        <div class="flow-node ortu">
+                            <span class="material-symbols-outlined">family_restroom</span>
+                            Dashboard Orang Tua
+                        </div>
+                        <div style="font-size:11px;color:var(--wf-text-muted);max-width:180px;">Dashboard Siswa, Riwayat Pembayaran, Tabungan Anak</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- TABEL RINGKASAN -->
+        <!-- ============================================== -->
+        <div style="margin-top:48px;">
+            <div class="wf-card">
+                <div class="wf-card-header">
+                    <h3>
+                        <span class="material-symbols-outlined">table_chart</span>
+                        Ringkasan Hierarki Menu per Peran
+                    </h3>
+                </div>
+                <div class="wf-table-wrapper">
+                    <table class="wf-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Menu</th>
+                                <th>Deskripsi</th>
+                                <th>Admin</th>
+                                <th>Bendahara</th>
+                                <th>Orang Tua</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td class="text-bold">Dashboard</td>
+                                <td>Ringkasan statistik dan data utama</td>
+                                <td><span class="wf-badge wf-badge-success">✓ Akses</span></td>
+                                <td><span class="wf-badge wf-badge-success">✓ Akses</span></td>
+                                <td><span class="wf-badge wf-badge-success">✓ Akses</span></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td class="text-bold">Manajemen User</td>
+                                <td>Kelola akun pengguna dan hak akses</td>
+                                <td><span class="wf-badge wf-badge-success">✓ Akses</span></td>
+                                <td><span class="wf-badge wf-badge-danger">✗ Tidak</span></td>
+                                <td><span class="wf-badge wf-badge-danger">✗ Tidak</span></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td class="text-bold">Manajemen Siswa</td>
+                                <td>Data siswa, tambah/ubah/hapus</td>
+                                <td><span class="wf-badge wf-badge-success">✓ Akses</span></td>
+                                <td><span class="wf-badge wf-badge-danger">✗ Tidak</span></td>
+                                <td><span class="wf-badge wf-badge-danger">✗ Tidak</span></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td class="text-bold">Kelas</td>
+                                <td>Data kelas dan wali kelas</td>
+                                <td><span class="wf-badge wf-badge-success">✓ Akses</span></td>
+                                <td><span class="wf-badge wf-badge-danger">✗ Tidak</span></td>
+                                <td><span class="wf-badge wf-badge-danger">✗ Tidak</span></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td class="text-bold">Tahun Ajaran</td>
+                                <td>Pengaturan periode tahun ajaran</td>
+                                <td><span class="wf-badge wf-badge-success">✓ Akses</span></td>
+                                <td><span class="wf-badge wf-badge-danger">✗ Tidak</span></td>
+                                <td><span class="wf-badge wf-badge-danger">✗ Tidak</span></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td class="text-bold">Manajemen Tagihan</td>
+                                <td>Buat dan kelola tagihan siswa</td>
+                                <td><span class="wf-badge wf-badge-danger">✗ Tidak</span></td>
+                                <td><span class="wf-badge wf-badge-success">✓ Akses</span></td>
+                                <td><span class="wf-badge wf-badge-danger">✗ Tidak</span></td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td class="text-bold">Konfirmasi Pembayaran</td>
+                                <td>Verifikasi dan catat pembayaran</td>
+                                <td><span class="wf-badge wf-badge-danger">✗ Tidak</span></td>
+                                <td><span class="wf-badge wf-badge-success">✓ Akses</span></td>
+                                <td><span class="wf-badge wf-badge-danger">✗ Tidak</span></td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td class="text-bold">Buku Kas</td>
+                                <td>Pencatatan pemasukan/pengeluaran</td>
+                                <td><span class="wf-badge wf-badge-danger">✗ Tidak</span></td>
+                                <td><span class="wf-badge wf-badge-success">✓ Akses</span></td>
+                                <td><span class="wf-badge wf-badge-danger">✗ Tidak</span></td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td class="text-bold">Tabungan Siswa</td>
+                                <td>Kelola setoran dan penarikan tabungan</td>
+                                <td><span class="wf-badge wf-badge-danger">✗ Tidak</span></td>
+                                <td><span class="wf-badge wf-badge-success">✓ Akses</span></td>
+                                <td><span class="wf-badge wf-badge-info">Lihat Saja</span></td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td class="text-bold">Laporan Keuangan</td>
+                                <td>Rekapitulasi dan ekspor laporan</td>
+                                <td><span class="wf-badge wf-badge-danger">✗ Tidak</span></td>
+                                <td><span class="wf-badge wf-badge-success">✓ Akses</span></td>
+                                <td><span class="wf-badge wf-badge-danger">✗ Tidak</span></td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td class="text-bold">Riwayat Pembayaran</td>
+                                <td>Lihat riwayat pembayaran anak</td>
+                                <td><span class="wf-badge wf-badge-danger">✗ Tidak</span></td>
+                                <td><span class="wf-badge wf-badge-danger">✗ Tidak</span></td>
+                                <td><span class="wf-badge wf-badge-success">✓ Akses</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="wireframe-switcher.js"></script>
+</body>
+</html>

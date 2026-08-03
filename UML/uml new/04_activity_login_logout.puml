@@ -1,0 +1,88 @@
+@startuml ACT_Login_Logout
+' ============================================================
+' ACTIVITY DIAGRAM - Login & Logout (Simplified)
+' Sistem Informasi Keuangan Sekolah Ananda
+' ============================================================
+skinparam Activity {
+  BackgroundColor #BBDEFB
+  BorderColor #1565C0
+  StartColor #1565C0
+  EndColor #0D47A1
+  DiamondBackgroundColor #FFF9C4
+  DiamondBorderColor #F57F17
+}
+skinparam swimlane {
+  BorderColor #37474F
+  BorderThickness 2
+  TitleFontSize 13
+  TitleFontStyle Bold
+}
+skinparam ArrowColor #37474F
+
+title Activity Diagram — Login & Logout (Disederhanakan)\nSistem Informasi Keuangan Sekolah Ananda
+
+|#E3F2FD| Pengguna |
+|#E8F5E9| Sistem |
+|#FFF3E0| Database |
+
+|Pengguna|
+start
+:Membuka URL Aplikasi;
+
+|Sistem|
+:Cek Sesi Login;
+if (Sesi Aktif?) then (Tidak)
+  :Tampilkan Form Login;
+  |Pengguna|
+  repeat
+    :Input Email & Password;
+    :Klik "Masuk";
+    
+    |Sistem|
+    :Validasi Input & Format;
+    |Database|
+    :Verifikasi Kredensial User;
+    
+    |Sistem|
+    if (Valid & Ditemukan?) then (Ya)
+      :Buat Sesi Login (Token);
+      :Catat Log Login;
+      |Database|
+      :Simpan Log Aktivitas;
+      break
+    else (Tidak)
+      |Sistem|
+      :Tampilkan Pesan Error;
+    endif
+  |Pengguna|
+  repeat while (Ulangi Input)
+else (Ya)
+endif
+
+|Sistem|
+:Redirect ke Dashboard\nSesuai Role Pengguna;
+
+|Pengguna|
+:Mengakses Halaman Dashboard;
+
+note right
+  ===== PROSES LOGOUT =====
+end note
+
+:Klik tombol "Logout";
+
+|Sistem|
+:Hapus Sesi / Invalidate Token;
+:Catat Log Logout;
+
+|Database|
+:Simpan Log Aktivitas;
+
+|Sistem|
+:Redirect ke Form Login;
+
+|Pengguna|
+:Kembali ke Halaman Login;
+stop
+
+@enduml

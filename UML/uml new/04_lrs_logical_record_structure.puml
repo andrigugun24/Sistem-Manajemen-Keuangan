@@ -1,0 +1,175 @@
+@startuml
+' LRS Profesional - selaras 03_erd.puml
+' Garis PK ke FK per field (butuh PlantUML 1.2021+)
+' Render: VS Code PlantUML / https://www.plantuml.com/plantuml
+
+skinparam linetype ortho
+skinparam shadowing false
+skinparam nodesep 28
+skinparam ranksep 22
+skinparam classAttributeIconSize 0
+skinparam classFontSize 9
+skinparam classBackgroundColor #FDFEFE
+skinparam classBorderColor #1565C0
+skinparam arrowColor #1565C0
+
+title Logical Record Structure (Entitas Utama)
+
+left to right direction
+
+class kelas {
+  id (PK)
+  --
+  nama_kelas
+  instansi
+}
+
+class siswas {
+  id (PK)
+  kelas_id (FK)
+  --
+  nisn
+  nama_lengkap
+  status
+}
+
+class kategori_tagihans {
+  id (PK)
+  --
+  nama_kategori
+  nominal_default
+  tipe_tagihan
+}
+
+class tagihans {
+  id (PK)
+  siswa_id (FK)
+  kategori_tagihan_id (FK)
+  --
+  nominal_tagihan
+  sisa_tagihan
+  status
+  jatuh_tempo
+}
+
+class pembayarans {
+  id (PK)
+  siswa_id (FK)
+  user_id (FK)
+  --
+  no_referensi
+  total_bayar
+  status_pembayaran
+}
+
+class detail_pembayarans {
+  id (PK)
+  pembayaran_id (FK)
+  tagihan_id (FK)
+  --
+  nominal_bayar
+}
+
+class users {
+  id (PK)
+  --
+  name
+  email
+  role
+}
+
+class gurus {
+  id (PK)
+  --
+  nama_guru
+  instansi
+}
+
+class kategori_keuangans {
+  id (PK)
+  --
+  nama_kategori
+  jenis
+}
+
+class transaksi_kas {
+  id (PK)
+  kategori_keuangan_id (FK)
+  --
+  tipe_transaksi
+  nominal
+  tanggal_transaksi
+}
+
+class tabungans {
+  id (PK)
+  siswa_id (FK)
+  --
+  saldo
+}
+
+class mutasi_tabungans {
+  id (PK)
+  tabungan_id (FK)
+  user_id (FK)
+  --
+  jenis_mutasi
+  nominal
+}
+
+class penggajians {
+  id (PK)
+  guru_id (FK)
+  --
+  periode_bulan
+  total_gaji
+  status
+}
+
+' Susun layout 2 baris
+kelas -[hidden]-> siswas
+siswas -[hidden]-> kategori_tagihans
+kategori_tagihans -[hidden]-> tagihans
+tagihans -[hidden]-> pembayarans
+pembayarans -[hidden]-> detail_pembayarans
+
+users -[hidden]-> gurus
+gurus -[hidden]-> kategori_keuangans
+kategori_keuangans -[hidden]-> transaksi_kas
+transaksi_kas -[hidden]-> tabungans
+tabungans -[hidden]-> mutasi_tabungans
+mutasi_tabungans -[hidden]-> penggajians
+
+kelas -[hidden]down-> users
+siswas -[hidden]down-> gurus
+kategori_tagihans -[hidden]down-> kategori_keuangans
+tagihans -[hidden]down-> transaksi_kas
+pembayarans -[hidden]down-> tabungans
+detail_pembayarans -[hidden]down-> mutasi_tabungans
+
+' Garis dari field PK (induk) ke field FK (anak)
+kelas::id --> siswas::kelas_id : "1 .. M"
+siswas::id --> tagihans::siswa_id : "1 .. M"
+kategori_tagihans::id --> tagihans::kategori_tagihan_id : "1 .. M"
+
+siswas::id --> pembayarans::siswa_id : "1 .. M"
+users::id --> pembayarans::user_id : "1 .. M"
+pembayarans::id --> detail_pembayarans::pembayaran_id : "1 .. M"
+tagihans::id --> detail_pembayarans::tagihan_id : "1 .. M"
+
+siswas::id --> tabungans::siswa_id : "1 .. 1"
+tabungans::id --> mutasi_tabungans::tabungan_id : "1 .. M"
+users::id --> mutasi_tabungans::user_id : "1 .. M"
+
+kategori_keuangans::id --> transaksi_kas::kategori_keuangan_id : "1 .. M"
+gurus::id --> penggajians::guru_id : "1 .. M"
+
+legend right
+  (PK) = Primary Key
+  (FK) = Foreign Key
+  1 .. M = One to Many
+  1 .. 1 = One to One
+  Garis: field PK --> field FK
+endlegend
+
+@enduml

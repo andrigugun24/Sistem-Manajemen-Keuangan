@@ -1,0 +1,60 @@
+@startuml ACT_Laporan
+' ============================================================
+' ACTIVITY DIAGRAM - Laporan Keuangan & Ekspor (Simplified)
+' Sistem Informasi Keuangan Sekolah Ananda
+' ============================================================
+skinparam Activity {
+  BackgroundColor #E8EAF6
+  BorderColor #283593
+  StartColor #1A237E
+  EndColor #1A237E
+  DiamondBackgroundColor #FFF9C4
+  DiamondBorderColor #F57F17
+}
+skinparam swimlane {
+  BorderColor #37474F
+  BorderThickness 2
+  TitleFontStyle Bold
+}
+skinparam ArrowColor #37474F
+
+title Activity Diagram — Laporan Keuangan & Ekspor Data (Disederhanakan)\nSistem Informasi Keuangan Sekolah Ananda
+
+|#EDE7F6| Pimpinan (Bendahara/Kepsek/Yayasan) |
+|#E8F5E9| Sistem |
+|#FFF9C4| Database |
+
+|Pimpinan (Bendahara/Kepsek/Yayasan)|
+start
+:Buka menu [Laporan];
+:Pilih Jenis Laporan\n(Arus Kas / Pembayaran / Tunggakan / Tabungan / Penggajian);
+
+|Sistem|
+:Tampilkan Form Filter Laporan;
+
+|Pimpinan (Bendahara/Kepsek/Yayasan)|
+:Input Parameter Filter\n(Tanggal, Kategori, Status);
+:Klik [Tampilkan Laporan];
+
+|Sistem|
+:Hitung Rekapitulasi & Breakdown;
+|Database|
+:Query Data Sesuai Filter;
+|Sistem|
+:Render Tabel & Grafik;
+
+|Pimpinan (Bendahara/Kepsek/Yayasan)|
+:Lihat Laporan di Layar;
+
+if (Perlu Ekspor Laporan?) then (Ya)
+  :Pilih Format [PDF] atau [Excel];
+  |Sistem|
+  :Generate File & Format Laporan;
+  |Pimpinan (Bendahara/Kepsek/Yayasan)|
+  :File Laporan Terunduh Otomatis;
+else (Tidak)
+endif
+
+:Selesai;
+stop
+@enduml

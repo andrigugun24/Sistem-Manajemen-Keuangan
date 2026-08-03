@@ -1,0 +1,58 @@
+@startuml
+actor "Orang Tua" as ortu
+boundary "View\n(Portal Siswa)" as view
+control "PembayaranController\n(Controller)" as ctrl
+entity "Transaksi\n(Model)" as model
+database "Database" as db
+actor "Bendahara" as bdh
+
+== Fase 1: Pelaporan dan Konfirmasi dari Perspektif Orang Tua ==
+ortu -> view : 1. Unggah Gambar Transaksi Bukti Keluar & Klik Submit
+activate view
+view -> ctrl : 2. Proses Endpoint POST /konfirmasi/transaksi (Data Multipart Binary Gambar)
+activate ctrl
+
+ctrl -> ctrl : 3. Validasi Keamanan MIME Ekstensi Gambar & Pindahkan Akses Ke Storage Folder App
+ctrl -> model : 4. Panggil Fungsi Update Tungkakan (ID_Tagihan, Status="Verifikasi")
+activate model
+
+model -> db : 5. Eksekusi Kueri UPDATE baris pada Data Base Tagihan
+activate db
+db --> model : Nilai Pengembalian OK
+deactivate db
+
+model --> ctrl : State model Ter-mutasi Berhasil
+deactivate model
+
+ctrl --> view : 6. Flash Response Session Success
+view --> ortu : Modifikasi UI/UX untuk merubah warna merah jadi kuning "Menunggu Konfirmasi" 
+deactivate ctrl
+deactivate view
+
+== Fase 2: Validasi Manual Dan Penyelesaian Akhir Dari Bendahara ==
+bdh -> view : 7. Melihat Halaman Daftar Permintaan Konfirmasi Masuk
+activate view
+view -> ctrl : 8. Memunculkan Call HTTP ke Daftar Pendig
+activate ctrl
+ctrl -> db : 9. Query Fetch Pending Request Statuses
+db --> ctrl : Kumpulan Array Baris SQL List Bukti Menunggu
+ctrl --> view : 10. Konversi Data Jadi Tabel 
+view --> bdh : Menampilkan Pratinjau Bukti Yang Diunggah Oleh Ortu
+deactivate ctrl
+
+bdh -> view : 11. Otorisasi Klik Tombol "Terima Pembayaran Valid" 
+view -> ctrl : 12. Endpoint POST /pembayaran/approve/{id}
+activate ctrl
+
+ctrl -> model : 13. setStatusLunasDanGuntingHutang(id)
+activate model
+model -> db : 14. UPDATE Status Menjadi Lunas, Lalu INSERT Lapor Transaksi Masuk Ke Kas 
+db --> model : Pindah Block Data OK
+model --> ctrl : True Konfirmasi Akhir
+deactivate model
+
+ctrl --> view : 15. Server Mengirim Respons Route Balik
+view --> bdh : Baris Mahasiswa Dan Orang Tua DiTabel Menghilang (Tervadilasi Bersih Ke Kas Harian)
+deactivate ctrl
+deactivate view
+@enduml

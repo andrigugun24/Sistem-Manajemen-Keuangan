@@ -1,0 +1,61 @@
+@startuml ACT_TransaksiKas
+' ============================================================
+' ACTIVITY DIAGRAM - Transaksi Kas (Simplified)
+' Sistem Informasi Keuangan Sekolah Ananda
+' ============================================================
+skinparam Activity {
+  BackgroundColor #F3E5F5
+  BorderColor #6A1B9A
+  StartColor #4A148C
+  EndColor #4A148C
+  DiamondBackgroundColor #FFF9C4
+  DiamondBorderColor #F57F17
+}
+skinparam swimlane {
+  BorderColor #37474F
+  BorderThickness 2
+  TitleFontStyle Bold
+}
+skinparam ArrowColor #37474F
+
+title Activity Diagram — Transaksi Kas (Buku Kas) (Disederhanakan)\nSistem Informasi Keuangan Sekolah Ananda
+
+|#EDE7F6| Bendahara |
+|#E8F5E9| Sistem |
+|#FFF9C4| Database |
+
+|Bendahara|
+start
+:Buka menu Transaksi Kas;
+|Sistem|
+:Tampilkan Buku Kas;
+
+|Bendahara|
+:Pilih Aksi;
+if (Kelola Transaksi Kas? \n(Tambah/Edit/Hapus)) then (Ya)
+  |Bendahara|
+  :Input / Konfirmasi Transaksi;
+  |Sistem|
+  :Validasi Nominal & Ketersediaan Saldo;
+  if (Valid?) then (Ya)
+    |Database|
+    :Simpan/Update/Hapus Transaksi;
+    |Sistem|
+    :Hitung Ulang Saldo Akhir;
+  else (Tidak)
+    :Tampilkan Error;
+    stop
+  endif
+else (Ekspor Laporan?)
+  |Bendahara|
+  :Pilih Filter Periode;
+  |Database|
+  :Ambil Data Rekapitulasi;
+  |Sistem|
+  :Generate PDF/Excel;
+endif
+
+|Sistem|
+:Tampilkan Hasil / Notifikasi;
+stop
+@enduml

@@ -1,0 +1,58 @@
+@startuml ACT_Penggajian
+' ============================================================
+' ACTIVITY DIAGRAM - Penggajian Guru (Simplified)
+' Sistem Informasi Keuangan Sekolah Ananda
+' ============================================================
+skinparam Activity {
+  BackgroundColor #FBE9E7
+  BorderColor #BF360C
+  StartColor #BF360C
+  EndColor #7F0000
+  DiamondBackgroundColor #F3E5F5
+  DiamondBorderColor #6A1B9A
+}
+skinparam swimlane {
+  BorderColor #37474F
+  BorderThickness 2
+  TitleFontStyle Bold
+}
+skinparam ArrowColor #37474F
+
+title Activity Diagram — Penggajian Guru (Disederhanakan)\nSistem Informasi Keuangan Sekolah Ananda
+
+|#FBE9E7| Bendahara |
+|#E8F5E9| Sistem |
+|#FFF9C4| Database |
+
+|Bendahara|
+start
+:Buka menu Penggajian;
+|Sistem|
+:Tampilkan Data Penggajian;
+
+|Bendahara|
+:Pilih Tahapan Penggajian;
+
+if (Pembuatan Draft?) then (Ya)
+  |Bendahara|
+  :Input/Edit Komponen Gaji;
+  |Sistem|
+  :Hitung Total Gaji;
+  |Database|
+  :Simpan Data (Status: Draft);
+else (Proses & Cetak)
+  |Bendahara|
+  :Proses Pembayaran;
+  |Database|
+  :Update Status: Dibayar;
+  :Catat Pengeluaran Kas;
+  |Sistem|
+  :Generate Slip Gaji PDF;
+  |Bendahara|
+  :Cetak Slip Gaji;
+endif
+
+|Sistem|
+:Tampilkan Notifikasi Sukses;
+stop
+@enduml

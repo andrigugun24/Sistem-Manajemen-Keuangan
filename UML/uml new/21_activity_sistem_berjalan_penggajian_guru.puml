@@ -1,0 +1,90 @@
+@startuml ACT_Sistem_Berjalan_Penggajian_Guru
+' ============================================================
+' ACTIVITY DIAGRAM 3.1.1.B — Sistem Berjalan (Manual)
+' Penggajian Guru — Triwulan (Siklus Dana BOS)
+' Analisis Sistem Berjalan — Proses Manual di Sekolah
+' ============================================================
+skinparam Activity {
+  BackgroundColor #FFF8E1
+  BorderColor #E65100
+  StartColor #black
+  EndColor #BF360C
+  DiamondBackgroundColor #FFF9C4
+  DiamondBorderColor #F57F17
+}
+skinparam swimlane {
+  BorderColor #37474F
+  BorderThickness 2
+  TitleFontStyle Bold
+}
+skinparam ArrowColor #37474F
+skinparam note {
+  BackgroundColor #ECEFF1
+  BorderColor #546E7A
+}
+
+title Activity Diagram: Sistem Berjalan\nPenggajian Guru (Siklus Dana BOS Triwulan)
+
+|#FFF3E0| Bendahara |
+|#E8F5E9| Ketua Yayasan |
+|#E3F2FD| Guru |
+
+|Bendahara|
+start
+:START\n(Dana BOS Turun);
+
+note right
+  Setiap siklus dana BOS
+  **(3 bulan sekali)**
+end note
+
+:Merekap Absensi &\nMenghitung Gaji (Manual);
+
+label buat_laporan
+:Membuat Laporan Rekapitulasi\nGaji (Kertas);
+
+|Ketua Yayasan|
+if (Validasi Laporan?) then (Salah)
+  |Bendahara|
+  :Revisi Laporan & Hitung Ulang;
+  goto buat_laporan
+else (Benar)
+  :Menyetujui & Menandatangani Laporan;
+  |Bendahara|
+  if (Perlu perbaikan?) then (Return)
+    :Revisi Laporan & Hitung Ulang;
+    goto buat_laporan
+  else (Lanjut)
+  endif
+endif
+
+:Menyiapkan Uang Tunai\nke Amplop Gaji;
+
+note right
+  **Document**
+  Buku Gaji
+end note
+
+:Menandatangani Lembar\nTanda Terima;
+
+note right
+  **Amplop Gaji**
+  → **Tanda Terima Fisik**
+end note
+
+|Guru|
+:Menerima Amplop Gaji\n& Uang Tunai;
+
+:Menandatangani Lembar\nTanda Terima;
+
+if (Setuju dengan Nominal?) then (Tidak)
+  |Bendahara|
+  :Penjelasan / Penyelesaian;
+  |Guru|
+else (Ya)
+endif
+
+:Gaji Diterima &\nProses Selesai;
+stop
+
+@enduml

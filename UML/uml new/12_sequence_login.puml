@@ -1,0 +1,56 @@
+@startuml SEQ_Login
+' ============================================================
+' SEQUENCE DIAGRAM - Login & Logout (Simplified)
+' Sistem Informasi Keuangan Sekolah Ananda
+' ============================================================
+skinparam sequence {
+  ArrowColor #1565C0
+  ActorBorderColor #1565C0
+  ActorBackgroundColor #E3F2FD
+  LifeLineBorderColor #90A4AE
+  ParticipantBorderColor #37474F
+  ParticipantBackgroundColor #F5F5F5
+  BoxBorderColor #546E7A
+  BoxBackgroundColor #FAFAFA
+}
+skinparam roundcorner 8
+
+title Sequence Diagram — Login & Logout (Disederhanakan)\nSistem Informasi Keuangan Sekolah Ananda
+
+actor "Pengguna" as User
+participant "Sistem" as Sys
+database "Database" as DB
+
+== Alur: Login ==
+
+User -> Sys : Buka URL & Submit (Email, Password)
+activate Sys
+
+Sys -> Sys : Validasi Format Input
+Sys -> DB : Verifikasi Kredensial Pengguna
+activate DB
+DB --> Sys : Hasil (Data User / Null)
+deactivate DB
+
+alt Kredensial Valid
+  Sys -> Sys : Buat Sesi / Token Auth
+  Sys -> DB : Simpan Log Aktivitas (Login)
+  Sys --> User : Redirect ke Dashboard (Sesuai Role)
+else Kredensial Tidak Valid
+  Sys --> User : Tampilkan Pesan Error (Akun / Password Salah)
+end
+
+deactivate Sys
+
+== Alur: Logout ==
+
+User -> Sys : Klik tombol Logout
+activate Sys
+
+Sys -> Sys : Hapus Sesi / Invalidate Token
+Sys -> DB : Simpan Log Aktivitas (Logout)
+
+Sys --> User : Redirect ke Halaman Login
+deactivate Sys
+
+@enduml

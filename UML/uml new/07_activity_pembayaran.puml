@@ -1,0 +1,60 @@
+@startuml ACT_Pembayaran
+' ============================================================
+' ACTIVITY DIAGRAM - Proses Pembayaran Lengkap (Simplified)
+' Sistem Informasi Keuangan Sekolah Ananda
+' ============================================================
+skinparam Activity {
+  BackgroundColor #E8F5E9
+  BorderColor #2E7D32
+  StartColor #1B5E20
+  EndColor #1B5E20
+  DiamondBackgroundColor #FFF9C4
+  DiamondBorderColor #F57F17
+}
+skinparam swimlane {
+  BorderColor #37474F
+  BorderThickness 2
+  TitleFontStyle Bold
+}
+skinparam ArrowColor #37474F
+
+title Activity Diagram — Proses Pembayaran (Disederhanakan)\n(Tunai Langsung & Transfer via Orang Tua)\nSistem Informasi Keuangan Sekolah Ananda
+
+|#E3F2FD| Orang Tua / Wali |
+|#E8F5E9| Sistem |
+|#FFF3E0| Bendahara |
+|#FFF9C4| Database |
+
+start
+:Mulai Proses Pembayaran;
+
+if (Metode Pembayaran?) then (Transfer via Orang Tua)
+  |Orang Tua / Wali|
+  :Pilih Tagihan & Unggah Bukti Transfer;
+  |Database|
+  :Simpan Status: Menunggu Validasi;
+  |Bendahara|
+  :Verifikasi Bukti Transfer;
+  if (Bukti Valid?) then (Tolak)
+    |Database|
+    :Update Status: Ditolak;
+    |Sistem|
+    :Kirim Notifikasi Penolakan;
+    stop
+  else (Setujui)
+  endif
+else (Tunai via Bendahara)
+  |Bendahara|
+  :Pilih Siswa & Input Nominal Tunai;
+  |Sistem|
+  :Validasi Nominal Input;
+endif
+
+|Database|
+:Update Status Tagihan: Lunas;
+:Catat Transaksi Kas Masuk;
+|Sistem|
+:Generate Kwitansi PDF;
+:Kirim Notifikasi Pembayaran Sukses;
+stop
+@enduml

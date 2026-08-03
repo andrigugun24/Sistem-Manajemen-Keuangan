@@ -1,0 +1,505 @@
+@startuml CD_Sistem_Ananda
+' ============================================================
+' CLASS DIAGRAM - Lengkap
+' Sistem Informasi Keuangan Sekolah Ananda
+' ============================================================
+skinparam class {
+  BackgroundColor #F8FAFE
+  BorderColor #3949AB
+  ArrowColor #1A237E
+  HeaderBackgroundColor #3949AB
+  HeaderFontColor #FFFFFF
+  FontSize 11
+}
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam package {
+  BackgroundColor #EEF2FF
+  BorderColor #3949AB
+}
+
+' =====================================================
+' PACKAGE: AUTENTIKASI & KONFIGURASI
+' =====================================================
+package "Autentikasi & Konfigurasi" {
+
+  class User {
+    - id : int <<PK>>
+    - name : string
+    - email : string <<UNIQUE>>
+    - password : string
+    - role : enum {Admin,Bendahara,Kepsek,Yayasan,Ortu}
+    - remember_token : string
+    - created_at : datetime
+    - updated_at : datetime
+    --
+    + login(email, password) : bool
+    + logout() : void
+    + ubahPassword(lama, baru) : bool
+    + hasRole(role) : bool
+    + getSiswas() : Collection
+    + getPembayaransVerified() : Collection
+    + getMutasiTabungan() : Collection
+    + getLogAktivitas() : Collection
+  }
+
+  class ProfilSekolah {
+    - id : int <<PK>>
+    - nama_sekolah : string
+    - alamat : text
+    - telepon : string
+    - email : string
+    - website : string
+    - kepala_sekolah : string
+    - nip_kepala_sekolah : string
+    - logo : string
+    - created_at : datetime
+    - updated_at : datetime
+    --
+    + getAktif() : ProfilSekolah
+    + update(data) : bool
+    + getLogo() : string
+  }
+
+  class LogAktivitas {
+    - id : int <<PK>>
+    - user_id : int <<FK>>
+    - action : string
+    - model_type : string
+    - model_id : string
+    - data_lama : text
+    - data_baru : text
+    - ip_address : string
+    - created_at : datetime
+    - updated_at : datetime
+    --
+    + getUser() : User
+    + getDeskripsi() : string
+    + getPerubahan() : array
+  }
+}
+
+' =====================================================
+' PACKAGE: DATA MASTER AKADEMIK
+' =====================================================
+package "Data Master Akademik" {
+
+  class TahunAjaran {
+    - id : int <<PK>>
+    - nama_tahun_ajaran : string
+    - semester : enum {Ganjil,Genap}
+    - aktif : bool
+    - created_at : datetime
+    - updated_at : datetime
+    --
+    + getAktif() : TahunAjaran
+    + setAktif() : void
+    + getNamaPeriode() : string
+    + getTagihans() : Collection
+  }
+
+  class Kelas {
+    - id : int <<PK>>
+    - nama_kelas : string
+    - instansi : enum {SMP,SMA}
+    - created_at : datetime
+    - updated_at : datetime
+    --
+    + getSiswas() : Collection
+    + countSiswaAktif() : int
+    + getNamaLengkap() : string
+  }
+
+  class Guru {
+    - id : int <<PK>>
+    - nama_guru : string
+    - nip : string
+    - instansi : enum {SMP,SMA,Keduanya}
+    - created_at : datetime
+    - updated_at : datetime
+    --
+    + getPenggajians() : Collection
+    + getGajiTerakhir() : Penggajian
+    + getTotalGajiPeriode(tahun) : int
+  }
+
+  class Siswa {
+    - id : int <<PK>>
+    - kelas_id : int <<FK>>
+    - nisn : string <<UNIQUE>>
+    - nama_lengkap : string
+    - tempat_lahir : string
+    - tanggal_lahir : date
+    - jenis_kelamin : enum {L,P}
+    - agama : string
+    - alamat : text
+    - instansi : enum {SMP,SMA}
+    - nama_ayah : string
+    - nama_ibu : string
+    - telepon_ortu : string
+    - pekerjaan_ortu : string
+    - status : enum {aktif,nonaktif,lulus,pindah}
+    - created_at : datetime
+    - updated_at : datetime
+    - deleted_at : datetime
+    --
+    + getKelas() : Kelas
+    + getOrangTua() : Collection
+    + getTagihans() : Collection
+    + getPembayarans() : Collection
+    + getTabungan() : Tabungan
+    + getTunggakan() : Collection
+    + getTotalSisaTagihan() : int
+  }
+
+  class SiswaUser <<pivot>> {
+    - id : int <<PK>>
+    - siswa_id : int <<FK>>
+    - user_id : int <<FK>>
+    - created_at : datetime
+    - updated_at : datetime
+  }
+}
+
+' =====================================================
+' PACKAGE: TAGIHAN & PEMBAYARAN
+' =====================================================
+package "Tagihan & Pembayaran" {
+
+  class KategoriTagihan {
+    - id : int <<PK>>
+    - nama_kategori : string
+    - nominal_default : int
+    - tipe_tagihan : enum {Sekali,Bulanan}
+    - tahun_ajaran : string
+    - created_at : datetime
+    - updated_at : datetime
+    - deleted_at : datetime
+    --
+    + getTagihans() : Collection
+    + getNominalFormatted() : string
+    + getTotalTagihan() : int
+  }
+
+  class Tagihan {
+    - id : int <<PK>>
+    - siswa_id : int <<FK>>
+    - kategori_tagihan_id : int <<FK>>
+    - tahun_ajaran_id : int <<FK>>
+    - bulan_tagihan : string
+    - nominal_tagihan : int
+    - sisa_tagihan : int
+    - status : enum {lunas,sebagian,belum_lunas}
+    - jatuh_tempo : date
+    - target_kelas : string
+    - created_at : datetime
+    - updated_at : datetime
+    - deleted_at : datetime
+    --
+    + getSiswa() : Siswa
+    + getKategori() : KategoriTagihan
+    + getTahunAjaran() : TahunAjaran
+    + getDetailPembayarans() : Collection
+    + updateStatus() : void
+    + hitungSisa() : int
+    + isLunas() : bool
+    + generateMassal(params) : int
+    + getNominalFormatted() : string
+  }
+
+  class Pembayaran {
+    - id : int <<PK>>
+    - no_referensi : string <<UNIQUE>>
+    - siswa_id : int <<FK>>
+    - user_id : int <<FK>>
+    - total_bayar : int
+    - metode_pembayaran : enum {tunai,transfer,qris}
+    - status_pembayaran : enum {menunggu,lunas,ditolak}
+    - tanggal_bayar : datetime
+    - file_bukti : string
+    - catatan_tolak : text
+    - created_at : datetime
+    - updated_at : datetime
+    - deleted_at : datetime
+    --
+    + getSiswa() : Siswa
+    + getBendahara() : User
+    + getDetailPembayarans() : Collection
+    + setujui(user_id) : bool
+    + tolak(alasan) : bool
+    + uploadBukti(file) : string
+    + cetakKwitansi() : PDF
+    + generateNoReferensi() : string
+    + getStatusLabel() : string
+  }
+
+  class DetailPembayaran {
+    - id : int <<PK>>
+    - pembayaran_id : int <<FK>>
+    - tagihan_id : int <<FK>>
+    - nominal_bayar : int
+    - created_at : datetime
+    - updated_at : datetime
+    --
+    + getPembayaran() : Pembayaran
+    + getTagihan() : Tagihan
+    + getNominalFormatted() : string
+  }
+}
+
+' =====================================================
+' PACKAGE: KEUANGAN & KAS
+' =====================================================
+package "Keuangan & Kas" {
+
+  class KategoriKeuangan {
+    - id : int <<PK>>
+    - nama_kategori : string
+    - jenis : enum {Pemasukan,Pengeluaran}
+    - created_at : datetime
+    - updated_at : datetime
+    --
+    + getTransaksiKas() : Collection
+    + getTotalPerPeriode(start,end) : int
+    + getJenisLabel() : string
+  }
+
+  class TransaksiKas {
+    - id : int <<PK>>
+    - kategori_keuangan_id : int <<FK>>
+    - tipe_transaksi : enum {masuk,keluar}
+    - nominal : int
+    - keterangan : text
+    - tanggal_transaksi : datetime
+    - referensi_type : string
+    - referensi_id : int
+    - created_at : datetime
+    - updated_at : datetime
+    --
+    + getKategori() : KategoriKeuangan
+    + getReferensi() : mixed
+    + getTotalMasukPeriode(start,end) : int
+    + getTotalKeluarPeriode(start,end) : int
+    + getSaldoAkhir() : int
+    + getLaporanPeriode(start,end) : Collection
+  }
+}
+
+' =====================================================
+' PACKAGE: TABUNGAN
+' =====================================================
+package "Tabungan Siswa" {
+
+  class Tabungan {
+    - id : int <<PK>>
+    - siswa_id : int <<FK, UNIQUE>>
+    - saldo : int
+    - created_at : datetime
+    - updated_at : datetime
+    --
+    + getSiswa() : Siswa
+    + getMutasis() : Collection
+    + setor(nominal, user_id, keperluan) : bool
+    + tarik(nominal, user_id, keperluan) : bool
+    + getSaldoFormatted() : string
+    + cukupSaldo(nominal) : bool
+  }
+
+  class MutasiTabungan {
+    - id : int <<PK>>
+    - tabungan_id : int <<FK>>
+    - user_id : int <<FK>>
+    - jenis_mutasi : enum {setor,tarik}
+    - nominal : int
+    - saldo_sebelum : int
+    - saldo_sesudah : int
+    - keperluan : string
+    - tanggal_mutasi : datetime
+    - created_at : datetime
+    - updated_at : datetime
+    --
+    + getTabungan() : Tabungan
+    + getPetugas() : User
+    + getNominalFormatted() : string
+  }
+}
+
+' =====================================================
+' PACKAGE: PENGGAJIAN
+' =====================================================
+package "Penggajian Guru" {
+
+  class Penggajian {
+    - id : int <<PK>>
+    - guru_id : int <<FK>>
+    - periode_bulan : string
+    - gaji_pokok : int
+    - tunjangan : int
+    - potongan : int
+    - total_gaji : int
+    - status : enum {draft,dibayar}
+    - tanggal_pembayaran : date
+    - created_at : datetime
+    - updated_at : datetime
+    --
+    + getGuru() : Guru
+    + hitungTotalGaji() : int
+    + tandaiBayar(tanggal) : bool
+    + cetakSlipGaji() : PDF
+    + getStatusLabel() : string
+    + getRingkasanBulan(bulan) : array
+  }
+}
+
+' =====================================================
+' CONTROLLER CLASSES
+' =====================================================
+package "Controllers (HTTP Layer)" {
+
+  class AuthController {
+    + login(request) : JsonResponse
+    + logout(request) : JsonResponse
+    + updatePassword(request) : JsonResponse
+  }
+
+  class DashboardController {
+    + index() : JsonResponse
+    + getStatistik() : JsonResponse
+    + getGrafikBulanan(tahun) : JsonResponse
+    + getRingkasanTunggakan() : JsonResponse
+  }
+
+  class SiswaController {
+    + index(request) : JsonResponse
+    + store(request) : JsonResponse
+    + show(id) : JsonResponse
+    + update(request, id) : JsonResponse
+    + destroy(id) : JsonResponse
+    + import(request) : JsonResponse
+  }
+
+  class TagihanController {
+    + index(request) : JsonResponse
+    + store(request) : JsonResponse
+    + generateMassal(request) : JsonResponse
+    + show(id) : JsonResponse
+    + update(request, id) : JsonResponse
+    + destroy(id) : JsonResponse
+    + getByOrtu(user_id) : JsonResponse
+  }
+
+  class PembayaranController {
+    + index(request) : JsonResponse
+    + store(request) : JsonResponse
+    + show(id) : JsonResponse
+    + uploadBukti(request, tagihan_id) : JsonResponse
+    + setujui(id) : JsonResponse
+    + tolak(request, id) : JsonResponse
+    + cetakKwitansi(id) : PDF
+    + getByOrtu() : JsonResponse
+  }
+
+  class TransaksiKasController {
+    + index(request) : JsonResponse
+    + store(request) : JsonResponse
+    + update(request, id) : JsonResponse
+    + destroy(id) : JsonResponse
+    + getLaporan(request) : JsonResponse
+    + getSaldoSaatIni() : JsonResponse
+  }
+
+  class TabunganController {
+    + index(request) : JsonResponse
+    + show(siswa_id) : JsonResponse
+    + setor(request) : JsonResponse
+    + tarik(request) : JsonResponse
+    + getMutasi(siswa_id) : JsonResponse
+  }
+
+  class PenggajianController {
+    + index(request) : JsonResponse
+    + store(request) : JsonResponse
+    + update(request, id) : JsonResponse
+    + tandaiBayar(request, id) : JsonResponse
+    + destroy(id) : JsonResponse
+    + cetakSlip(id) : PDF
+  }
+
+  class LaporanController {
+    + keuangan(request) : JsonResponse
+    + pembayaran(request) : JsonResponse
+    + tunggakan(request) : JsonResponse
+    + tabungan(request) : JsonResponse
+    + penggajian(request) : JsonResponse
+    + eksporPDF(request) : PDF
+    + eksporExcel(request) : Excel
+  }
+
+  class UserController {
+    + index(request) : JsonResponse
+    + store(request) : JsonResponse
+    + update(request, id) : JsonResponse
+    + destroy(id) : JsonResponse
+    + assignSiswa(request, user_id) : JsonResponse
+    + detachSiswa(user_id, siswa_id) : JsonResponse
+  }
+}
+
+' =====================================================
+' RELASI ANTAR MODEL
+' =====================================================
+
+' Autentikasi
+User "1" -- "0..*" LogAktivitas : "merekam >"
+User "1..*" -- "0..*" Siswa : "wali/ortu" >
+(User, Siswa) .. SiswaUser
+
+' Akademik
+Kelas "1" --> "0..*" Siswa : "dihuni >"
+TahunAjaran "1" --> "0..*" Tagihan : "berlaku >"
+
+' Tagihan
+Siswa "1" --> "0..*" Tagihan : "ditagih >"
+KategoriTagihan "1" --> "0..*" Tagihan : "menjadi dasar >"
+Tagihan "1" --> "0..*" DetailPembayaran : "dirinci >"
+
+' Pembayaran
+Siswa "1" --> "0..*" Pembayaran : "melakukan >"
+User "1" --> "0..*" Pembayaran : "memverifikasi >"
+Pembayaran "1" --> "1..*" DetailPembayaran : "memuat >"
+
+' Kas
+KategoriKeuangan "1" --> "0..*" TransaksiKas : "diklasifikasi >"
+
+' Tabungan
+Siswa "1" --> "1" Tabungan : "memiliki >"
+Tabungan "1" --> "0..*" MutasiTabungan : "mencatat >"
+User "1" --> "0..*" MutasiTabungan : "memproses >"
+
+' Penggajian
+Guru "1" --> "0..*" Penggajian : "menerima >"
+
+' Controller -> Model
+AuthController ..> User : uses
+DashboardController ..> Tagihan : uses
+DashboardController ..> TransaksiKas : uses
+SiswaController ..> Siswa : uses
+TagihanController ..> Tagihan : uses
+TagihanController ..> KategoriTagihan : uses
+PembayaranController ..> Pembayaran : uses
+PembayaranController ..> DetailPembayaran : uses
+PembayaranController ..> TransaksiKas : uses
+TransaksiKasController ..> TransaksiKas : uses
+TransaksiKasController ..> KategoriKeuangan : uses
+TabunganController ..> Tabungan : uses
+TabunganController ..> MutasiTabungan : uses
+PenggajianController ..> Penggajian : uses
+PenggajianController ..> TransaksiKas : uses
+LaporanController ..> TransaksiKas : uses
+LaporanController ..> Pembayaran : uses
+LaporanController ..> Penggajian : uses
+LaporanController ..> Tabungan : uses
+UserController ..> User : uses
+UserController ..> SiswaUser : uses
+
+@enduml

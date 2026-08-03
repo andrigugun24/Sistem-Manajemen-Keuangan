@@ -1,0 +1,356 @@
+1. Tabel Users
+   Nama Tabel : users
+   Primary Key : id
+   Foreign key : -
+
+   Tabel 3.1 Spesifikasi Tabel Users
+   | No | Nama Field | Tipe Data | Keterangan |
+   |---|---|---|---|
+   | 1 | id | bigint(20) unsigned | Primary Key |
+   | 2 | name | varchar(255) | Not Null |
+   | 3 | email | varchar(255) | Not Null |
+   | 4 | email_verified_at | timestamp | Null |
+   | 5 | password | varchar(255) | Not Null |
+   | 6 | remember_token | varchar(100) | Null |
+   | 7 | created_at | timestamp | Null |
+   | 8 | updated_at | timestamp | Null |
+   | 9 | role | varchar(255) | Not Null |
+
+2. Tabel Cache
+   Nama Tabel : cache
+   Primary Key : key
+   Foreign key : -
+
+   Tabel 3.2 Spesifikasi Tabel Cache
+   | No | Nama Field | Tipe Data | Keterangan |
+   |---|---|---|---|
+   | 1 | key | varchar(255) | Primary Key |
+   | 2 | value | mediumText | Not Null |
+   | 3 | expiration | int(11) | Not Null |
+
+3. Tabel Jobs
+   Nama Tabel : jobs
+   Primary Key : id
+   Foreign key : -
+
+   Tabel 3.3 Spesifikasi Tabel Jobs
+   | No | Nama Field | Tipe Data | Keterangan |
+   |---|---|---|---|
+   | 1 | id | bigint(20) unsigned | Primary Key |
+   | 2 | queue | varchar(255) | Not Null |
+   | 3 | payload | text | Not Null |
+   | 4 | attempts | unsignedTinyInteger | Not Null |
+   | 5 | reserved_at | unsignedInteger | Null |
+   | 6 | available_at | unsignedInteger | Not Null |
+   | 7 | created_at | unsignedInteger | Not Null |
+
+4. Tabel Gurus
+   Nama Tabel : gurus
+   Primary Key : id
+   Foreign key : -
+
+   Tabel 3.4 Spesifikasi Tabel Gurus
+   | No | Nama Field | Tipe Data | Keterangan |
+   |---|---|---|---|
+   | 1 | id | bigint(20) unsigned | Primary Key |
+   | 2 | nama_guru | varchar(255) | Not Null |
+   | 3 | nip | varchar(255) | Null |
+   | 4 | instansi | enum('SMP', 'SMA', 'Keduanya/Yayasan') | Not Null |
+   | 5 | created_at | timestamp | Null |
+   | 6 | updated_at | timestamp | Null |
+
+5. Tabel Tahun Ajarans
+   Nama Tabel : tahun_ajarans
+   Primary Key : id
+   Foreign key : -
+
+   Tabel 3.5 Spesifikasi Tabel Tahun Ajarans
+   | No | Nama Field | Tipe Data | Keterangan |
+   |---|---|---|---|
+   | 1 | id | bigint(20) unsigned | Primary Key |
+   | 2 | nama_tahun_ajaran | varchar(255) | Not Null |
+   | 3 | semester | enum('Ganjil', 'Genap') | Not Null |
+   | 4 | aktif | tinyint(1) | Not Null |
+   | 5 | created_at | timestamp | Null |
+   | 6 | updated_at | timestamp | Null |
+
+6. Tabel Kategori Tagihans
+   Nama Tabel : kategori_tagihans
+   Primary Key : id
+   Foreign key : -
+
+   Tabel 3.6 Spesifikasi Tabel Kategori Tagihans
+   | No | Nama Field | Tipe Data | Keterangan |
+   |---|---|---|---|
+   | 1 | id | bigint(20) unsigned | Primary Key |
+   | 2 | nama_kategori | varchar(255) | Not Null |
+   | 3 | nominal_default | int(11) | Null |
+   | 4 | created_at | timestamp | Null |
+   | 5 | updated_at | timestamp | Null |
+   | 6 | kode_tagihan | varchar(255) | Null |
+   | 7 | jenis_tagihan | varchar(255) | Not Null |
+   | 8 | deskripsi | text | Null |
+
+7. Tabel Kelas
+   Nama Tabel : kelas
+   Primary Key : id
+   Foreign key : -
+
+   Tabel 3.7 Spesifikasi Tabel Kelas
+   | No | Nama Field | Tipe Data | Keterangan |
+   |---|---|---|---|
+   | 1 | id | bigint(20) unsigned | Primary Key |
+   | 2 | nama_kelas | varchar(255) | Not Null |
+   | 3 | instansi | enum('SMP', 'SMA') | Not Null |
+   | 4 | created_at | timestamp | Null |
+   | 5 | updated_at | timestamp | Null |
+
+8. Tabel Kategori Keuangans
+   Nama Tabel : kategori_keuangans
+   Primary Key : id
+   Foreign key : -
+
+   Tabel 3.8 Spesifikasi Tabel Kategori Keuangans
+   | No | Nama Field | Tipe Data | Keterangan |
+   |---|---|---|---|
+   | 1 | id | bigint(20) unsigned | Primary Key |
+   | 2 | nama_kategori | varchar(255) | Not Null |
+   | 3 | jenis | enum('Pemasukan', 'Pengeluaran') | Not Null |
+   | 4 | created_at | timestamp | Null |
+   | 5 | updated_at | timestamp | Null |
+
+9. Tabel Siswas
+   Nama Tabel : siswas
+   Primary Key : id
+   Foreign key : kelas_id
+
+   Tabel 3.9 Spesifikasi Tabel Siswas
+   | No | Nama Field | Tipe Data | Keterangan |
+   |---|---|---|---|
+   | 1 | id | bigint(20) unsigned | Primary Key |
+   | 2 | nisn | varchar(255) | Not Null |
+   | 3 | nama_lengkap | varchar(255) | Not Null |
+   | 4 | tempat_lahir | varchar(255) | Null |
+   | 5 | tanggal_lahir | date | Null |
+   | 6 | jenis_kelamin | enum('L', 'P') | Not Null |
+   | 7 | agama | varchar(255) | Null |
+   | 8 | alamat | text | Null |
+   | 9 | kelas_id | bigint(20) unsigned | Foreign Key |
+   | 10 | instansi | enum('SMP', 'SMA') | Not Null |
+   | 11 | nama_ayah | varchar(255) | Null |
+   | 12 | nama_ibu | varchar(255) | Null |
+   | 13 | telepon_ortu | varchar(255) | Null |
+   | 14 | pekerjaan_ortu | varchar(255) | Null |
+   | 15 | status | enum('aktif', 'nonaktif', 'lulus', 'pindah') | Not Null |
+   | 16 | created_at | timestamp | Null |
+   | 17 | updated_at | timestamp | Null |
+   | 18 | nis | renameColumn | Not Null |
+
+10. Tabel Tagihans
+   Nama Tabel : tagihans
+   Primary Key : id
+   Foreign key : siswa_id, kategori_tagihan_id, tahun_ajaran_id
+
+   Tabel 3.10 Spesifikasi Tabel Tagihans
+   | No | Nama Field | Tipe Data | Keterangan |
+   |---|---|---|---|
+   | 1 | id | bigint(20) unsigned | Primary Key |
+   | 2 | siswa_id | bigint(20) unsigned | Foreign Key |
+   | 3 | kategori_tagihan_id | bigint(20) unsigned | Foreign Key |
+   | 4 | tahun_ajaran_id | bigint(20) unsigned | Foreign Key |
+   | 5 | bulan_tagihan | varchar(255) | Null |
+   | 6 | nominal_tagihan | int(11) | Not Null |
+   | 7 | sisa_tagihan | int(11) | Not Null |
+   | 8 | status | enum('lunas', 'sebagian', 'belum_lunas') | Not Null |
+   | 9 | jatuh_tempo | date | Not Null |
+   | 10 | created_at | timestamp | Null |
+   | 11 | updated_at | timestamp | Null |
+   | 12 | target_kelas | varchar(255) | Not Null |
+
+11. Tabel Pembayarans
+   Nama Tabel : pembayarans
+   Primary Key : id
+   Foreign key : siswa_id, user_id
+
+   Tabel 3.11 Spesifikasi Tabel Pembayarans
+   | No | Nama Field | Tipe Data | Keterangan |
+   |---|---|---|---|
+   | 1 | id | bigint(20) unsigned | Primary Key |
+   | 2 | no_referensi | varchar(255) | Not Null |
+   | 3 | siswa_id | bigint(20) unsigned | Foreign Key |
+   | 4 | user_id | bigint(20) unsigned | Foreign Key |
+   | 5 | total_bayar | int(11) | Not Null |
+   | 6 | metode_pembayaran | enum('tunai', 'transfer', 'qris') | Not Null |
+   | 7 | status_pembayaran | enum('menunggu', 'lunas', 'ditolak') | Not Null |
+   | 8 | tanggal_bayar | dateTime | Not Null |
+   | 9 | created_at | timestamp | Null |
+   | 10 | updated_at | timestamp | Null |
+
+12. Tabel Detail Pembayarans
+   Nama Tabel : detail_pembayarans
+   Primary Key : id
+   Foreign key : pembayaran_id, tagihan_id
+
+   Tabel 3.12 Spesifikasi Tabel Detail Pembayarans
+   | No | Nama Field | Tipe Data | Keterangan |
+   |---|---|---|---|
+   | 1 | id | bigint(20) unsigned | Primary Key |
+   | 2 | pembayaran_id | bigint(20) unsigned | Foreign Key |
+   | 3 | tagihan_id | bigint(20) unsigned | Foreign Key |
+   | 4 | nominal_bayar | int(11) | Not Null |
+   | 5 | created_at | timestamp | Null |
+   | 6 | updated_at | timestamp | Null |
+
+13. Tabel Transaksi Kas
+   Nama Tabel : transaksi_kas
+   Primary Key : id
+   Foreign key : kategori_keuangan_id
+
+   Tabel 3.13 Spesifikasi Tabel Transaksi Kas
+   | No | Nama Field | Tipe Data | Keterangan |
+   |---|---|---|---|
+   | 1 | id | bigint(20) unsigned | Primary Key |
+   | 2 | kategori_keuangan_id | bigint(20) unsigned | Foreign Key |
+   | 3 | tipe_transaksi | enum('masuk', 'keluar') | Not Null |
+   | 4 | nominal | int(11) | Not Null |
+   | 5 | keterangan | text | Null |
+   | 6 | tanggal_transaksi | dateTime | Not Null |
+   | 7 | referensi | nullableMorphs | Not Null |
+   | 8 | created_at | timestamp | Null |
+   | 9 | updated_at | timestamp | Null |
+
+14. Tabel Tabungans
+   Nama Tabel : tabungans
+   Primary Key : id
+   Foreign key : siswa_id
+
+   Tabel 3.14 Spesifikasi Tabel Tabungans
+   | No | Nama Field | Tipe Data | Keterangan |
+   |---|---|---|---|
+   | 1 | id | bigint(20) unsigned | Primary Key |
+   | 2 | siswa_id | bigint(20) unsigned | Foreign Key |
+   | 3 | saldo | int(11) | Not Null |
+   | 4 | created_at | timestamp | Null |
+   | 5 | updated_at | timestamp | Null |
+
+15. Tabel Mutasi Tabungans
+   Nama Tabel : mutasi_tabungans
+   Primary Key : id
+   Foreign key : tabungan_id, user_id
+
+   Tabel 3.15 Spesifikasi Tabel Mutasi Tabungans
+   | No | Nama Field | Tipe Data | Keterangan |
+   |---|---|---|---|
+   | 1 | id | bigint(20) unsigned | Primary Key |
+   | 2 | tabungan_id | bigint(20) unsigned | Foreign Key |
+   | 3 | user_id | bigint(20) unsigned | Foreign Key |
+   | 4 | jenis_mutasi | enum('setor', 'tarik') | Not Null |
+   | 5 | nominal | int(11) | Not Null |
+   | 6 | keperluan | varchar(255) | Null |
+   | 7 | tanggal_mutasi | dateTime | Not Null |
+   | 8 | created_at | timestamp | Null |
+   | 9 | updated_at | timestamp | Null |
+   | 10 | saldo_sebelum | int(11) | Not Null |
+   | 11 | saldo_sesudah | int(11) | Not Null |
+
+16. Tabel Penggajians
+   Nama Tabel : penggajians
+   Primary Key : id
+   Foreign key : guru_id
+
+   Tabel 3.16 Spesifikasi Tabel Penggajians
+   | No | Nama Field | Tipe Data | Keterangan |
+   |---|---|---|---|
+   | 1 | id | bigint(20) unsigned | Primary Key |
+   | 2 | guru_id | bigint(20) unsigned | Foreign Key |
+   | 3 | periode_bulan | varchar(255) | Not Null |
+   | 4 | gaji_pokok | int(11) | Not Null |
+   | 5 | tunjangan | int(11) | Not Null |
+   | 6 | potongan | int(11) | Not Null |
+   | 7 | total_gaji | int(11) | Not Null |
+   | 8 | status | enum('draft', 'dibayar') | Not Null |
+   | 9 | tanggal_pembayaran | date | Null |
+   | 10 | created_at | timestamp | Null |
+   | 11 | updated_at | timestamp | Null |
+
+17. Tabel Siswa User
+   Nama Tabel : siswa_user
+   Primary Key : id
+   Foreign key : siswa_id, user_id
+
+   Tabel 3.17 Spesifikasi Tabel Siswa User
+   | No | Nama Field | Tipe Data | Keterangan |
+   |---|---|---|---|
+   | 1 | id | bigint(20) unsigned | Primary Key |
+   | 2 | siswa_id | bigint(20) unsigned | Foreign Key |
+   | 3 | user_id | bigint(20) unsigned | Foreign Key |
+   | 4 | created_at | timestamp | Null |
+   | 5 | updated_at | timestamp | Null |
+
+18. Tabel Log Aktivitas
+   Nama Tabel : log_aktivitas
+   Primary Key : id
+   Foreign key : user_id
+
+   Tabel 3.18 Spesifikasi Tabel Log Aktivitas
+   | No | Nama Field | Tipe Data | Keterangan |
+   |---|---|---|---|
+   | 1 | id | bigint(20) unsigned | Primary Key |
+   | 2 | user_id | bigint(20) unsigned | Foreign Key |
+   | 3 | action | varchar(255) | Not Null |
+   | 4 | model_type | varchar(255) | Null |
+   | 5 | model_id | varchar(255) | Null |
+   | 6 | data_lama | text | Null |
+   | 7 | data_baru | text | Null |
+   | 8 | ip_address | varchar(255) | Null |
+   | 9 | created_at | timestamp | Null |
+   | 10 | updated_at | timestamp | Null |
+
+19. Tabel Notifications
+   Nama Tabel : notifications
+   Primary Key : id
+   Foreign key : -
+
+   Tabel 3.19 Spesifikasi Tabel Notifications
+   | No | Nama Field | Tipe Data | Keterangan |
+   |---|---|---|---|
+   | 1 | id | char(36) | Primary Key |
+   | 2 | type | varchar(255) | Not Null |
+   | 3 | notifiable | morphs | Not Null |
+   | 4 | data | text | Not Null |
+   | 5 | read_at | timestamp | Null |
+   | 6 | created_at | timestamp | Null |
+   | 7 | updated_at | timestamp | Null |
+
+20. Tabel Profil Sekolahs
+   Nama Tabel : profil_sekolahs
+   Primary Key : id
+   Foreign key : -
+
+   Tabel 3.20 Spesifikasi Tabel Profil Sekolahs
+   | No | Nama Field | Tipe Data | Keterangan |
+   |---|---|---|---|
+   | 1 | id | bigint(20) unsigned | Primary Key |
+   | 2 | nama_sekolah | varchar(255) | Not Null |
+   | 3 | alamat | text | Null |
+   | 4 | telepon | varchar(255) | Null |
+   | 5 | email | varchar(255) | Null |
+   | 6 | website | varchar(255) | Null |
+   | 7 | kepala_sekolah | varchar(255) | Null |
+   | 8 | nip_kepala_sekolah | varchar(255) | Null |
+   | 9 | logo | varchar(255) | Null |
+   | 10 | created_at | timestamp | Null |
+   | 11 | updated_at | timestamp | Null |
+
+21. Tabel Notifikasis
+   Nama Tabel : notifikasis
+   Primary Key : id
+   Foreign key : -
+
+   Tabel 3.21 Spesifikasi Tabel Notifikasis
+   | No | Nama Field | Tipe Data | Keterangan |
+   |---|---|---|---|
+   | 1 | id | bigint(20) unsigned | Primary Key |
+   | 2 | created_at | timestamp | Null |
+   | 3 | updated_at | timestamp | Null |
+

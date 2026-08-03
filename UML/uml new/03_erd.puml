@@ -1,0 +1,296 @@
+@startuml ERD_Sistem_Ananda
+' ============================================================
+' ERD FISIK (PHYSICAL)
+' Sistem Informasi Keuangan Sekolah Ananda
+' ============================================================
+hide circle
+skinparam linetype ortho
+
+skinparam class {
+  BackgroundColor #FDFEFE
+  BorderColor #1565C0
+  ArrowColor #0D47A1
+  HeaderBackgroundColor #1565C0
+  HeaderFontColor #FFFFFF
+  FontSize 11
+}
+
+' =====================================================
+' TABEL-TABEL SISTEM
+' =====================================================
+
+entity "users" as users {
+  * id : BIGINT UNSIGNED <<PK>>
+  ==
+  * name : VARCHAR(255)
+  * email : VARCHAR(255) <<UNIQUE>>
+  * password : VARCHAR(255)
+  * role : ENUM('Admin','Bendahara','Kepsek','Yayasan','Ortu')
+    remember_token : VARCHAR(100)
+    email_verified_at : TIMESTAMP NULL
+    created_at : TIMESTAMP NULL
+    updated_at : TIMESTAMP NULL
+}
+
+entity "profil_sekolahs" as profil {
+  * id : BIGINT UNSIGNED <<PK>>
+  ==
+  * nama_sekolah : VARCHAR(255)
+    alamat : TEXT NULL
+    telepon : VARCHAR(50) NULL
+    email : VARCHAR(255) NULL
+    website : VARCHAR(255) NULL
+    kepala_sekolah : VARCHAR(255) NULL
+    nip_kepala_sekolah : VARCHAR(50) NULL
+    logo : VARCHAR(255) NULL
+    created_at : TIMESTAMP NULL
+    updated_at : TIMESTAMP NULL
+}
+
+entity "tahun_ajarans" as tahun {
+  * id : BIGINT UNSIGNED <<PK>>
+  ==
+  * nama_tahun_ajaran : VARCHAR(20)
+  * semester : ENUM('Ganjil','Genap')
+  * aktif : TINYINT(1) DEFAULT 0
+    created_at : TIMESTAMP NULL
+    updated_at : TIMESTAMP NULL
+}
+
+entity "kelas" as kelas {
+  * id : BIGINT UNSIGNED <<PK>>
+  ==
+  * nama_kelas : VARCHAR(100)
+  * instansi : ENUM('SMP','SMA')
+    created_at : TIMESTAMP NULL
+    updated_at : TIMESTAMP NULL
+}
+
+entity "gurus" as gurus {
+  * id : BIGINT UNSIGNED <<PK>>
+  ==
+  * nama_guru : VARCHAR(255)
+    nip : VARCHAR(50) NULL
+    instansi : ENUM('SMP','SMA','Keduanya/Yayasan')
+    created_at : TIMESTAMP NULL
+    updated_at : TIMESTAMP NULL
+}
+
+entity "siswas" as siswas {
+  * id : BIGINT UNSIGNED <<PK>>
+  ==
+  * kelas_id : BIGINT UNSIGNED <<FK → kelas.id>>
+  * nisn : VARCHAR(30) <<UNIQUE>>
+  * nama_lengkap : VARCHAR(255)
+    tempat_lahir : VARCHAR(100) NULL
+    tanggal_lahir : DATE NULL
+  * jenis_kelamin : ENUM('L','P')
+    agama : VARCHAR(50) NULL
+    alamat : TEXT NULL
+  * instansi : ENUM('SMP','SMA')
+    nama_ayah : VARCHAR(150) NULL
+    nama_ibu : VARCHAR(150) NULL
+    telepon_ortu : VARCHAR(20) NULL
+    pekerjaan_ortu : VARCHAR(100) NULL
+  * status : ENUM('aktif','nonaktif','lulus','pindah')
+    created_at : TIMESTAMP NULL
+    updated_at : TIMESTAMP NULL
+    deleted_at : TIMESTAMP NULL
+}
+
+entity "siswa_user" as siswa_user {
+  * id : BIGINT UNSIGNED <<PK>>
+  ==
+  * siswa_id : BIGINT UNSIGNED <<FK → siswas.id>>
+  * user_id : BIGINT UNSIGNED <<FK → users.id>>
+    created_at : TIMESTAMP NULL
+    updated_at : TIMESTAMP NULL
+}
+
+entity "kategori_tagihans" as kat_tagihan {
+  * id : BIGINT UNSIGNED <<PK>>
+  ==
+  * nama_kategori : VARCHAR(255)
+    nominal_default : INT NULL
+    tipe_tagihan : ENUM('Sekali','Bulanan') NULL
+    tahun_ajaran : VARCHAR(20) NULL
+    created_at : TIMESTAMP NULL
+    updated_at : TIMESTAMP NULL
+    deleted_at : TIMESTAMP NULL
+}
+
+entity "tagihans" as tagihans {
+  * id : BIGINT UNSIGNED <<PK>>
+  ==
+  * siswa_id : BIGINT UNSIGNED <<FK → siswas.id>>
+  * kategori_tagihan_id : BIGINT UNSIGNED <<FK → kategori_tagihans.id>>
+  * tahun_ajaran_id : BIGINT UNSIGNED <<FK → tahun_ajarans.id>>
+    bulan_tagihan : VARCHAR(50) NULL
+  * nominal_tagihan : INT
+  * sisa_tagihan : INT
+  * status : ENUM('lunas','sebagian','belum_lunas')
+  * jatuh_tempo : DATE
+    target_kelas : VARCHAR(100) NULL
+    created_at : TIMESTAMP NULL
+    updated_at : TIMESTAMP NULL
+    deleted_at : TIMESTAMP NULL
+}
+
+entity "pembayarans" as pembayarans {
+  * id : BIGINT UNSIGNED <<PK>>
+  ==
+  * no_referensi : VARCHAR(100) <<UNIQUE>>
+  * siswa_id : BIGINT UNSIGNED <<FK → siswas.id>>
+  * user_id : BIGINT UNSIGNED <<FK → users.id>>
+  * total_bayar : INT
+  * metode_pembayaran : ENUM('tunai','transfer','qris')
+  * status_pembayaran : ENUM('menunggu','lunas','ditolak')
+  * tanggal_bayar : DATETIME
+    file_bukti : VARCHAR(255) NULL
+    catatan_tolak : TEXT NULL
+    created_at : TIMESTAMP NULL
+    updated_at : TIMESTAMP NULL
+    deleted_at : TIMESTAMP NULL
+}
+
+entity "detail_pembayarans" as detail_bayar {
+  * id : BIGINT UNSIGNED <<PK>>
+  ==
+  * pembayaran_id : BIGINT UNSIGNED <<FK → pembayarans.id>>
+  * tagihan_id : BIGINT UNSIGNED <<FK → tagihans.id>>
+  * nominal_bayar : INT
+    created_at : TIMESTAMP NULL
+    updated_at : TIMESTAMP NULL
+}
+
+entity "kategori_keuangans" as kat_keuangan {
+  * id : BIGINT UNSIGNED <<PK>>
+  ==
+  * nama_kategori : VARCHAR(255)
+  * jenis : ENUM('Pemasukan','Pengeluaran')
+    created_at : TIMESTAMP NULL
+    updated_at : TIMESTAMP NULL
+}
+
+entity "transaksi_kas" as transaksi {
+  * id : BIGINT UNSIGNED <<PK>>
+  ==
+  * kategori_keuangan_id : BIGINT UNSIGNED <<FK → kategori_keuangans.id>>
+  * tipe_transaksi : ENUM('masuk','keluar')
+  * nominal : INT
+    keterangan : TEXT NULL
+  * tanggal_transaksi : DATETIME
+    referensi_type : VARCHAR(255) NULL
+    referensi_id : BIGINT UNSIGNED NULL
+    created_at : TIMESTAMP NULL
+    updated_at : TIMESTAMP NULL
+}
+
+entity "tabungans" as tabungans {
+  * id : BIGINT UNSIGNED <<PK>>
+  ==
+  * siswa_id : BIGINT UNSIGNED <<FK → siswas.id, UNIQUE>>
+  * saldo : INT DEFAULT 0
+    created_at : TIMESTAMP NULL
+    updated_at : TIMESTAMP NULL
+}
+
+entity "mutasi_tabungans" as mutasi {
+  * id : BIGINT UNSIGNED <<PK>>
+  ==
+  * tabungan_id : BIGINT UNSIGNED <<FK → tabungans.id>>
+  * user_id : BIGINT UNSIGNED <<FK → users.id>>
+  * jenis_mutasi : ENUM('setor','tarik')
+  * nominal : INT
+    saldo_sebelum : INT NULL
+    saldo_sesudah : INT NULL
+    keperluan : VARCHAR(255) NULL
+  * tanggal_mutasi : DATETIME
+    created_at : TIMESTAMP NULL
+    updated_at : TIMESTAMP NULL
+}
+
+entity "penggajians" as penggajians {
+  * id : BIGINT UNSIGNED <<PK>>
+  ==
+  * guru_id : BIGINT UNSIGNED <<FK → gurus.id>>
+  * periode_bulan : VARCHAR(50)
+    gaji_pokok : INT DEFAULT 0
+    tunjangan : INT DEFAULT 0
+    potongan : INT DEFAULT 0
+    total_gaji : INT DEFAULT 0
+  * status : ENUM('draft','dibayar')
+    tanggal_pembayaran : DATE NULL
+    created_at : TIMESTAMP NULL
+    updated_at : TIMESTAMP NULL
+}
+
+entity "log_aktivitas" as log_akt {
+  * id : BIGINT UNSIGNED <<PK>>
+  ==
+    user_id : BIGINT UNSIGNED <<FK → users.id, NULLABLE>>
+  * action : VARCHAR(100)
+    model_type : VARCHAR(255) NULL
+    model_id : VARCHAR(50) NULL
+    data_lama : TEXT NULL
+    data_baru : TEXT NULL
+    ip_address : VARCHAR(45) NULL
+    created_at : TIMESTAMP NULL
+    updated_at : TIMESTAMP NULL
+}
+
+' =====================================================
+' RELASI (CROW'S FOOT)
+' ||  = tepat satu
+' o{  = nol atau banyak
+' |{  = satu atau banyak
+' o|  = nol atau satu
+' =====================================================
+
+' Users & Siswa (many-to-many)
+users ||--o{ siswa_user : "memiliki akun wali >"
+siswas ||--o{ siswa_user : "terhubung ke >"
+
+' Kelas & Siswa
+kelas ||--|{ siswas : "menampung >"
+
+' Tahun Ajaran & Tagihan
+tahun ||--|{ tagihans : "periode berlaku >"
+
+' Kategori Tagihan & Tagihan
+kat_tagihan ||--|{ tagihans : "menjadi dasar >"
+
+' Siswa & Tagihan
+siswas ||--|{ tagihans : "memiliki tagihan >"
+
+' Pembayaran Header
+siswas ||--|{ pembayarans : "melakukan >"
+users ||--|{ pembayarans : "diverifikasi oleh >"
+
+' Detail Pembayaran
+pembayarans ||--|{ detail_bayar : "memuat rincian >"
+tagihans ||--|{ detail_bayar : "dilunasi via >"
+
+' Kategori Keuangan & Transaksi Kas
+kat_keuangan ||--|{ transaksi : "mengkategorikan >"
+
+' Tabungan
+siswas ||--|| tabungans : "memiliki rekening >"
+tabungans ||--|{ mutasi : "mencatat mutasi >"
+users ||--|{ mutasi : "diproses oleh >"
+
+' Penggajian
+gurus ||--|{ penggajians : "menerima gaji >"
+
+' Log Aktivitas
+users ||--o{ log_akt : "aktivitas terekam >"
+
+note as N1
+  Relasi Polimorfik (transaksi_kas):
+  referensi_type = 'App\\Models\\Pembayaran'
+       → kas masuk dari pembayaran SPP
+  referensi_type = 'App\\Models\\Penggajian'
+       → kas keluar untuk gaji guru
+end note
+
+@enduml

@@ -1,0 +1,182 @@
+# Skenario Pengujian Blackbox (Proses Utama Bisnis)
+
+Berikut adalah 20 rancangan pengujian Blackbox yang difokuskan pada proses utama bisnis (Otentikasi, Master Data, Keuangan, Tagihan, Pembayaran, dan Tabungan) pada Sistem Manajemen Keuangan Yayasan La Tahzan:
+
+| ID | Modul | Skenario Pengujian | Kondisi / Input Pengujian | Hasil yang Diharapkan |
+|:---|:---|:---|:---|:---|
+| BB-01 | Otentikasi | Login Admin Berhasil | Memasukkan username dan password valid, klik "Masuk" | Sistem mengarahkan ke Dashboard Utama dan menampilkan profil pengguna. |
+| BB-02 | Otentikasi | Login Admin Gagal | Memasukkan password yang salah untuk username yang valid | Sistem menolak akses dan menampilkan peringatan kredensial tidak valid. |
+| BB-03 | Master Data Siswa | Tambah Siswa Baru | Mengisi NISN, Nama Lengkap, Jenis Kelamin, Kelas, Instansi, dan menyimpannya | Data siswa baru berhasil ditambahkan dan muncul di Tabel Daftar Siswa. |
+| BB-04 | Master Data Siswa | Validasi Form Siswa Kosong | Mengosongkan form berstatus wajib (contoh: NISN atau Nama) lalu klik "Simpan" | Sistem memunculkan pesan validasi wajib isi dan mencegah penyimpanan. |
+| BB-05 | Manajemen Pengguna | Tambah Pengguna Baru | Mengisi Nama, Email, menetapkan Peran (misal: Guru), dan Password | Akun baru terbuat dan tampil di tabel Manajemen Pengguna dengan status Aktif. |
+| BB-06 | Kategori Tagihan | Tambah Tagihan Bulanan | Memilih siklus "Rutin Bulanan", mengisi Nama Tagihan dan Nominal | Kategori tagihan bulanan baru tersimpan dan berstatus Aktif. |
+| BB-07 | Kategori Tagihan | Tambah Tagihan Insidental | Memilih siklus "Insidental/1x", mengisi Nama Tagihan dan Nominal | Kategori tagihan sekali bayar tersimpan dan berstatus Aktif. |
+| BB-08 | Generate Tagihan | Generate Batch Bulan Spesifik | Memilih "Infaq Syahriah", memilih 1 bulan (misal Juni), memilih target Kelas | Sistem memunculkan ringkasan kalkulasi estimasi tagihan sebelum eksekusi. |
+| BB-09 | Generate Tagihan | Eksekusi Generate Batch | Menyetujui ringkasan kalkulasi Generate Batch lalu klik "Proses" | Tagihan berhasil dibuat secara massal untuk seluruh siswa di kelas target. |
+| BB-10 | Pembayaran (POS) | Pencarian Siswa | Mengetikkan nama siswa atau NISN di form "Cari Siswa" | Sistem secara dinamis memunculkan kartu profil siswa dan daftar tagihannya. |
+| BB-11 | Pembayaran (POS) | Pembayaran Tagihan Lunas | Memilih tagihan, mengisi nominal bayar sesuai total tagihan (metode Tunai) | Status tagihan berubah menjadi "Lunas", dan penerimaan kas hari ini bertambah. |
+| BB-12 | Pembayaran (POS) | Pembayaran Tagihan Sebagian (Cicilan) | Memilih tagihan, mengisi nominal bayar lebih kecil dari total tagihan | Sistem mencatat pembayaran parsial, tagihan berstatus "Belum Lunas", dan sisa tagihan terupdate. |
+| BB-13 | Pembayaran (POS) | Konfirmasi Verifikasi Transfer | Mengecek tagihan dengan status "Menunggu Verifikasi" dan menyetujui bukti bayar | Status pembayaran berubah menjadi "Lunas" dan tercatat ke kas masuk. |
+| BB-14 | Tabungan Siswa | Pencarian Tabungan Siswa | Mengetikkan nama/NISN siswa di fitur "Data Tabungan Siswa" | Sistem memfilter tabel untuk hanya menampilkan data tabungan siswa yang dicari. |
+| BB-15 | Tabungan Siswa | Setor Tabungan | Mengisi form setor tunai tabungan dengan nominal valid (misal: Rp 50.000) | Saldo tabungan siswa bertambah Rp 50.000 dan tercatat pada riwayat transaksi. |
+| BB-16 | Tabungan Siswa | Tarik Tabungan (Saldo Cukup) | Mengisi form penarikan dengan nominal lebih kecil atau sama dengan total saldo | Saldo tabungan siswa berkurang dan sistem berhasil memproses penarikan uang. |
+| BB-17 | Tabungan Siswa | Tarik Tabungan (Saldo Kurang) | Mengisi form penarikan dengan nominal lebih besar dari total saldo siswa saat ini | Sistem membatalkan proses dengan pesan peringatan "Saldo tabungan tidak mencukupi". |
+| BB-18 | Kategori Keuangan | Transaksi Kas Keluar | Menambahkan data pengeluaran (misal: "Gaji Guru") dengan nominal valid | Total Kas Sekolah berkurang dan tercatat dalam buku besar atau riwayat transaksi kas keluar. |
+| BB-19 | Dashboard | Pembaruan Statistik Transaksi | Membuka Dashboard Utama setelah menyelesaikan transaksi pembayaran lunas | Angka "Total Pendapatan" atau widget indikator keuangan real-time otomatis terupdate. |
+| BB-20 | Laporan | Ekspor Laporan Keuangan | Memilih periode tanggal, memfilter kas masuk/keluar, lalu klik "Ekspor Excel/PDF" | Sistem mengunduh dokumen laporan yang berisi rincian transaksi sesuai rentang periode. |
+
+---
+
+# Skenario Pengujian Whitebox (Basis Path Testing)
+
+Pengujian Whitebox berfokus pada struktur internal atau kode sumber dari perangkat lunak. Pada pengujian ini, metode *Basis Path Testing* digunakan untuk memastikan bahwa setiap jalur independen dalam suatu fungsi atau modul penting telah dieksekusi setidaknya satu kali.
+
+Sebagai sampel pengujian, akan dianalisis fungsi `tarikStore` (Proses Penarikan Tabungan Siswa) yang berada di dalam class `TabunganController.php`.
+
+## 1. Analisis Kode Sumber (Fungsi `tarikStore`)
+
+Fungsi ini bertanggung jawab memproses penarikan saldo tabungan siswa. Kode sumber fungsi dapat dipetakan sebagai berikut:
+
+```php
+public function tarikStore(Request $request)
+{
+    // Node 1: Menerima request, validasi awal, & Query Tabungan
+    $validated = $request->validate([
+        'siswa_id' => 'required|exists:siswas,id',
+        'nominal' => 'required|integer|min:1000',
+        'tanggal_mutasi' => 'required|date',
+    ]);
+    $tabungan = Tabungan::where('siswa_id', $validated['siswa_id'])->first();
+
+    // Node 2 & 3: Evaluasi kondisi ketersediaan data dan kecukupan saldo
+    if (!$tabungan || $tabungan->saldo < $validated['nominal']) {
+        
+        // Node 4: Kondisi tidak terpenuhi (Redirect Error)
+        return redirect()->back()->with('error', 'Saldo tabungan tidak mencukupi.');
+    }
+
+    // Node 5: Kondisi terpenuhi (Eksekusi transaksi Database)
+    DB::transaction(function () use ($validated, $tabungan) {
+        $saldoBaru = $tabungan->saldo - $validated['nominal'];
+        $tabungan->update(['saldo' => $saldoBaru]);
+
+        MutasiTabungan::create([
+            // ... insert data mutasi ...
+        ]);
+    });
+
+    // Node 6: Pencatatan Log Aktivitas
+    AktivitasService::catat('Tarik Tabungan', 'App\Models\Tabungan', $validated['siswa_id'], null, [
+        'nominal' => $validated['nominal'],
+    ]);
+
+    // Node 7: Transaksi sukses dan redirect
+    return redirect()->route('tabungan.tarik')->with('success', 'Penarikan berhasil dicatat.');
+}
+```
+
+## 2. Flowgraph (Grafik Aliran)
+
+Untuk menghitung jalur logika yang tepat, blok kondisi majemuk (`||`) pada `if (!$tabungan || $tabungan->saldo < $validated['nominal'])` dipisah menjadi dua *predicate node* yang dievaluasi berurutan. Berikut adalah rincian node-nya:
+
+- **Node 1**: Inisialisasi, Validasi Request, dan Query data Tabungan.
+- **Node 2**: Evaluasi Kondisi 1 (Apakah variabel `$tabungan` bernilai *NULL* / tidak ditemukan?).
+- **Node 3**: Evaluasi Kondisi 2 (Apakah saldo siswa saat ini `<` nominal penarikan?).
+- **Node 4**: Aksi Pengecualian (Mengembalikan nilai *Return/Redirect* dengan pesan Error).
+- **Node 5**: Aksi Transaksi Utama (Update Saldo & Buat catatan Mutasi di *Database*).
+- **Node 6**: Aksi Log (Pencatatan Aktivitas sistem).
+- **Node 7**: Aksi Berhasil (Mengembalikan nilai *Return/Redirect* dengan pesan Sukses).
+- **Node 8**: Selesai (Titik Akhir / *Exit Point* Konseptual Eksekusi Fungsi).
+
+*Alur Edge (Garis pada Graph):*
+1. **1 -> 2**
+2. **2 -> 4** (Jalur jika Tabungan = Kosong)
+3. **2 -> 3** (Jalur jika Tabungan = Ada)
+4. **3 -> 4** (Jalur jika Saldo < Nominal)
+5. **3 -> 5** (Jalur jika Saldo >= Nominal)
+6. **4 -> 8** (Selesai eksekusi melalui blok error)
+7. **5 -> 6**
+8. **6 -> 7**
+9. **7 -> 8** (Selesai eksekusi melalui blok sukses)
+
+## 3. Perhitungan Cyclomatic Complexity (V(G))
+
+*Cyclomatic Complexity* (Kompleksitas Siklomatis) digunakan untuk menentukan jumlah jalur independen minimum (*Basis Path*) yang perlu diuji agar seluruh baris kode dieksekusi secara merata.
+
+Berdasarkan *Flowgraph* di atas, diketahui:
+- **Edge (E):** 9
+- **Node (N):** 8
+- **Predicate Node (P):** 2 (Node 2 dan Node 3)
+
+Metode Perhitungan:
+1. Menggunakan Rumus Node & Edge: **V(G) = E - N + 2**  -->  `9 - 8 + 2 = 3`
+2. Menggunakan Rumus Predicate Node: **V(G) = P + 1**  -->  `2 + 1 = 3`
+
+Hasil perhitungan **V(G) adalah 3**, yang berarti terdapat **3 jalur logika independen (Basis Path)** pada fungsi ini yang harus dibuatkan skenario pengujiannya.
+
+## 4. Jalur Independen (Basis Path) & Skenario Pengujian
+
+Berdasarkan *Cyclomatic Complexity*, berikut adalah ekstraksi 3 jalur eksekusi:
+
+* **Path 1 (`1-2-4-8`):** Sistem berhasil memvalidasi *request*, namun data tabungan siswa tidak ditemukan. Eksekusi berhenti di tengah jalan dan langsung me-return pesan *error*.
+* **Path 2 (`1-2-3-4-8`):** Sistem berhasil memvalidasi *request*, data tabungan ditemukan, namun saat dievaluasi, jumlah saldo siswa lebih kecil dari nominal yang akan ditarik. Sistem membatalkan penarikan dan me-return pesan *error*.
+* **Path 3 (`1-2-3-5-6-7-8`):** Sistem memvalidasi *request*, data tabungan ada, dan evaluasi jumlah saldo mencukupi (>= nominal). Eksekusi berhasil masuk ke blok *database transaction* untuk memproses pengurangan saldo, mencatat mutasi, membuat log sistem, lalu me-return pesan *success*.
+
+### Tabel Eksekusi Pengujian Whitebox
+
+| Basis Path | Input Pengujian (Skenario) | Jalur yang Dilalui | Hasil yang Diharapkan | Status |
+|:---|:---|:---|:---|:---|
+| **Path 1** | Mengirimkan `siswa_id` siswa yang tidak punya record tabungan (hasil query `$tabungan` = NULL). Nominal dikirim: Rp 10.000 | 1 -> 2 -> 4 -> 8 | Eksekusi diarahkan ke Node 4, sistem me-return peringatan: "Saldo tabungan tidak mencukupi." | Lulus |
+| **Path 2** | Mengirimkan `siswa_id` dengan saldo siswa Rp 15.000, namun menginput nominal penarikan Rp 50.000 | 1 -> 2 -> 3 -> 4 -> 8 | Eksekusi diarahkan ke Node 4 karena evaluasi Node 3 *True*, sistem me-return peringatan: "Saldo tabungan tidak mencukupi." | Lulus |
+| **Path 3** | Mengirimkan `siswa_id` dengan saldo siswa Rp 100.000, dan menginput nominal penarikan sebesar Rp 50.000 | 1 -> 2 -> 3 -> 5 -> 6 -> 7 -> 8 | Eksekusi berlanjut ke Node 5 dan 6. Sistem memotong saldo, menambah data mutasi, dan memunculkan *alert*: "Penarikan berhasil dicatat." | Lulus |
+
+---
+Tiga jalur independen (*Basis Path*) telah dieksekusi seluruhnya dengan hasil yang sesuai (berhasil diantisipasi oleh *source code*). Karena tidak ada anomali atau celah *logic flow*, modul fungsi Penarikan Tabungan (`tarikStore`) dinyatakan lolos pengujian dan aman digunakan.
+
+---
+
+# Hasil Wawancara Evaluasi Implementasi Sistem
+
+Untuk mengetahui sejauh mana dampak dari implementasi Sistem Informasi Manajemen Keuangan berbasis digital ini, telah dilakukan pengumpulan tanggapan (wawancara/kuesioner) secara langsung dengan perwakilan pengguna di Yayasan La Tahzan. Mengingat sebelumnya yayasan masih menggunakan pencatatan manual secara penuh, masa transisi ini memberikan kesan tersendiri bagi penggunanya.
+
+Berikut adalah rangkuman hasil wawancara terkait kelebihan dan kekurangan sistem dari kacamata masing-masing responden:
+
+## 1. KH. Asep Saefullah S.pd., M.Pd (Ketua Yayasan)
+**Tanya:** "Bagaimana pendapat Bapak setelah yayasan kita mulai beralih menggunakan sistem keuangan digital ini? Apa kelebihan dan kekurangannya menurut Bapak?"
+
+**Jawab:** 
+> "Alhamdulillah, perubahannya kerasa banget ya. Kalau dari sisi kelebihannya, sekarang saya sebagai ketua yayasan bisa mantau pergerakan keuangan itu kapan aja. Tinggal buka *dashboard*, saya udah bisa lihat uang masuk berapa, keluarnya buat apa aja. Dulu kan saya harus nunggu laporan fisik dari bendahara numpuk di akhir bulan baru bisa ngecek. Jadi sekarang jauh lebih transparan dan saya rasa lebih aman dari risiko uang bocor atau catatannya hilang."
+>
+> "Tapi kalau ditanya kekurangannya, ya namanya juga sistem *online*, operasional kita jadi lumayan ketergantungan sama koneksi internet. Terus yayasan juga harus nyiapin dana khusus tiap tahun buat bayar sewa *hosting* sama domainnya. Tapi menurut saya itu sepadan lah sama manfaat yang didapat, itung-itung investasi buat kemajuan sekolah."
+
+## 2. Romanudin S.pd.I (Kepala Sekolah)
+**Tanya:** "Bapak sebagai Kepala Sekolah, apa dampak yang paling terasa di operasional sekolah dengan adanya sistem ini?"
+
+**Jawab:**
+> "Yang paling menonjol itu efisiensi waktu staf TU kita. Dulu kan mereka kalau nyatet SPP atau bikin rekap itu capek banget karena harus nulis satu-satu di buku besar, rentan salah juga. Sekarang kerjaan mereka jadi lebih cepat selesai, jadi bisa lebih fokus ngurus pelayanan pendidikan yang lain. Terus, buat saya pribadi, jadi gampang banget kalau mau ngecek anak mana saja yang masih nunggak SPP, datanya *real-time*, jadi bisa langsung kita komunikasikan dengan orang tuanya."
+>
+> "Kekurangannya sih lebih ke masa adaptasinya aja di awal. Staf kita kan udah bertahun-tahun terbiasa pakai kertas, nah pas disuruh pindah ke komputer ini agak kaku awalnya. Jadi kita memang harus luangin waktu ekstra buat ngajarin mereka pelan-pelan biar nggak salah input data pas nerima bayaran."
+
+## 3. Rara (Bendahara / Operator Keuangan)
+**Tanya:** "Teh Rara kan yang tiap hari pegang uang dan ngejalanin sistemnya langsung di lapangan, gimana perasaannya sejauh ini?"
+
+**Jawab:**
+> "Jujur ngebantu banget sih! Dulu aku sering banget pusing kalau akhir bulan harus ngerekap, kadang suka selisih hitungannya karena salah pencet kalkulator. Kalau sekarang kan otomatis dihitungin sama sistem. Terus kalau ada orang tua murid yang nanya *'Teh, anak saya bulan kemarin udah bayar belum ya?'*, aku tinggal ketik aja namanya di pencarian, langsung keluar semua riwayatnya. Nggak perlu lagi buka-buka tumpukan kuitansi lama."
+>
+> "Cuma ya gitu, kalau pas lagi mati lampu atau internet sekolah lagi gangguan, aku jadi agak bingung mau nerima pembayaran, soalnya nggak bisa buka sistemnya. Terus aku juga ngerasa beban tanggung jawabnya lebih gede nih buat jaga *password*, takutnya kalau sampai bocor terus datanya diotak-atik orang kan bahaya."
+
+## 4. Perwakilan Orang Tua Siswa
+**Tanya:** "Ibu/Bapak, bagaimana tanggapannya dengan sistem pembayaran dan tabungan yang sekarang sudah dicatat pakai komputer ini?"
+
+**Jawab:**
+> "Wah, lebih tenang sih sebenarnya. Dulu kan kadang kita kasih uang SPP ke anak, eh gataunya uangnya malah dipakai jajan, kita kan nggak tau ya kalau kuitansinya nggak sampe ke rumah. Kalau sekarang kan pencatatannya rapi, kita jadi percaya uangnya beneran masuk ke sekolah. Terus tunggakan anak juga rinciannya jelas banget, ketahuan bulan apa aja yang belum bayar, nggak cuma sekadar coretan di kartu SPP doang."
+>
+> "Kekurangannya mungkin buat ibu-ibu yang agak *gaptek* (gagap teknologi) kayak saya, awal-awal tuh agak bingung liat notifikasi atau tanda terima digitalnya. Apalagi kalau disuruh upload bukti transfer, kadang masih minta tolong anak. Tapi lama-lama sih kebiasa dan justru ngerasa lebih praktis nggak usah bawa-bawa kartu SPP kertas lagi."
+
+## 5. Perwakilan Siswa
+**Tanya:** "Gimana rasanya nabung di sekolah sekarang setelah nggak pakai buku tabungan kertas lagi?"
+
+**Jawab:**
+> "Enak sih, soalnya aku sering banget ngilangin buku tabungan atau lecek kena air di dalem tas. Kalau sekarang kan aman uangnya tetep ada di komputer sekolah biarpun aku nggak pegang bukunya. Terus pas mau nabung atau narik uang jajan juga Teh Rara ngelayaninnya lebih cepet."
+>
+> "Cuma kurangnya tuh, aku jadi nggak tau pasti uangku sekarang sisa berapa kalau nggak nanya langsung ke Teh Rara. Kalau dulu kan tinggal buka buku tabungan langsung keliatan saldonya. Pengennya sih ke depan ada cara biar siswa bisa cek saldo sendiri lewat HP."

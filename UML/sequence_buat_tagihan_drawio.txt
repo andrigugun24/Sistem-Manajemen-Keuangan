@@ -1,0 +1,44 @@
+@startuml
+actor "Bendahara" as bendahara
+boundary "View\n(Form Tagihan)" as view
+control "TagihanController\n(Controller)" as ctrl
+entity "Tagihan\n(Model)" as model
+entity "Notification\n(Service)" as notif
+database "Database" as db
+
+bendahara -> view : 1. Membuka Halaman Buat Tagihan Baru
+activate view
+view --> bendahara : Menampilkan Input Form Tagihan Massal
+
+bendahara -> view : 2. Memasukkan Jenis Biaya, Tenggat Waktu & Sasar Kelas Siswa
+view -> ctrl : 3. POST /tagihan/generate
+activate ctrl
+
+ctrl -> ctrl : 4. Cek Konsistensi Validasi Data
+ctrl -> model : 5. Inisialiasi Method GenerateTagihanBulk(Data Request)
+activate model
+
+model -> db : 6. SELECT Semua Siswa Aktif Berdasarkan Kelas_id Terpilih
+activate db
+db --> model : Mengembalikan Array/Collection Berisi Daftar Siswa
+deactivate db
+
+model -> db : 7. Batch Eksekusi INSERT INTO tagihans (Membuat tagihan secara lopping paralel)
+activate db
+db --> model : Status Transaction Berhasil Disimpan 
+deactivate db
+
+model --> ctrl : Mengembalikan Nilai Boolean True
+deactivate model
+
+ctrl -> notif : 8. Memanggil fungsi EmitPemberitahuan(Array Siswa)
+activate notif
+notif --> ctrl : Memasukkan ke Antrian Broadcast / Worker Latar Belakang
+deactivate notif
+
+ctrl --> view : 9. Return Redirect with Konfirmasi
+view --> bendahara : Halaman Utama Merender Visual Tagihan Kosong yang Menunggu Diapilkasikan Siswa
+
+deactivate ctrl
+deactivate view
+@enduml

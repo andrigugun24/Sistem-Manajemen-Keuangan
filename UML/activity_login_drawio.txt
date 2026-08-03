@@ -1,0 +1,49 @@
+@startuml
+skinparam Activity {
+  BackgroundColor #DDA0DD
+  BorderColor #800080
+}
+
+|Aktor (Pengguna)|
+|Sistem|
+
+|Aktor (Pengguna)|
+start
+:Akses Halaman URL Sistem;
+
+|Sistem|
+:Menampilkan Antarmuka Form Login;
+
+|Aktor (Pengguna)|
+:Input Email Akun;
+:Input Kata Sandi (Password);
+:Klik "Login";
+
+|Sistem|
+:Sistem Mencari User berdasarkan Email;
+if (Email Ditemukan?) then (Ditemukan)
+  :Bandingkan Hash Password dengan Data Database;
+  if (Password Cocok?) then (Cocok)
+    :Periksa Role / Hak Akses Pengguna;
+    if (Role == Admin?) then (Ya)
+      :Set Sesi Keamanan Admin;
+      :Alihkan ke Dashboard Admin;
+    else (Bukan Admin)
+      :Set Sesi Keamanan General;
+      :Alihkan ke Dashboard General;
+    endif
+  else (Tidak Cocok)
+    :Kirim Pesan Error "Password Salah";
+    |Aktor (Pengguna)|
+    stop
+  endif
+else (Tidak Ditemukan)
+  |Sistem|
+  :Kirim Pesan Error "Akun Tidak Terdaftar";
+  |Aktor (Pengguna)|
+  stop
+endif
+
+|Sistem|
+stop
+@enduml

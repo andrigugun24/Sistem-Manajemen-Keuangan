@@ -1,0 +1,69 @@
+@startuml SEQ_Tagihan
+' ============================================================
+' SEQUENCE DIAGRAM - Generate Tagihan Massal & Manual (Simplified)
+' Sistem Informasi Keuangan Sekolah Ananda
+' ============================================================
+skinparam sequence {
+  ArrowColor #E65100
+  ActorBorderColor #E65100
+  ActorBackgroundColor #FFF3E0
+  LifeLineBorderColor #90A4AE
+  ParticipantBorderColor #37474F
+  ParticipantBackgroundColor #F5F5F5
+}
+skinparam roundcorner 8
+
+title Sequence Diagram — Manajemen Tagihan (Disederhanakan)\nSistem Informasi Keuangan Sekolah Ananda
+
+actor "Bendahara" as Bendahara
+participant "Sistem" as Sys
+database "Database" as DB
+
+== Alur: Buat Tagihan Massal ==
+Bendahara -> Sys : Isi Form Massal & Klik Generate
+activate Sys
+Sys -> Sys : Validasi Input
+Sys -> DB : Ambil Data Siswa (Filter Kelas & Status)
+activate DB
+DB --> Sys : Daftar Siswa
+deactivate DB
+
+Sys -> DB : Simpan Tagihan Massal (Batch Insert)
+activate DB
+DB --> Sys : Sukses
+deactivate DB
+
+Sys -> DB : Antre Notifikasi ke Orang Tua
+Sys --> Bendahara : Tampilkan Sukses & Refresh Data
+deactivate Sys
+
+== Alur: Buat Tagihan Manual (Per Siswa) ==
+Bendahara -> Sys : Isi Form Tagihan Individu & Simpan
+activate Sys
+Sys -> Sys : Validasi Input
+Sys -> DB : Simpan Tagihan Baru
+activate DB
+DB --> Sys : Sukses
+deactivate DB
+Sys --> Bendahara : Tampilkan Sukses
+deactivate Sys
+
+== Alur: Edit / Hapus Tagihan ==
+Bendahara -> Sys : Edit / Hapus Tagihan
+activate Sys
+Sys -> DB : Cek Status Pembayaran
+activate DB
+DB --> Sys : Hasil Pengecekan
+deactivate DB
+
+alt Status Lunas / Ada Pembayaran
+  Sys --> Bendahara : Tampilkan Error (Tidak Bisa Diubah)
+else Belum Ada Pembayaran
+  Sys -> DB : Update / Soft Delete Tagihan
+  activate DB
+  DB --> Sys : Sukses
+  deactivate DB
+  Sys --> Bendahara : Tampilkan Notifikasi Sukses
+end
+deactivate Sys
+@enduml

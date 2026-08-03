@@ -43,7 +43,7 @@ export default function AdminDashboard() {
                 </div>
 
                 {/* KPI Cards Row */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
                     {/* Card 1 */}
                     <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-5 shadow-sm">
                         <div className="flex items-center justify-between mb-4">
@@ -56,6 +56,17 @@ export default function AdminDashboard() {
                         <p className="text-xs text-slate-400 mt-1">Siswa Aktif Terdaftar</p>
                     </div>
 
+                    {/* Card 2 */}
+                    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-5 shadow-sm">
+                        <div className="flex items-center justify-between mb-4">
+                            <span className="text-[13px] font-medium text-slate-500 dark:text-slate-400">Total Guru & Staf</span>
+                            <div className="w-8 h-8 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 flex items-center justify-center">
+                                <span className="material-symbols-outlined text-emerald-600 dark:text-emerald-400 text-[18px]">badge</span>
+                            </div>
+                        </div>
+                        <p className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">{stats.totalGuru || 0}</p>
+                        <p className="text-xs text-slate-400 mt-1">Tenaga Pendidik Aktif</p>
+                    </div>
 
                     {/* Card 3 */}
                     <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-5 shadow-sm">

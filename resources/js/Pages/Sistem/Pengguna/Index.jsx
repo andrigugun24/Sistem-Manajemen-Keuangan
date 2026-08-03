@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, router, usePage } from '@inertiajs/react';
-import { Search, Plus, Filter, Download, Edit, Trash2, Shield, GraduationCap, DollarSign, Users, CreditCard, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, Plus, Filter, Download, Edit, Trash2, Shield, GraduationCap, DollarSign, Users, ChevronLeft, ChevronRight } from 'lucide-react';
 import { confirmDelete } from '@/utils/confirmDelete';
 
 export default function PenggunaIndex() {
@@ -43,7 +43,6 @@ export default function PenggunaIndex() {
         { label: 'Admin', count: roleCounts.admin || 0, icon: Shield, color: 'blue' },
         { label: 'Kepala Sekolah', count: roleCounts.kepala_sekolah || 0, icon: GraduationCap, color: 'purple' },
         { label: 'Bendahara', count: roleCounts.bendahara || 0, icon: DollarSign, color: 'amber' },
-        { label: 'Guru', count: roleCounts.guru || 0, icon: CreditCard, color: 'emerald' },
         { label: 'Orang Tua', count: roleCounts.orang_tua || 0, icon: Users, color: 'slate' },
     ];
 
@@ -64,7 +63,7 @@ export default function PenggunaIndex() {
             </div>
 
             {/* Stats Cards — Real Counts */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-5">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-5">
                 {statCards.map(({ label, count, icon: Icon, color }) => (
                     <div key={label} className={`bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/60 dark:border-slate-800 shadow-sm flex flex-col gap-4 hover:border-${color}-200 hover:shadow-md transition-all h-[130px] justify-between`}>
                         <div className={`w-10 h-10 rounded-full bg-${color}-50 text-${color}-600 flex flex-shrink-0 items-center justify-center`}>
